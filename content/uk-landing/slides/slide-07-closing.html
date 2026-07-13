@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wrigital — Find Out What Wrigital Can Do For Your Firm</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --navy:       #2D3561;
+      --navy-dark:  #1E2A4A;
+      --cyan:       #00C8E0;
+      --blue:       #3B82F6;
+      --white:      #FFFFFF;
+      --off-white:  #F0F4F8;
+      --text-body:  #CBD5E1;
+      --text-muted: #94A3B8;
+      --card-bg:    #1E2A4A;
+      --divider:    rgba(0, 200, 224, 0.2);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: linear-gradient(160deg, var(--navy-dark) 0%, var(--navy) 100%);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      max-width: 760px;
+      padding: 80px 48px;
+      text-align: center;
+    }
+
+    .brand-name {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin-bottom: 56px;
+      display: inline-block;
+    }
+
+    .brand-name span { color: var(--cyan); }
+
+    .slide-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 20px;
+    }
+
+    .slide-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 52px;
+      font-weight: 400;
+      line-height: 1.1;
+      color: var(--white);
+      margin-bottom: 20px;
+      letter-spacing: -0.01em;
+    }
+
+    .slide-subtitle {
+      font-size: 17px;
+      color: var(--text-body);
+      margin-bottom: 56px;
+      line-height: 1.65;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--divider);
+      margin: 0 auto 48px;
+      max-width: 200px;
+    }
+
+    .contact-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 48px;
+    }
+
+    .contact-email {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--cyan);
+      letter-spacing: -0.01em;
+    }
+
+    .contact-label {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      color: var(--navy-dark);
+      font-size: 15px;
+      font-weight: 700;
+      padding: 16px 36px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+    }
+
+    .fca-note {
+      margin-top: 48px;
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 600px) {
+      .page { padding: 48px 24px; }
+      .slide-title { font-size: 36px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <div class="brand-name">Velocity<span>IQ</span></div>
+
+    <p class="slide-eyebrow">Get Started</p>
+    <h1 class="slide-title">AI-Powered Pre-Meeting Intelligence for Financial Advisers</h1>
+    <p class="slide-subtitle">Wrigital is built for FCA-regulated financial advisers working with high-net-worth business owner clients.</p>
+
+    <hr class="divider" />
+
+    <div class="contact-block">
+      <span class="contact-email">admin@wrigital.com</span>
+      <span class="contact-label">Get in touch to request a demonstration</span>
+    </div>
+
+    <a href="mailto:admin@wrigital.com" class="cta-button">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 4l6 5 6-5M2 4h12v9H2V4z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Find out what Wrigital can do for your firm
+    </a>
+
+    <p class="fca-note">Built for FCA-regulated advisers · UK financial intelligence · Azure-hosted · No PII stored server-side</p>
+
+  </div>
+</body>
+</html>

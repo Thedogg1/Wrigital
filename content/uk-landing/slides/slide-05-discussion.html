@@ -1,0 +1,330 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wrigital — The Adviser Shapes the Conversation Before It Starts</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --navy:       #2D3561;
+      --navy-dark:  #1E2A4A;
+      --cyan:       #00C8E0;
+      --blue:       #3B82F6;
+      --white:      #FFFFFF;
+      --off-white:  #F0F4F8;
+      --text-body:  #CBD5E1;
+      --text-muted: #94A3B8;
+      --card-bg:    #1E2A4A;
+      --divider:    rgba(0, 200, 224, 0.2);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--navy);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .slide {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 100vh;
+      align-items: start;
+    }
+
+    .report-panel {
+      background: var(--navy-dark);
+      padding: 48px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      overflow-y: auto;
+      min-height: 100vh;
+    }
+
+    /* Mini brand header */
+    .report-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 28px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--divider);
+    }
+
+    .report-brand-name {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--white);
+    }
+
+    .report-brand-name span { color: var(--cyan); }
+
+    .report-label-tag {
+      margin-left: auto;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .report-eyebrow {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 10px;
+    }
+
+    .report-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 26px;
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
+    }
+
+    .report-intro {
+      font-size: 13px;
+      font-style: italic;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+
+    /* Discussion items */
+    .discussion-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .discussion-item {
+      background: var(--card-bg);
+      border-radius: 8px;
+      padding: 16px 18px;
+      display: grid;
+      grid-template-columns: 26px 1fr;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .discussion-number {
+      width: 26px;
+      height: 26px;
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--navy-dark);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .discussion-heading {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 5px;
+      line-height: 1.4;
+    }
+
+    .discussion-body {
+      font-size: 12px;
+      color: var(--text-body);
+      line-height: 1.6;
+    }
+
+    /* ── Right: explanation panel ── */
+    .explain-panel {
+      background: var(--navy);
+      padding: 48px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      border-left: 1px solid var(--divider);
+      min-height: 100vh;
+    }
+
+    .slide-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 20px;
+    }
+
+    .slide-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 40px;
+      font-weight: 400;
+      line-height: 1.1;
+      color: var(--white);
+      margin-bottom: 48px;
+      letter-spacing: -0.01em;
+    }
+
+    .numbered-points {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .numbered-point {
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .point-number {
+      width: 36px;
+      height: 36px;
+      background: var(--card-bg);
+      border: 1px solid var(--divider);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--cyan);
+      flex-shrink: 0;
+    }
+
+    .point-content {}
+
+    .point-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 6px;
+      line-height: 1.35;
+    }
+
+    .point-body {
+      font-size: 14px;
+      color: var(--text-body);
+      line-height: 1.65;
+    }
+
+    .point-body strong { color: var(--white); }
+
+    @media (max-width: 900px) {
+      .slide { grid-template-columns: 1fr; }
+      .report-panel, .explain-panel { padding: 40px 24px; }
+      .slide-title { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+
+    <!-- Left: What to Discuss report section -->
+    <div class="report-panel">
+
+      <div class="report-brand">
+        <div class="report-brand-name">Velocity<span>IQ</span></div>
+        <div class="report-label-tag">Pre-Meeting Intelligence Report</div>
+      </div>
+
+      <p class="report-eyebrow">For Your Meeting</p>
+      <h2 class="report-title">What to Discuss With Your Adviser</h2>
+      <p class="report-intro">These are the must-know topics for your next conversation, in priority order.</p>
+
+      <ul class="discussion-list">
+
+        <li class="discussion-item">
+          <div class="discussion-number">1</div>
+          <div>
+            <h3 class="discussion-heading">Business heavily reliant on owner, reducing appeal to buyers and valuation potential</h3>
+            <p class="discussion-body">Your business is heavily dependent on your hands-on involvement, which could deter buyers or reduce its value. Addressing owner-dependency now — by delegating key relationships and decisions — can materially improve your exit outcome.</p>
+          </div>
+        </li>
+
+        <li class="discussion-item">
+          <div class="discussion-number">2</div>
+          <div>
+            <h3 class="discussion-heading">Excess retained cash on balance sheet risks BADR eligibility</h3>
+            <p class="discussion-body">The retained cash sitting on your balance sheet, while a result of profitability, could jeopardise your Business Asset Disposal Relief eligibility. Ensuring the cash is actively used in the business — or distributed appropriately — needs to be addressed before any sale process begins.</p>
+          </div>
+        </li>
+
+        <li class="discussion-item">
+          <div class="discussion-number">3</div>
+          <div>
+            <h3 class="discussion-heading">Significant IHT exposure on post-sale assets without proper estate planning</h3>
+            <p class="discussion-body">After the sale, the business will no longer benefit from Business Property Relief, leaving your estate exposed to substantial Inheritance Tax liabilities. Early estate planning is essential to protect the wealth you are working to release.</p>
+          </div>
+        </li>
+
+        <li class="discussion-item">
+          <div class="discussion-number">4</div>
+          <div>
+            <h3 class="discussion-heading">Concentration risk with wealth tied predominantly to the business</h3>
+            <p class="discussion-body">The majority of your wealth is tied up in the business, creating a significant concentration risk. A successful exit will provide an opportunity to diversify your holdings and build a more resilient financial position for the long term.</p>
+          </div>
+        </li>
+
+        <li class="discussion-item">
+          <div class="discussion-number">5</div>
+          <div>
+            <h3 class="discussion-heading">Emotional uncertainty about retirement and life after the sale</h3>
+            <p class="discussion-body">While you are clearly focused on the financial aspects of an exit, there appears to be some uncertainty about what life will look like after the sale. Retirement planning that goes beyond the numbers — addressing purpose, identity, and lifestyle — will be an important part of the conversation.</p>
+          </div>
+        </li>
+
+      </ul>
+
+    </div>
+
+    <!-- Right: explanation -->
+    <div class="explain-panel">
+      <p class="slide-eyebrow">Meeting Architecture</p>
+      <h1 class="slide-title">The Adviser Shapes the Conversation Before It Starts</h1>
+
+      <div class="numbered-points">
+
+        <div class="numbered-point">
+          <div class="point-number">1</div>
+          <div class="point-content">
+            <h3 class="point-title">Designed by the Adviser</h3>
+            <p class="point-body">The prospect receives a prioritised list of topics that matter most to their situation, but the adviser has quietly designed it.</p>
+          </div>
+        </div>
+
+        <div class="numbered-point">
+          <div class="point-number">2</div>
+          <div class="point-content">
+            <h3 class="point-title">Meeting Architecture</h3>
+            <p class="point-body">The topics reflect the strategic questions the adviser wants to be paid to answer. This isn't just prospect engagement — it's <strong>meeting architecture</strong>.</p>
+          </div>
+        </div>
+
+        <div class="numbered-point">
+          <div class="point-number">3</div>
+          <div class="point-content">
+            <h3 class="point-title">Prospect Arrives Ready</h3>
+            <p class="point-body">The prospect arrives at the first meeting already engaged, already thinking, already invested in the conversation.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,412 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wrigital — AI Generates. You Approve.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --navy:       #2D3561;
+      --navy-dark:  #1E2A4A;
+      --cyan:       #00C8E0;
+      --blue:       #3B82F6;
+      --white:      #FFFFFF;
+      --off-white:  #F0F4F8;
+      --text-body:  #CBD5E1;
+      --text-muted: #94A3B8;
+      --card-bg:    #1E2A4A;
+      --divider:    rgba(0, 200, 224, 0.2);
+      --danger:     #EF4444;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--navy);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .slide {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 100vh;
+      align-items: start;
+    }
+
+    .form-panel {
+      background: var(--navy-dark);
+      padding: 48px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      min-height: 100vh;
+    }
+
+    .report-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 28px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--divider);
+    }
+
+    .report-brand-name {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--white);
+    }
+
+    .report-brand-name span { color: var(--cyan); }
+
+    .report-label-tag {
+      margin-left: auto;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .slide-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 12px;
+    }
+
+    .slide-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 36px;
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--white);
+      margin-bottom: 32px;
+      letter-spacing: -0.01em;
+    }
+
+    /* Legend badges */
+    .legend {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .legend-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .legend-dot.mandatory { background: var(--cyan); }
+    .legend-dot.optional  { background: var(--danger); }
+
+    /* Fields form card */
+    .fields-card {
+      background: var(--card-bg);
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--divider);
+    }
+
+    .fields-card-header {
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--divider);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .fields-card-header-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    .fields-card-header-meta {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* Individual field rows */
+    .fields-list {
+      padding: 8px 0;
+      max-height: 440px;
+      overflow-y: auto;
+    }
+
+    .field-row {
+      padding: 10px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .field-row:last-child { border-bottom: none; }
+
+    .field-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .field-label .required-star {
+      color: var(--cyan);
+      font-size: 13px;
+      line-height: 1;
+    }
+
+    .field-label .optional-tag {
+      font-size: 10px;
+      background: rgba(239,68,68,0.15);
+      color: var(--danger);
+      padding: 1px 6px;
+      border-radius: 3px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+    }
+
+    .field-input-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .field-value {
+      flex: 1;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 5px;
+      padding: 8px 12px;
+      font-size: 13px;
+      color: var(--white);
+      font-family: 'Inter', monospace;
+    }
+
+    .field-value:focus {
+      outline: none;
+      border-color: var(--cyan);
+    }
+
+    .remove-btn {
+      background: var(--danger);
+      color: var(--white);
+      border: none;
+      border-radius: 4px;
+      padding: 6px 12px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    /* ── Right: explanation panel ── */
+    .explain-panel {
+      background: var(--navy);
+      padding: 48px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      border-left: 1px solid var(--divider);
+      min-height: 100vh;
+    }
+
+    .explain-panel .slide-title {
+      margin-bottom: 28px;
+    }
+
+    .explain-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .explain-card {
+      background: var(--card-bg);
+      border-left: 3px solid var(--cyan);
+      border-radius: 0 8px 8px 0;
+      padding: 22px 24px;
+    }
+
+    .explain-card-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .explain-card-body {
+      font-size: 14px;
+      color: var(--text-body);
+      line-height: 1.65;
+    }
+
+    .explain-card-body strong {
+      color: var(--white);
+    }
+
+    @media (max-width: 900px) {
+      .slide { grid-template-columns: 1fr; }
+      .form-panel, .explain-panel { padding: 40px 24px; }
+      .slide-title { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+
+    <!-- Left: Approved Fields form -->
+    <div class="form-panel">
+      <div class="report-brand">
+        <div class="report-brand-name">Velocity<span>IQ</span></div>
+        <div class="report-label-tag">Pre-Meeting Intelligence Report</div>
+      </div>
+
+      <div class="legend">
+        <div class="legend-item">
+          <span class="legend-dot mandatory"></span>
+          <span>Mandatory — always runs → asterisked fields ensure core output never fails</span>
+        </div>
+      </div>
+      <div class="legend" style="margin-top: -12px;">
+        <div class="legend-item">
+          <span class="legend-dot optional"></span>
+          <span>Optional — unlocks richer output → selected based on client profile</span>
+        </div>
+      </div>
+
+      <div class="fields-card">
+        <div class="fields-card-header">
+          <span class="fields-card-header-title">Approved Fields</span>
+          <span class="fields-card-header-meta">Robert Hartley — Hartley Precision Components Ltd</span>
+        </div>
+
+        <div class="fields-list">
+
+          <div class="field-row">
+            <div class="field-label">Business Value <span class="required-star">*</span></div>
+            <div class="field-input-row">
+              <input class="field-value" type="text" value="8280000" readonly />
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field-label">Gross Income <span class="required-star">*</span></div>
+            <div class="field-input-row">
+              <input class="field-value" type="text" value="620000" readonly />
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field-label">Annual Lifestyle <span class="required-star">*</span></div>
+            <div class="field-input-row">
+              <input class="field-value" type="text" value="195000" readonly />
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field-label">Annual Tax Burden <span class="required-star">*</span></div>
+            <div class="field-input-row">
+              <input class="field-value" type="text" value="248000" readonly />
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field-label">Liquid Cash <span class="required-star">*</span></div>
+            <div class="field-input-row">
+              <input class="field-value" type="text" value="1150000" readonly />
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field-label">Years Owned <span class="optional-tag">Optional</span></div>
+            <div class="field-input-row">
+              <input class="field-value" type="text" value="22" readonly />
+              <button class="remove-btn">Remove</button>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field-label">Business Name <span class="optional-tag">Optional</span></div>
+            <div class="field-input-row">
+              <input class="field-value" type="text" value="Hartley Precision Components Ltd" readonly />
+              <button class="remove-btn">Remove</button>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field-label">Industry <span class="optional-tag">Optional</span></div>
+            <div class="field-input-row">
+              <input class="field-value" type="text" value="Precision Engineering &amp; Manufacturing" readonly />
+              <button class="remove-btn">Remove</button>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field-label">Exit Timeline <span class="optional-tag">Optional</span></div>
+            <div class="field-input-row">
+              <input class="field-value" type="text" value="Short (1–3y)" readonly />
+              <button class="remove-btn">Remove</button>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field-label">Cost Basis <span class="optional-tag">Optional</span></div>
+            <div class="field-input-row">
+              <input class="field-value" type="text" value="95000" readonly />
+              <button class="remove-btn">Remove</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: explanation cards -->
+    <div class="explain-panel">
+      <p class="slide-eyebrow">Review &amp; Approve</p>
+      <h1 class="slide-title">AI Generates. You Approve.</h1>
+
+      <div class="explain-cards">
+
+        <div class="explain-card">
+          <h3 class="explain-card-title">Formula-Driven</h3>
+          <p class="explain-card-body">Wrigital extracts and calculates a personalised set of financial figures from your notes — ready for your review.</p>
+        </div>
+
+        <div class="explain-card">
+          <h3 class="explain-card-title">Mandatory &amp; Optional Fields</h3>
+          <p class="explain-card-body"><strong>Mandatory fields</strong> ensure the core output always runs. <strong>Optional fields</strong>, selected based on the client profile, unlock richer, more detailed intelligence across the entire report.</p>
+        </div>
+
+        <div class="explain-card">
+          <h3 class="explain-card-title">Adviser-Approved</h3>
+          <p class="explain-card-body">Every figure is formula-driven and adviser-approved — so the adviser can justify every number if challenged.</p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</body>
+</html>

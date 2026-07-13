@@ -1,0 +1,336 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wrigital — It Starts With What You Already Know</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --navy:       #2D3561;
+      --navy-dark:  #1E2A4A;
+      --cyan:       #00C8E0;
+      --blue:       #3B82F6;
+      --white:      #FFFFFF;
+      --off-white:  #F0F4F8;
+      --text-body:  #CBD5E1;
+      --text-muted: #94A3B8;
+      --card-bg:    #1E2A4A;
+      --divider:    rgba(0, 200, 224, 0.2);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--navy);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .slide {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 100vh;
+      gap: 0;
+      align-items: start;
+    }
+
+    /* ── Left: mock UI ── */
+    .form-panel {
+      background: var(--navy-dark);
+      padding: 48px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      min-height: 100vh;
+    }
+
+    .report-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 28px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--divider);
+    }
+
+    .report-brand-name {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--white);
+    }
+
+    .report-brand-name span { color: var(--cyan); }
+
+    .report-label-tag {
+      margin-left: auto;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .slide-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 12px;
+    }
+
+    .slide-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 36px;
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--white);
+      margin-bottom: 40px;
+      letter-spacing: -0.01em;
+    }
+
+    /* The notes form card */
+    .notes-card {
+      background: var(--white);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.4);
+    }
+
+    .notes-card-header {
+      padding: 28px 32px 20px;
+      border-bottom: 1px solid #E2E8F0;
+    }
+
+    .notes-card-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1E2A4A;
+      margin-bottom: 6px;
+      letter-spacing: -0.01em;
+    }
+
+    .notes-card-subtitle {
+      font-size: 13px;
+      color: #64748B;
+      line-height: 1.5;
+    }
+
+    .notes-textarea-wrap {
+      padding: 0;
+    }
+
+    .notes-textarea {
+      width: 100%;
+      min-height: 260px;
+      padding: 20px 32px;
+      font-family: 'Inter', monospace;
+      font-size: 13px;
+      line-height: 1.75;
+      color: #334155;
+      background: #FAFBFC;
+      border: none;
+      resize: vertical;
+      outline: none;
+      display: block;
+    }
+
+    .notes-card-footer {
+      padding: 16px 32px;
+      background: var(--white);
+      border-top: 1px solid #E2E8F0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .notes-char-count {
+      font-size: 12px;
+      color: #94A3B8;
+    }
+
+    .notes-submit-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      color: var(--navy-dark);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 10px 20px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      letter-spacing: 0.02em;
+    }
+
+    .disclaimer {
+      margin-top: 20px;
+      font-size: 11px;
+      font-style: italic;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* ── Right: explanation panel ── */
+    .explain-panel {
+      background: var(--navy);
+      padding: 48px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      border-left: 1px solid var(--divider);
+      min-height: 100vh;
+    }
+
+    .explain-header {
+      margin-bottom: 32px;
+    }
+
+    .explain-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 12px;
+    }
+
+    .explain-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.4;
+    }
+
+    .cta-block {
+      background: linear-gradient(135deg, var(--cyan) 0%, var(--blue) 100%);
+      border-radius: 8px;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 36px;
+    }
+
+    .cta-block-icon {
+      width: 28px;
+      height: 28px;
+      flex-shrink: 0;
+      color: var(--navy-dark);
+    }
+
+    .cta-block-text {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--navy-dark);
+    }
+
+    .bullet-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .bullet-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .bullet-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--cyan);
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 8px;
+    }
+
+    .bullet-text {
+      font-size: 15px;
+      color: var(--text-body);
+      line-height: 1.65;
+    }
+
+    @media (max-width: 900px) {
+      .slide { grid-template-columns: 1fr; }
+      .form-panel, .explain-panel { padding: 40px 28px; }
+      .slide-title { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+
+    <!-- Left: mock UI -->
+    <div class="form-panel">
+      <div class="report-brand">
+        <div class="report-brand-name">Velocity<span>IQ</span></div>
+        <div class="report-label-tag">Pre-Meeting Intelligence Report</div>
+      </div>
+
+      <div class="notes-card">
+        <div class="notes-card-header">
+          <h2 class="notes-card-title">Pre-meeting adviser notes</h2>
+          <p class="notes-card-subtitle">Paste sparse notes about the client, their business, and exit intent. The system will generate a full questionnaire and adviser–client transcript for your review.</p>
+        </div>
+        <div class="notes-textarea-wrap">
+          <textarea class="notes-textarea" readonly>Referral from existing client (commercial lawyer at Foot Anstey). Name: Robert Hartley. Owns a UK precision engineering business – Hartley Precision Components Ltd. Referrer said he's "done very well" over 20+ years, worth "well into eight figures" but most of it is in the company. Thinking about an exit in the next few years – nothing firm, no mandate yet. Personality: pragmatic, hands-on, still running the business day to day.
+
+Companies House – Hartley Precision Components Ltd. Last filed accounts (~12-15 months old): turnover circa £9m, profit before tax around £600k–£700k (abbreviated accounts – limited detail). Director: Robert Hartley, appointed April 2003. PSC register shows Robert ~80% (verify at meeting). No other obvious shareholders on public record.
+
+Website / LinkedIn: supplies Tier 1 and Tier 2 manufacturers in aerospace and automotive. West Midlands / Midlands area (not confirmed). ~50–80 staff per LinkedIn estimate. Robert, late 50s, engineering background, been building the business since early 2000s. No recent press or obvious sale process.
+
+Referrer mentioned: wife involved in the business peripherally; two adult children (renting, not in the business). Robert sounded "tired" and open to trade sale or MBO but sceptical about buyer appetite in his sector.</textarea>
+        </div>
+        <div class="notes-card-footer">
+          <span class="notes-char-count">847 characters</span>
+          <button class="notes-submit-btn">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Generate Report
+          </button>
+        </div>
+      </div>
+
+      <p class="disclaimer">Robert Hartley and Hartley Precision Components Ltd are AI-generated fictional characters created for demonstration purposes only.</p>
+    </div>
+
+    <!-- Right: explanation -->
+    <div class="explain-panel">
+      <p class="slide-eyebrow">How It Begins</p>
+      <h1 class="slide-title">It Starts With What You Already Know</h1>
+
+      <div class="explain-header">
+        <p class="explain-label">Pre-Meeting Adviser Notes Input Screen</p>
+        <h2 class="explain-title">Send us your sparse notes.<br>Wrigital does the rest.</h2>
+      </div>
+
+      <div class="cta-block">
+        <svg class="cta-block-icon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="3" width="22" height="22" rx="4" stroke="currentColor" stroke-width="2"/>
+          <path d="M9 14l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="cta-block-text">This is all it takes. →</span>
+      </div>
+
+      <ul class="bullet-list">
+        <li class="bullet-item">
+          <span class="bullet-dot"></span>
+          <span class="bullet-text">Send us your sparse notes. Wrigital does the rest.</span>
+        </li>
+        <li class="bullet-item">
+          <span class="bullet-dot"></span>
+          <span class="bullet-text">A referral name. A rough business valuation. A sense of personality and exit intent. That's enough to begin.</span>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</body>
+</html>

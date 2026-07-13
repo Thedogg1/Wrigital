@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+/docs
 /.pnp
 .pnp.*
 .yarn/*
@@ -39,3 +40,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# lead capture logs (runtime; keep data/ directory via .gitkeep)
+/data/uk-leads.jsonl
+/data/us-leads.jsonl

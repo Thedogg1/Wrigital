@@ -1,0 +1,207 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wrigital — FCA-Ready Audit Trail</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --navy:       #2D3561;
+      --navy-dark:  #1E2A4A;
+      --cyan:       #00C8E0;
+      --blue:       #3B82F6;
+      --white:      #FFFFFF;
+      --off-white:  #F0F4F8;
+      --text-body:  #CBD5E1;
+      --text-muted: #94A3B8;
+      --card-bg:    #1E2A4A;
+      --divider:    rgba(0, 200, 224, 0.2);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--navy);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      align-items: center;
+    }
+
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 80px 56px;
+      width: 100%;
+    }
+
+    .slide-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 16px;
+    }
+
+    .slide-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 48px;
+      font-weight: 400;
+      line-height: 1.1;
+      color: var(--white);
+      margin-bottom: 16px;
+      letter-spacing: -0.01em;
+    }
+
+    .slide-subtitle {
+      font-size: 16px;
+      color: var(--text-body);
+      margin-bottom: 64px;
+      line-height: 1.6;
+      max-width: 680px;
+    }
+
+    /* Three audit cards */
+    .audit-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 56px;
+    }
+
+    .audit-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 36px 32px;
+      border: 1px solid var(--divider);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .audit-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--cyan), var(--blue));
+    }
+
+    .audit-card-icon {
+      width: 44px;
+      height: 44px;
+      background: rgba(0,200,224,0.1);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      color: var(--cyan);
+    }
+
+    .audit-card-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+
+    .audit-card-body {
+      font-size: 14px;
+      color: var(--text-body);
+      line-height: 1.7;
+    }
+
+    /* Closing statement */
+    .closing-bar {
+      border-top: 1px solid var(--divider);
+      padding-top: 32px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .closing-icon {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--navy-dark);
+    }
+
+    .closing-text {
+      font-family: 'DM Serif Display', serif;
+      font-size: 22px;
+      color: var(--white);
+    }
+
+    @media (max-width: 900px) {
+      .audit-grid { grid-template-columns: 1fr; }
+      .slide-title { font-size: 32px; }
+      .page { padding: 48px 24px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <p class="slide-eyebrow">FCA-Ready Audit Trail</p>
+    <h1 class="slide-title">Every Claim Has a Paper Trail</h1>
+    <p class="slide-subtitle">Wrigital produces three separate audit reports — giving the adviser a complete, defensible record across every dimension of the intelligence it generates.</p>
+
+    <div class="audit-grid">
+
+      <div class="audit-card">
+        <div class="audit-card-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="3" width="16" height="16" rx="3" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M7 11h8M7 7.5h4M7 14.5h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3 class="audit-card-title">Numbers</h3>
+        <p class="audit-card-body">Every figure traces back to adviser-approved data. Formula-driven, reviewed, and ready to defend under scrutiny.</p>
+      </div>
+
+      <div class="audit-card">
+        <div class="audit-card-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11 3L4 7v5c0 3.5 3 6.5 7 7.5 4-1 7-4 7-7.5V7l-7-4z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M8 11l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3 class="audit-card-title">Knowledge Base</h3>
+        <p class="audit-card-body">Regulatory and technical intelligence drawn from a curated knowledge base built on authoritative sources — including gov.uk, HMRC, and the FCA.</p>
+      </div>
+
+      <div class="audit-card">
+        <div class="audit-card-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M11 3C11 3 14 7 14 11s-3 8-3 8M11 3C11 3 8 7 8 11s3 8 3 8M3 11h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3 class="audit-card-title">External Sources</h3>
+        <p class="audit-card-body">Market and sector intelligence pulled from credible, up-to-date external sources at the time of blueprint generation. Current, relevant, and fully cited.</p>
+      </div>
+
+    </div>
+
+    <div class="closing-bar">
+      <div class="closing-icon">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 9l3.5 3.5L14 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <p class="closing-text">The adviser can defend every line.</p>
+    </div>
+
+  </div>
+</body>
+</html>

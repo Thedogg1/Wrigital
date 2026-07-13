@@ -1,0 +1,304 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wrigital — Numbers Tell You What. Your Story Tells You Why.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --navy:       #2D3561;
+      --navy-dark:  #1E2A4A;
+      --cyan:       #00C8E0;
+      --blue:       #3B82F6;
+      --white:      #FFFFFF;
+      --off-white:  #F0F4F8;
+      --text-body:  #CBD5E1;
+      --text-muted: #94A3B8;
+      --card-bg:    #1E2A4A;
+      --divider:    rgba(0, 200, 224, 0.2);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--navy);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .slide {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 100vh;
+      align-items: start;
+    }
+
+    .context-panel {
+      background: var(--navy);
+      padding: 48px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      border-left: 1px solid var(--divider);
+      min-height: 100vh;
+    }
+
+    .slide-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 20px;
+    }
+
+    .slide-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 44px;
+      font-weight: 400;
+      line-height: 1.1;
+      color: var(--white);
+      margin-bottom: 36px;
+      letter-spacing: -0.01em;
+    }
+
+    .pull-quote {
+      border-left: 3px solid var(--cyan);
+      padding: 0 0 0 20px;
+      margin-bottom: 48px;
+    }
+
+    .pull-quote p {
+      font-size: 16px;
+      font-style: italic;
+      color: var(--text-body);
+      line-height: 1.65;
+    }
+
+    .feature-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .feature-card {
+      background: var(--card-bg);
+      border-radius: 8px;
+      padding: 20px;
+      border: 1px solid var(--divider);
+    }
+
+    .feature-card-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .feature-card-body {
+      font-size: 13px;
+      color: var(--text-body);
+      line-height: 1.6;
+    }
+
+    .feature-card-body em {
+      font-style: italic;
+      color: var(--text-muted);
+    }
+
+    .adviser-note {
+      background: var(--card-bg);
+      border-radius: 8px;
+      padding: 20px 24px;
+      border: 1px solid var(--divider);
+    }
+
+    .adviser-note-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .adviser-note-body {
+      font-size: 13px;
+      color: var(--text-body);
+      line-height: 1.6;
+    }
+
+    /* ── Left: report recreation ── */
+    .report-panel {
+      background: var(--navy-dark);
+      padding: 48px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      overflow-y: auto;
+      min-height: 100vh;
+    }
+
+    /* Mini brand header inside report panel */
+    .report-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 32px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--divider);
+    }
+
+    .report-brand-name {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--white);
+    }
+
+    .report-brand-name span { color: var(--cyan); }
+
+    .report-label-tag {
+      margin-left: auto;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .report-eyebrow {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 10px;
+    }
+
+    .report-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 28px;
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 28px;
+      letter-spacing: -0.01em;
+    }
+
+    .story-card {
+      background: var(--card-bg);
+      border-left: 3px solid var(--cyan);
+      border-radius: 0 8px 8px 0;
+      padding: 20px 22px;
+      margin-bottom: 16px;
+    }
+
+    .story-card-heading {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .story-card-body {
+      font-size: 13px;
+      color: var(--text-body);
+      line-height: 1.7;
+    }
+
+    .story-card-question {
+      margin-top: 10px;
+      font-size: 12px;
+      font-style: italic;
+      color: var(--cyan);
+      line-height: 1.55;
+    }
+
+    @media (max-width: 900px) {
+      .slide { grid-template-columns: 1fr; }
+      .context-panel, .report-panel { padding: 40px 24px; }
+      .slide-title { font-size: 30px; }
+      .feature-cards { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+
+    <!-- Left: Your Story report -->
+    <div class="report-panel">
+
+      <div class="report-brand">
+        <div class="report-brand-name">Velocity<span>IQ</span></div>
+        <div class="report-label-tag">Pre-Meeting Intelligence Report</div>
+      </div>
+
+      <p class="report-eyebrow">Report Section</p>
+      <h2 class="report-title">Your Story</h2>
+
+      <div class="story-card">
+        <h3 class="story-card-heading">Your business relies heavily on you, limiting its appeal to buyers.</h3>
+        <p class="story-card-body">
+          Hartley Precision Components thrives under your leadership, but its reliance on your direct involvement raises questions for potential buyers. While the business shows strong margins and consistent revenue, the perception of owner-dependency could temper its valuation or deter interest.
+        </p>
+        <p class="story-card-question">After two decades of building this, how might you shift its identity from being your business to a business that stands independently?</p>
+      </div>
+
+      <div class="story-card">
+        <h3 class="story-card-heading">Excess retained cash could jeopardise tax relief on the sale.</h3>
+        <p class="story-card-body">
+          The profitability of your company has led to a buildup of cash on the balance sheet, but this surplus risks disqualifying the business from the 10% tax rate under Business Asset Disposal Relief. Without a clear strategy for managing these retained earnings, the tax implications could significantly impact the proceeds of your exit.
+        </p>
+        <p class="story-card-question">Is there a way to align your financial goals with the rules that preserve this relief?</p>
+      </div>
+
+      <div class="story-card">
+        <h3 class="story-card-heading">Inheritance Tax exposure could erode the wealth meant for your family.</h3>
+        <p class="story-card-body">
+          Post-sale, the liquid assets from your exit will lose their protection under Business Property Relief, leaving them exposed to significant Inheritance Tax. With no estate planning yet in place, the risk to your family's future grows as your wealth transitions from the business to personal assets.
+        </p>
+        <p class="story-card-question">How might you balance supporting your children's housing needs with preserving the legacy you've worked to build?</p>
+      </div>
+
+      <div class="story-card">
+        <h3 class="story-card-heading">Most of your wealth is tied up in the business, creating concentration risk.</h3>
+        <p class="story-card-body">
+          Nearly all of your financial security is bound to Hartley Precision Components, leaving little room for diversification. A successful exit could unlock the opportunity to spread risk and ensure long-term stability for your family — but only if the proceeds are managed strategically from day one.
+        </p>
+        <p class="story-card-question">What does financial security look like for you once the business is no longer the foundation it has been for twenty years?</p>
+      </div>
+
+    </div>
+
+    <!-- Right: context -->
+    <div class="context-panel">
+      <p class="slide-eyebrow">Report Section</p>
+      <h1 class="slide-title">Numbers Tell You What. Your Story Tells You Why It Matters.</h1>
+
+      <div class="pull-quote">
+        <p>His adviser understood not just his finances — but what he's worried about.</p>
+      </div>
+
+      <div class="feature-cards">
+        <div class="feature-card">
+          <h3 class="feature-card-title">Narrative Translation</h3>
+          <p class="feature-card-body">Your Story converts the numbers into a narrative written around the client's actual concerns, using language they can read without a financial dictionary.</p>
+        </div>
+        <div class="feature-card">
+          <h3 class="feature-card-title">Your Story Report Section</h3>
+          <p class="feature-card-body"><em>See the report → reconstructed from the client's data, personalised to their situation.</em></p>
+        </div>
+      </div>
+
+      <div class="adviser-note">
+        <h3 class="adviser-note-title">Adviser's Discretion</h3>
+        <p class="adviser-note-body">The adviser decides whether to share it. But it's ready when they need it.</p>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
