@@ -23,6 +23,7 @@ const navItems = [
     href: '/client-intelligence-engine',
     shortLabel: 'The Engine',
   },
+  { label: 'Blog', href: '/blog', shortLabel: 'Blog' },
 ];
 
 export default function Header({ variant = 'main' }: HeaderProps) {
