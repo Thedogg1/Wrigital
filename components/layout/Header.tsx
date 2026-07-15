@@ -23,6 +23,7 @@ const navItems = [
     href: '/client-intelligence-engine',
     shortLabel: 'The Engine',
   },
+  { label: 'About', href: '/about', shortLabel: 'About' },
   { label: 'Blog', href: '/blog', shortLabel: 'Blog' },
 ];
 

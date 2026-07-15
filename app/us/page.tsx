@@ -29,7 +29,7 @@ export default function UsaLandingPage() {
         <section className='bg-gradient-to-br from-[#1E2A4A] via-[#2D3561] to-[#0a2463] text-white py-20 lg:py-28'>
           <div className='max-w-5xl mx-auto px-6 text-center'>
             <h1 className='text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-6 text-white'>
-              Your Prospect Is Already Using AI. Wrigital Sets the Standard.
+              Your Prospect Is Already Using AI. FinPrint Sets the Standard.
             </h1>
             <p className='text-lg sm:text-xl text-[#CBD5E1] max-w-3xl mx-auto mb-8 leading-relaxed'>
               Enterprise-grade governance, compliance and Advisor-specific intelligence; built for
@@ -48,14 +48,14 @@ export default function UsaLandingPage() {
                 three years ago doesn&apos;t work the same way anymore.
               </p>
               <p>
-                Wrigital is the only system that delivers a complete, quantified financial picture
+                FinPrint is the only system that delivers a complete, quantified financial picture
                 of your prospect before you&apos;ve sat down together. advisor-reviewed,
                 formula-driven, SEC-defensible, and designed to make the first meeting close.
               </p>
             </div>
             <div className='flex flex-col sm:flex-row gap-4 justify-center items-center mb-4'>
               <Button href='#calculator' className='bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-strong)] border-none'>
-                Calculate Your Client&apos;s Exit Tax Position — Free
+                Calculate Your Client&apos;s Exit Tax Position � Free
               </Button>
             </div>
             <p className='text-sm text-[#94A3B8] italic'>
@@ -129,7 +129,7 @@ export default function UsaLandingPage() {
                 for it.
               </p>
               <p>
-                Empathy alone doesn&apos;t convert — not reliably, not consistently, not at the
+                Empathy alone doesn&apos;t convert � not reliably, not consistently, not at the
                 volume a growing firm requires. The prospect feels heard in the room and forgotten
                 by the follow-up email. That gap is where deals die.
               </p>
@@ -151,7 +151,7 @@ export default function UsaLandingPage() {
             </h2>
             <div className='space-y-6 text-[var(--color-text-secondary)] text-lg leading-relaxed'>
               <p>
-                Wrigital converts the sparse notes you already have into a complete,
+                FinPrint converts the sparse notes you already have into a complete,
                 advisor-reviewed financial intelligence report on your HNW business owner prospect;
                 it is ready before you walk into the room.
               </p>
@@ -167,7 +167,7 @@ export default function UsaLandingPage() {
                 knows you&apos;ve done the work before they&apos;ve told you a thing.
               </p>
               <p className='font-semibold text-[var(--color-text-primary)]'>
-                Everyone else is using AI to cut costs. Wrigital uses it to win clients.
+                Everyone else is using AI to cut costs. FinPrint uses it to win clients.
               </p>
             </div>
           </div>
@@ -192,7 +192,7 @@ export default function UsaLandingPage() {
                   the referrer shared. That&apos;s enough.
                 </p>
                 <p className='text-[var(--color-text-secondary)] text-sm leading-relaxed mt-3'>
-                  Wrigital is built to work from what you already know, not from what you wish
+                  FinPrint is built to work from what you already know, not from what you wish
                   you&apos;d asked.
                 </p>
               </div>
@@ -202,7 +202,7 @@ export default function UsaLandingPage() {
                   Step 2: Review and Approve Every Figure
                 </h3>
                 <p className='text-[var(--color-text-secondary)] text-sm leading-relaxed'>
-                  Wrigital extracts and calculates a personalised set of financial data points from
+                  FinPrint extracts and calculates a personalised set of financial data points from
                   your notes, which could include QSBS eligibility, retained
                   cash risk, concentration risk and more.
                 </p>
@@ -230,17 +230,17 @@ export default function UsaLandingPage() {
                 <ul className='text-[var(--color-text-secondary)] text-sm leading-relaxed mt-2 list-disc pl-5 space-y-1'>
                   <li>Executive Summary</li>
                   <li>
-                    Your Story — a narrative that converts the numbers into plain-language insight
+                    Your Story � a narrative that converts the numbers into plain-language insight
                     around the client&apos;s real concerns.
                   </li>
                   <li>
-                    What to Discuss With Your Advisor — frames the agenda without the prospect
+                    What to Discuss With Your Advisor � frames the agenda without the prospect
                     realising you influenced it.
                   </li>
                   <li>Relevant pivot tables built from the formula calculations.</li>
                 </ul>
                 <p className='text-[var(--color-text-secondary)] text-sm leading-relaxed mt-3 font-medium text-[var(--color-text-primary)]'>
-                  Beyond that, Wrigital selects additional sections based on the client&apos;s
+                  Beyond that, FinPrint selects additional sections based on the client&apos;s
                   specific circumstances:
                 </p>
                 <ul className='text-[var(--color-text-secondary)] text-sm leading-relaxed mt-2 list-disc pl-5 space-y-1'>
@@ -267,12 +267,12 @@ export default function UsaLandingPage() {
         {/* PRESENTATION */}
         <section className='py-20 bg-gradient-to-b from-[#1E2A4A] to-[#2D3561]'>
           <div className='max-w-5xl mx-auto px-6'>
-            <SectionLabel>See Wrigital in Action</SectionLabel>
+            <SectionLabel>See FinPrint in Action</SectionLabel>
             <h2 className='text-3xl sm:text-4xl font-bold text-white mb-4'>
               From Sparse Notes to SEC-Ready Intelligence
             </h2>
             <p className='text-[#CBD5E1] mb-10 max-w-2xl'>
-              Walk through a sample pre-meeting report — built for US financial advisors working with
+              Walk through a sample pre-meeting report � built for US financial advisors working with
               HNW business owner clients.
             </p>
             <LandingSlideViewer slides={slides} />
@@ -284,10 +284,10 @@ export default function UsaLandingPage() {
           <div className='max-w-4xl mx-auto px-6'>
             <SectionLabel>Free Tool</SectionLabel>
             <h2 className='text-3xl sm:text-4xl font-bold text-[var(--color-primary)] mb-3'>
-              See What Your Client Is Liable For on Exit — Right Now
+              See What Your Client Is Liable For on Exit � Right Now
             </h2>
             <p className='text-xl text-[var(--color-text-secondary)] mb-8'>
-              The Wrigital Exit Tax Optimization Calculator
+              The FinPrint Exit Tax Optimization Calculator
             </p>
             <div className='space-y-6 text-[var(--color-text-secondary)] mb-10 leading-relaxed'>
               <p>
@@ -308,7 +308,7 @@ export default function UsaLandingPage() {
               <p>
                 Enter six figures about your client&apos;s exit position. In under two minutes you have
                 their estimated net proceeds after capital gains tax, their QSBS eligibility and their
-                concentration risk — clearly laid out and ready to show.
+                concentration risk � clearly laid out and ready to show.
               </p>
               <p className='font-semibold text-[var(--color-text-primary)]'>
                 This calculator doesn&apos;t replace your accountant. It makes you the person who knew
@@ -327,11 +327,11 @@ export default function UsaLandingPage() {
           <div className='max-w-3xl mx-auto px-6'>
             <SectionLabel>Who It&apos;s Built For</SectionLabel>
             <h2 className='text-3xl sm:text-4xl font-bold text-[var(--color-primary)] mb-8'>
-              Built for Ambitious Advisors Who Want to Win Clients — Not Just Serve Them
+              Built for Ambitious Advisors Who Want to Win Clients � Not Just Serve Them
             </h2>
             <div className='space-y-6 text-[var(--color-text-secondary)] text-lg leading-relaxed'>
               <p>
-                Wrigital is designed specifically for SEC- and FINRA-regulated financial advisors and firm
+                FinPrint is designed specifically for SEC- and FINRA-regulated financial advisors and firm
                 owners working with high-net-worth business owner clients, who are building a
                 practice where quality of conversion matters more than volume of meetings.
               </p>
@@ -363,7 +363,7 @@ export default function UsaLandingPage() {
             </h2>
             <div className='space-y-6 text-[var(--color-text-secondary)] text-lg leading-relaxed'>
               <p>
-                The Wrigital pre-meeting report is the system&apos;s opening move. The full capability
+                The FinPrint pre-meeting report is the system&apos;s opening move. The full capability
                 runs across the entire client acquisition journey.
               </p>
               <p>
@@ -375,8 +375,8 @@ export default function UsaLandingPage() {
               <p>
                 <strong className='text-[var(--color-text-primary)]'>During the meeting:</strong> You
                 already know the numbers. The conversation is about planning, not discovery. The
-                emotional motivator — fear of falling behind, ambition to protect what they&apos;ve
-                built — stays at the centre of the conversation rather than being buried under
+                emotional motivator � fear of falling behind, ambition to protect what they&apos;ve
+                built � stays at the centre of the conversation rather than being buried under
                 credentials and features.
               </p>
               <p>
@@ -397,7 +397,7 @@ export default function UsaLandingPage() {
                 defensible.
               </p>
               <p className='font-semibold text-[var(--color-text-primary)]'>
-                The trust that was built in the meeting is reinforced every time you make contact —
+                The trust that was built in the meeting is reinforced every time you make contact �
                 because every contact is built on intelligence, not guesswork.
               </p>
             </div>
@@ -413,7 +413,7 @@ export default function UsaLandingPage() {
             </h2>
             <div className='space-y-6 text-[var(--color-text-secondary)] text-lg leading-relaxed'>
               <p>
-                Wrigital is not a general-purpose AI tool applied to financial services. It is
+                FinPrint is not a general-purpose AI tool applied to financial services. It is
                 built from the ground up for SEC- and FINRA-regulated advice practices.
               </p>
               <p>
@@ -447,7 +447,7 @@ export default function UsaLandingPage() {
               The Window Is Open Now. It Will Not Stay Open.
             </h2>
             <p className='text-[#CBD5E1] text-lg mb-6 leading-relaxed'>
-              Right now, most Advisor firms are using AI around the edges — meeting notes, compliance
+              Right now, most Advisor firms are using AI around the edges � meeting notes, compliance
               summaries, drafted emails. That&apos;s useful. It is not a competitive differentiator.
             </p>
             <p className='text-[#CBD5E1] text-lg mb-6 leading-relaxed'>
@@ -459,7 +459,7 @@ export default function UsaLandingPage() {
               stronger relationships than the firms that waited.
             </p>
             <p className='text-[#CBD5E1] text-lg mb-6 leading-relaxed'>
-              Wrigital is not a tool you add to your stack; it is the system you build your
+              FinPrint is not a tool you add to your stack; it is the system you build your
               client-acquisition workflow around.
             </p>
             <p className='text-[#CBD5E1] text-lg mb-12 leading-relaxed'>
@@ -476,7 +476,7 @@ export default function UsaLandingPage() {
                   then book a discovery call to find out more.
                 </p>
                 <Button href='#calculator' className='bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-strong)] border-none w-full sm:w-auto'>
-                  Calculate Your Client&apos;s Exit Tax Position — Free →
+                  Calculate Your Client&apos;s Exit Tax Position � Free ?
                 </Button>
               </div>
             </div>
@@ -499,9 +499,9 @@ export default function UsaLandingPage() {
         {/* US FOOTER NOTE */}
         <section className='py-8 bg-[var(--color-surface)] border-t border-[var(--color-border-subtle)]'>
           <div className='max-w-4xl mx-auto px-6 text-center text-sm text-[var(--color-text-secondary)] space-y-3'>
-            <p>Wrigital Ltd | AI-Powered Pre-Meeting Intelligence for financial advisors</p>
+            <p>Wrigital Ltd | FinPrint - AI-Powered Pre-Meeting Intelligence for financial advisors</p>
             <p>
-              Wrigital is a technology platform. It does not provide financial advice. All outputs
+              FinPrint is a technology product from Wrigital. It does not provide financial advice. All outputs
               are designed for use by SEC- and FINRA-regulated financial advisors and are subject to Advisor
               review and approval before use.
             </p>

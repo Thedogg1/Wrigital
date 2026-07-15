@@ -13,12 +13,12 @@ const EMAIL_SUBJECT = 'Your US exit tax report is attached';
 const EMAIL_HTML = `
   <p>Hi {{firstName}},</p>
   <p>The first attachment is the exit tax calculation you just ran. The figures are based on the inputs you entered.</p>
-  <p>The second is a sample Wrigital intelligence report built around a fictional business owner called Marcus T. Ellison of Ellison Dynamics.</p>
+  <p>The second is a sample FinPrint intelligence report built around a fictional business owner called Marcus T. Ellison of Ellison Dynamics.</p>
   <p>If you'd like to see a report built around one of your own prospects, I'd be glad to walk you through it.</p>
   <p><a href="${DISCOVERY_CALL_URL}">Book a Discovery Call →</a></p>
   <p>Terry Martin<br/>Founder, Wrigital</p>
   <p style="font-size: 12px; color: #666;">
-    Wrigital is a technology platform. It does not provide financial, tax, or investment advice. All outputs are designed for use by SEC- and FINRA-regulated financial advisors and are subject to advisor review and approval before use. Marcus T. Ellison and Ellison Dynamics are AI-generated fictional characters created for demonstration purposes only.
+    FinPrint is a technology product from Wrigital. It does not provide financial, tax, or investment advice. All outputs are designed for use by SEC- and FINRA-regulated financial advisors and are subject to advisor review and approval before use. Marcus T. Ellison and Ellison Dynamics are AI-generated fictional characters created for demonstration purposes only.
   </p>
 `;
 

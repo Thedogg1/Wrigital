@@ -5,5 +5,5 @@ export const USA_LANDING_SLIDES = [
   { id: 'slide-04', file: 'slide-04-your-story.html', label: 'Numbers Tell You What. Your Story Tells You Why.' },
   { id: 'slide-05', file: 'slide-05-discussion.html', label: 'The Advisor Shapes the Conversation Before It Starts' },
   { id: 'slide-06', file: 'slide-06-audit-trail.html', label: 'Every Claim Has a Paper Trail' },
-  { id: 'slide-07', file: 'slide-07-closing.html', label: 'Find Out What Wrigital Can Do For Your Firm' },
+  { id: 'slide-07', file: 'slide-07-closing.html', label: 'Find Out What FinPrint Can Do For Your Firm' },
 ] as const;

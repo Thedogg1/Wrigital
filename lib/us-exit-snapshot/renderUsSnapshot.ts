@@ -63,7 +63,7 @@ export function buildUsSnapshotReport(
     <table><thead><tr><th>Check</th><th>Result</th><th>Detail</th></tr></thead><tbody>${qsbsChecks}</tbody></table>
     ${observations ? `<h2>Observations</h2>${observations}` : ''}
     <div class="disclaimer">
-      <p>Wrigital is a technology platform. It does not provide financial, tax, or investment advice. All outputs are designed for use by SEC- and FINRA-regulated financial advisors and are subject to advisor review and approval before use.</p>
+      <p>FinPrint is a technology product from Wrigital. It does not provide financial, tax, or investment advice. All outputs are designed for use by SEC- and FINRA-regulated financial advisors and are subject to advisor review and approval before use.</p>
       <p>Calculation date: ${c.calculationDate}. State tax modelled at default rate; actual state treatment may vary.</p>
     </div>`;
 

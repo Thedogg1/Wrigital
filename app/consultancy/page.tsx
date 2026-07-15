@@ -299,6 +299,16 @@ export default function ConsultancyPage() {
                     },
                   ]}
                 />
+                <p className="mt-8 max-w-3xl text-[var(--color-text-secondary)]">
+                  See the judgment behind the work on our{' '}
+                  <Link
+                    href="/about"
+                    className="font-medium text-[var(--color-primary)] underline-offset-4 hover:underline"
+                  >
+                    About
+                  </Link>{' '}
+                  page.
+                </p>
               </ScrollReveal>
             </div>
             <ScrollReveal delay={0.1}>

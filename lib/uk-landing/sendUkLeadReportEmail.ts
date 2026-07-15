@@ -15,7 +15,7 @@ const EMAIL_HTML = `
   <p>Hi {{firstName}},</p>
   <p>You'll find two attachments in this email.</p>
   <p>The first is the exit tax calculation you just ran. The figures are based on the inputs you entered. If any of those numbers change when you get to the precise data, the output changes proportionally; the structure of the opportunity won't.</p>
-  <p>The second is a sample Wrigital intelligence report. It's built around a fictional business owner called Robert Hartley of Hartley Precision Components Ltd. The report itself is real. The figures are formula-driven, the risks are genuine, and the narrative is the kind of thing that makes a prospect want to book a second meeting before the first one has ended.</p>
+  <p>The second is a sample FinPrint intelligence report. It's built around a fictional business owner called Robert Hartley of Hartley Precision Components Ltd. The report itself is real. The figures are formula-driven, the risks are genuine, and the narrative is the kind of thing that makes a prospect want to book a second meeting before the first one has ended.</p>
   <p>The difference between the calculation and the full report is the difference between a number and a conversation.</p>
   <p>If you'd like to see a report built around one of your own prospects, I'd be glad to walk you through it.</p>
   <p><a href="${DISCOVERY_CALL_URL}">Book a Discovery Call →</a></p>
@@ -25,7 +25,7 @@ const EMAIL_HTML = `
     <a href="${siteUrl}">${siteUrl.replace(/^https?:\/\//, '')}</a>
   </p>
   <p style="font-size: 12px; color: #666;">
-    Wrigital is a technology platform. It does not provide financial advice. All outputs are designed for use by FCA-regulated financial advisers and are subject to adviser review and approval before use. Robert Hartley and Hartley Precision Components Ltd are AI-generated fictional characters created for demonstration purposes only.
+    FinPrint is a technology product from Wrigital. It does not provide financial advice. All outputs are designed for use by FCA-regulated financial advisers and are subject to adviser review and approval before use. Robert Hartley and Hartley Precision Components Ltd are AI-generated fictional characters created for demonstration purposes only.
   </p>
 `;
 

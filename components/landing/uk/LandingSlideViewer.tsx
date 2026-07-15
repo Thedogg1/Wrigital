@@ -37,7 +37,7 @@ export default function LandingSlideViewer({ slides }: LandingSlideViewerProps) 
       <div className='flex items-center justify-between gap-4 px-4 sm:px-6 py-3 border-b border-[rgba(0,200,224,0.2)] bg-[#2D3561]'>
         <div className='min-w-0'>
           <p className='text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-[#00C8E0] mb-0.5'>
-            Wrigital Presentation
+            FinPrint Presentation
           </p>
           <p className='text-sm sm:text-base font-medium text-white truncate'>{current.label}</p>
         </div>

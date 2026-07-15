@@ -8,6 +8,7 @@ const footerLinks = [
     label: 'Client Intelligence Engine',
     href: '/client-intelligence-engine',
   },
+  { label: 'About', href: '/about' },
   { label: 'Blog', href: '/blog' },
   { label: 'Book an assessment', href: calendlyUrl, external: true },
 ];
