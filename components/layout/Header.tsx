@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
+import { WrigitalLogo } from '@/components/brand/WrigitalLogo';
 import { buttonVariants } from '@/components/ui/button';
 import { calendlyUrl } from '@/lib/site';
 import { cn } from '@/lib/utils';
@@ -30,8 +31,6 @@ const navItems = [
 export default function Header({ variant = 'main' }: HeaderProps) {
   const [open, setOpen] = useState(false);
 
-  const logo =
-    variant === 'finprint' ? 'FinPrint, by Wrigital' : 'Wrigital';
   const cta =
     variant === 'finprint'
       ? { label: 'Request a sample report', href: '#request-sample' }
@@ -45,10 +44,10 @@ export default function Header({ variant = 'main' }: HeaderProps) {
       <nav className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-4">
         <Link
           href="/"
-          className="text-lg font-bold text-[var(--color-primary)] sm:text-xl"
+          className="flex shrink-0 items-center"
           onClick={() => setOpen(false)}
         >
-          {logo}
+          <WrigitalLogo variant={variant} />
         </Link>
 
         <div className="hidden items-center gap-6 lg:flex">

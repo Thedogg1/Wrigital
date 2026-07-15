@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+import { WrigitalLogo } from '@/components/brand/WrigitalLogo';
 import Footer from '@/components/layout/Footer';
 import { MetaPixel } from '@/components/analytics/MetaPixel';
 import { Section } from '@/components/marketing/CtaBand';
@@ -69,11 +70,8 @@ function LocalHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-[var(--color-border-subtle)] bg-[var(--color-bg)]/95 backdrop-blur-sm">
       <nav className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-4">
-        <Link
-          href="/"
-          className="text-lg font-bold text-[var(--color-primary)] sm:text-xl"
-        >
-          Wrigital
+        <Link href="/" className="flex shrink-0 items-center">
+          <WrigitalLogo />
         </Link>
         <a
           href={calendlyDonkeyUrl}
