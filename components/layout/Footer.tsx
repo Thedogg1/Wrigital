@@ -14,7 +14,7 @@ const footerLinks = [
   },
   { label: 'About', href: '/about' },
   { label: 'Blog', href: '/blog' },
-  { label: 'Book an assessment', href: calendlyUrl, external: true },
+  { label: 'Book a call', href: calendlyUrl, external: true },
 ];
 
 export default function Footer() {

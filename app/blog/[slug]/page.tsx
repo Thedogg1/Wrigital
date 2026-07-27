@@ -137,10 +137,13 @@ export default async function BlogPostPage({
         </article>
         <CtaBand
           title="Ready to see FinPrint or book an assessment?"
-          cta={{ label: 'Book an assessment', href: calendlyUrl }}
+          cta={{
+            label: 'Start the free count',
+            href: '/unverified-answer-count',
+          }}
           secondary={{
-            label: 'See FinPrint',
-            href: '/client-conversion-financial-advisers',
+            label: 'Book a call',
+            href: calendlyUrl,
           }}
           tone="paper"
         />

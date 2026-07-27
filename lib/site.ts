@@ -3,7 +3,7 @@ export const siteUrl =
 
 export const calendlyUrl =
   process.env.NEXT_PUBLIC_CALENDLY_URL ??
-  'https://calendly.com/wrigital/assessment';
+  'https://calendly.com/hello-wrigital/30min';
 
 /** Separate Calendly event for the Facebook /local “Donkey Work Assessment” lane. */
 export const calendlyDonkeyUrl =
