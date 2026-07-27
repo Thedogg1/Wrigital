@@ -55,7 +55,7 @@ export const PAGE_TITLE = 'The unverified answer count';
 export const PAGE_DESCRIPTION =
   'Nine questions. A plain count of how many AI answers on regulated subjects your firm may produce each month that nobody can trace to a source.';
 
-export const INTRO_HEADLINE = 'How many AI answers can nobody trace?';
+export const INTRO_HEADLINE = 'How many AI answers are untraceable?';
 export const INTRO_BODY =
   'Answer nine questions about how your firm uses AI today. You will get an estimate based on what you enter. Nothing is sent anywhere until you choose to request a copy by email.';
 export const INTRO_CTA = 'Start';
@@ -140,7 +140,7 @@ export interface SingleChoiceOption<T extends string> {
 }
 
 export const QUESTION_2_PROMPT =
-  'How many work questions does a typical one of them ask in a week?';
+  'How many questions does each employee ask in a typical week?';
 
 export const FREQUENCY_OPTIONS: readonly FrequencyOption[] = [
   { id: '1_2', label: '1 to 2' },
@@ -230,7 +230,7 @@ export const TOOL_LABELS: Record<ToolId, string> = {
 };
 
 export const QUESTION_6_PROMPT =
-  'Can the AI read a list of sources someone in the firm has approved?';
+  'Does AI have read access to a list of approved sources?';
 
 export const SOURCE_ACCESS_OPTIONS: readonly SingleChoiceOption<SourceAccessAnswer>[] =
   [
@@ -282,7 +282,7 @@ export const CLIENT_TRACE_LABELS: Record<ClientTraceAnswer, string> = {
 };
 
 export const QUESTION_9_PROMPT =
-  'Is there anything written down about what AI must not be used for here?';
+  'Have AI use policies been documented?';
 
 export const POLICY_OPTIONS: readonly SingleChoiceOption<PolicyAnswer>[] = [
   { id: 'yes', label: 'Yes' },
