@@ -44,3 +44,5 @@ next-env.d.ts
 # lead capture logs (runtime; keep data/ directory via .gitkeep)
 /data/uk-leads.jsonl
 /data/us-leads.jsonl
+/data/unverified-leads.jsonl
+/data/unverified-reports/

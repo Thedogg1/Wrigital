@@ -1,6 +1,6 @@
 import { safeDecimal } from '@/lib/validation/validation-library-core';
 import type { SnapshotFormData, SnapshotCalculated } from './types';
-import { TAX_PARAMETERS_2025_26, TAX_YEAR_LABEL } from './taxParameters202526';
+import { TAX_PARAMETERS_2026_27, TAX_YEAR_LABEL } from './taxParameters202627';
 import { validateBadrEligibility } from './validateBadrEligibility';
 import {
   CONCENTRATION_EXTREME_THRESHOLD,
@@ -27,11 +27,11 @@ function round1(n: number): number {
 }
 
 /**
- * Port of TaxOptimizationFormulas.CalculateUkScenario (BadrOnly, Rates202526).
+ * Port of TaxOptimizationFormulas.CalculateUkScenario (BadrOnly, Rates202627).
  */
 export function calculateUkTaxScenario(
   input: UkTaxScenarioInput,
-  params = TAX_PARAMETERS_2025_26,
+  params = TAX_PARAMETERS_2026_27,
 ): Omit<SnapshotCalculated, 'equityValue' | 'businessValueShareOfNetWorth' | 'badrHeadroomRemaining' | 'holdingPeriodYears' | 'ownershipPercent' | 'badrEligible' | 'badrCheckResults' | 'calculationDate' | 'taxYear'> {
   const capitalGain = input.grossProceeds - input.costBasis;
 
@@ -66,7 +66,7 @@ export function calculateUkTaxScenario(
     const headroom = Math.max(0, params.badrLifetimeLimit - input.previousBadrClaimed);
     badrGain = Math.min(gainsAfterLosses, headroom);
     nonBadrGain = gainsAfterLosses - badrGain;
-    badrRateApplied = params.badrRate202526;
+    badrRateApplied = params.badrRate;
   }
 
   const aeaOnNonBadr = Math.min(params.annualCgtExemption, nonBadrGain);

@@ -33,7 +33,7 @@ export type UkEntityType = (typeof UK_ENTITY_TYPES)[number];
 
 export const BADR_HOLDING_PERIOD_YEARS = 2;
 export const BADR_LIFETIME_LIMIT = 1_000_000;
-export const BADR_RATE = 0.14;
+export const BADR_RATE = 0.18;
 export const CGT_BASIC_RATE = 0.18;
 export const CGT_HIGHER_RATE = 0.24;
 export const CGT_ANNUAL_EXEMPT_AMOUNT = 3_000;

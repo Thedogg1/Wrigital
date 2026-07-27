@@ -1,6 +1,6 @@
 import { formatCurrency, safeDecimal } from '@/lib/validation/validation-library-core';
 import { formatAssumptionRows } from './formatAssumptionDisplay';
-import { BADR_RATE_LABEL, TAX_PARAMETERS_2025_26, TAX_YEAR_LABEL } from './taxParameters202526';
+import { BADR_RATE_LABEL, TAX_PARAMETERS_2026_27, TAX_YEAR_LABEL } from './taxParameters202627';
 import type { SnapshotCalculated, SnapshotFormData } from './types';
 import type { ExitSnapshotMethodology } from './methodologyTypes';
 
@@ -12,7 +12,7 @@ export function buildUkMethodology(
   inputs: SnapshotFormData,
   calculated: SnapshotCalculated,
 ): ExitSnapshotMethodology {
-  const params = TAX_PARAMETERS_2025_26;
+  const params = TAX_PARAMETERS_2026_27;
   const businessValue = safeDecimal(inputs.businessValue) ?? 0;
   const costBasis = safeDecimal(inputs.costBasis) ?? 0;
   const taxableIncome = safeDecimal(inputs.taxableIncome) ?? 0;

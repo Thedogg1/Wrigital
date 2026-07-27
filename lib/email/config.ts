@@ -7,7 +7,7 @@ const resendFromName =
 
 /** Public contact address (mailto links, error messages, email signatures). */
 export const contactEmail =
-  process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim() || 'admin@wrigital.com';
+  process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim() || 'hello@wrigital.com';
 
 /** Resend `from` field — must use the verified sending domain. */
 export const resendFromAddress =

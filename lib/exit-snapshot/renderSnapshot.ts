@@ -2,7 +2,7 @@ import { formatCurrency } from '@/lib/validation/validation-library-core';
 import type { MatchedNarrativeRule, SnapshotContext } from './types';
 import { DISCLAIMER_MODULES } from './narrativeRules';
 import { collectDisclaimerTags } from './evaluateNarrativeRules';
-import { BADR_RATE_LABEL } from './taxParameters202526';
+import { BADR_RATE_LABEL } from './taxParameters202627';
 import {
   formatAssumptionRows,
   formatCurrencyField,

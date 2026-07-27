@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: ['/uk', '/us', '/studio'],
+      disallow: ['/uk', '/us', '/studio', '/unverified-answer-count/report'],
     },
     sitemap: `${siteUrl}/sitemap.xml`,
   };

@@ -24,6 +24,11 @@ const navItems = [
     href: '/client-intelligence-engine',
     shortLabel: 'The Engine',
   },
+  {
+    label: 'Unverified Answer Count',
+    href: '/unverified-answer-count',
+    shortLabel: 'Answer Count',
+  },
   { label: 'About', href: '/about', shortLabel: 'About' },
   { label: 'Blog', href: '/blog', shortLabel: 'Blog' },
 ];

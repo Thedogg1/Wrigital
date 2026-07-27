@@ -8,6 +8,10 @@ const footerLinks = [
     label: 'Client Intelligence Engine',
     href: '/client-intelligence-engine',
   },
+  {
+    label: 'Unverified Answer Count',
+    href: '/unverified-answer-count',
+  },
   { label: 'About', href: '/about' },
   { label: 'Blog', href: '/blog' },
   { label: 'Book an assessment', href: calendlyUrl, external: true },

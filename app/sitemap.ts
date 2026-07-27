@@ -11,6 +11,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/consultancy',
     '/client-conversion-financial-advisers',
     '/client-intelligence-engine',
+    '/unverified-answer-count',
     '/about',
     '/blog',
     '/privacy',

@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { calculateUkTaxScenario } from '@/lib/exit-snapshot/calculateUkExitSnapshot';
-import { TAX_PARAMETERS_2025_26 } from '@/lib/exit-snapshot/taxParameters202526';
+import { TAX_PARAMETERS_2026_27 } from '@/lib/exit-snapshot/taxParameters202627';
 
 describe('calculateUkTaxScenario', () => {
   it('BADR-eligible exit has lower tax than without BADR', () => {
@@ -16,7 +16,7 @@ describe('calculateUkTaxScenario', () => {
         badrEligible: true,
         previousBadrClaimed: 0,
       },
-      TAX_PARAMETERS_2025_26,
+      TAX_PARAMETERS_2026_27,
     );
 
     const withoutBadr = calculateUkTaxScenario(
@@ -28,12 +28,13 @@ describe('calculateUkTaxScenario', () => {
         badrEligible: false,
         previousBadrClaimed: 0,
       },
-      TAX_PARAMETERS_2025_26,
+      TAX_PARAMETERS_2026_27,
     );
 
     expect(withBadr.totalTaxLiability).toBeLessThan(withoutBadr.totalTaxLiability);
     expect(withBadr.netProceeds).toBeGreaterThan(withoutBadr.netProceeds);
-    expect(withBadr.totalTaxLiability).toBe(330_818);
+    // BADR 18% on £1m + standard CGT on remainder
+    expect(withBadr.totalTaxLiability).toBe(370_818);
     expect(withoutBadr.totalTaxLiability).toBe(430_818);
   });
 
@@ -47,7 +48,7 @@ describe('calculateUkTaxScenario', () => {
         badrEligible: true,
         previousBadrClaimed: 0,
       },
-      TAX_PARAMETERS_2025_26,
+      TAX_PARAMETERS_2026_27,
     );
 
     expect(result.grossCapitalGain).toBe(-100_000);
@@ -66,11 +67,11 @@ describe('calculateUkTaxScenario', () => {
         badrEligible: true,
         previousBadrClaimed: 900_000,
       },
-      TAX_PARAMETERS_2025_26,
+      TAX_PARAMETERS_2026_27,
     );
 
     expect(result.badrQualifyingGain).toBe(100_000);
     expect(result.nonBadrGain).toBe(650_000);
-    expect(result.badrTax).toBe(14_000);
+    expect(result.badrTax).toBe(18_000);
   });
 });

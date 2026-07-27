@@ -6,7 +6,7 @@ export interface TaxParameters {
   capitalGainsTaxBasicRate: number;
   capitalGainsTaxHigherRate: number;
   annualCgtExemption: number;
-  badrRate202526: number;
+  badrRate: number;
   badrLifetimeLimit: number;
   basicRateBand: number;
 }
