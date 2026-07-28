@@ -5,6 +5,9 @@ import {
   FREQUENCY_OPTIONS,
   HONEYPOT_FIELD_NAME,
   LINK_CHECK_OPTIONS,
+  MAX_FIRM_NAME_LENGTH,
+  PI_DISCLOSURE_OPTIONS,
+  PI_RENEWAL_MONTH_OPTIONS,
   POLICY_OPTIONS,
   REGULATED_SHARE_OPTIONS,
   SOURCE_ACCESS_OPTIONS,
@@ -52,6 +55,16 @@ const policyIds = POLICY_OPTIONS.map((o) => o.id) as [
   ...(typeof POLICY_OPTIONS)[number]['id'][],
 ];
 
+const piDisclosureIds = PI_DISCLOSURE_OPTIONS.map((o) => o.id) as [
+  (typeof PI_DISCLOSURE_OPTIONS)[number]['id'],
+  ...(typeof PI_DISCLOSURE_OPTIONS)[number]['id'][],
+];
+
+const piRenewalMonthIds = PI_RENEWAL_MONTH_OPTIONS.map((o) => o.id) as [
+  (typeof PI_RENEWAL_MONTH_OPTIONS)[number]['id'],
+  ...(typeof PI_RENEWAL_MONTH_OPTIONS)[number]['id'][],
+];
+
 export const unverifiedAnswersPayloadSchema = z.object({
   people: z.number().int().min(1).max(200),
   frequencyBand: z.enum(frequencyBandIds),
@@ -62,11 +75,19 @@ export const unverifiedAnswersPayloadSchema = z.object({
   linkCheck: z.enum(linkCheckIds),
   clientTrace: z.enum(clientTraceIds),
   policy: z.enum(policyIds),
+  piDisclosure: z.enum(piDisclosureIds),
+  piRenewalMonth: z.enum(piRenewalMonthIds),
 });
 
 export const unverifiedLeadSchema = z
   .object({
     email: z.string().trim().email('Please enter a valid email address.'),
+    firmName: z
+      .string()
+      .trim()
+      .max(MAX_FIRM_NAME_LENGTH)
+      .optional()
+      .transform((value) => value ?? ''),
     complianceOfficerEmail: z
       .string()
       .trim()
@@ -91,6 +112,7 @@ export const unverifiedLeadSchema = z
   })
   .transform((data) => ({
     ...data,
+    firmName: data.firmName.length > 0 ? data.firmName : undefined,
     complianceOfficerEmail:
       data.complianceOfficerEmail.length > 0
         ? data.complianceOfficerEmail

@@ -4,6 +4,7 @@ import type { CompleteUnverifiedAnswersInput } from '@/lib/unverifiedAnswers';
 
 export interface UnverifiedLeadRecord {
   email: string;
+  firmName?: string;
   complianceOfficerEmail?: string;
   marketingConsent: boolean;
   consentWordingVersion: string;

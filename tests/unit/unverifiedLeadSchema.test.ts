@@ -12,6 +12,8 @@ const validAnswers = {
   linkCheck: 'never' as const,
   clientTrace: 'no' as const,
   policy: 'no' as const,
+  piDisclosure: 'no' as const,
+  piRenewalMonth: 'march' as const,
 };
 
 function validLead(overrides: Record<string, unknown> = {}) {
@@ -31,6 +33,25 @@ describe('unverifiedLeadSchema', () => {
     expect(result.success).toBe(true);
     if (result.success) {
       expect(result.data.complianceOfficerEmail).toBeUndefined();
+      expect(result.data.firmName).toBeUndefined();
+    }
+  });
+
+  it('accepts an optional firm name', () => {
+    const result = unverifiedLeadSchema.safeParse(
+      validLead({ firmName: 'Northgate Financial' }),
+    );
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.data.firmName).toBe('Northgate Financial');
+    }
+  });
+
+  it('treats blank firm name as omitted', () => {
+    const result = unverifiedLeadSchema.safeParse(validLead({ firmName: '   ' }));
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.data.firmName).toBeUndefined();
     }
   });
 
@@ -72,6 +93,15 @@ describe('unverifiedLeadSchema', () => {
     const result = unverifiedLeadSchema.safeParse(
       validLead({
         answers: { ...validAnswers, people: 0 },
+      }),
+    );
+    expect(result.success).toBe(false);
+  });
+
+  it('requires both PI answers', () => {
+    const result = unverifiedLeadSchema.safeParse(
+      validLead({
+        answers: { ...validAnswers, piDisclosure: undefined },
       }),
     );
     expect(result.success).toBe(false);

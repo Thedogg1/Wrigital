@@ -1,10 +1,13 @@
 import { calendlyUrl } from '@/lib/site';
 
 /**
- * Server routes for this tool must post the nine answers and run
+ * Server routes for this tool must post the eleven answers and run
  * calculateUnverifiedAnswers server-side. Do not accept a pre-rendered report
  * or a client-supplied count (see app/api/uk-lead-capture/route.ts for the
  * pattern to avoid).
+ *
+ * The two PI questions are recorded and drive report copy only. They must never
+ * appear in a factor, a working step or the count.
  */
 
 // ---------------------------------------------------------------------------
@@ -38,7 +41,7 @@ export const MANUAL_CHECK_RATE_NEVER = 0;
 export const CHECKED_LIBRARY_FACTOR_YES = 0.6;
 export const CHECKED_LIBRARY_FACTOR_NO = 0;
 
-export const TOTAL_QUESTIONS = 9;
+export const TOTAL_QUESTIONS = 11;
 
 /**
  * Shown with the working panel. Sources are checked at build time, before
@@ -53,11 +56,11 @@ export const ASSUMPTIONS_NOTE =
 
 export const PAGE_TITLE = 'The unverified answer count';
 export const PAGE_DESCRIPTION =
-  'Nine questions. A plain count of how many AI answers on regulated subjects your firm may produce each month that nobody can trace to a source.';
+  'Eleven questions. A plain count of how many AI answers on regulated subjects your firm may produce each month that nobody can trace to a source.';
 
 export const INTRO_HEADLINE = 'How many AI answers are untraceable?';
 export const INTRO_BODY =
-  'Answer nine questions about how your firm uses AI today. You will get an estimate based on what you enter. Nothing is sent anywhere until you choose to request a copy by email.';
+  'Answer eleven questions about how your firm uses AI today. You will get an estimate based on what you enter. Nothing is sent anywhere until you choose to request a copy by email.';
 export const INTRO_CTA = 'Start';
 
 export const PRIVACY_NOTE =
@@ -67,7 +70,6 @@ export const PROGRESS_LABEL = 'Question {current} of {total}';
 export const BACK_BUTTON_LABEL = 'Back';
 export const NEXT_BUTTON_LABEL = 'Next';
 export const SEE_RESULT_BUTTON_LABEL = 'See my estimate';
-export const PRINT_BUTTON_LABEL = 'Print or save as PDF';
 
 export const QUESTION_1_PROMPT =
   'How many people in the firm use AI for work in a typical week?';
@@ -109,6 +111,27 @@ export type SourceAccessAnswer = 'yes' | 'no' | 'not_sure';
 export type LinkCheckAnswer = 'every_time' | 'sometimes' | 'never' | 'not_sure';
 export type ClientTraceAnswer = 'yes_full' | 'partly' | 'no' | 'not_sure';
 export type PolicyAnswer = 'yes' | 'no' | 'not_sure';
+
+/** Recorded for the report only. Never used in the count. */
+export type PiDisclosureAnswer = 'yes' | 'no' | 'not_sure';
+
+/** Recorded for the report only. Orders the report, never the count. */
+export type PiRenewalMonthId =
+  | 'january'
+  | 'february'
+  | 'march'
+  | 'april'
+  | 'may'
+  | 'june'
+  | 'july'
+  | 'august'
+  | 'september'
+  | 'october'
+  | 'november'
+  | 'december'
+  | 'not_sure';
+
+export type KnownPiRenewalMonthId = Exclude<PiRenewalMonthId, 'not_sure'>;
 
 export type KnownSourceAccessAnswer = Exclude<SourceAccessAnswer, 'not_sure'>;
 export type KnownLinkCheckAnswer = Exclude<LinkCheckAnswer, 'not_sure'>;
@@ -296,6 +319,77 @@ export const POLICY_LABELS: Record<PolicyAnswer, string> = {
   not_sure: POLICY_OPTIONS[2].label,
 };
 
+export const QUESTION_10_PROMPT =
+  'Have you told your PI insurer how the firm uses AI?';
+export const QUESTION_10_HINT =
+  'This does not change the count. It decides what the report gives you.';
+
+export const PI_DISCLOSURE_OPTIONS: readonly SingleChoiceOption<PiDisclosureAnswer>[] =
+  [
+    { id: 'yes', label: 'Yes' },
+    { id: 'no', label: 'No' },
+    { id: 'not_sure', label: 'Not sure' },
+  ] as const;
+
+export const PI_DISCLOSURE_LABELS: Record<PiDisclosureAnswer, string> = {
+  yes: PI_DISCLOSURE_OPTIONS[0].label,
+  no: PI_DISCLOSURE_OPTIONS[1].label,
+  not_sure: PI_DISCLOSURE_OPTIONS[2].label,
+};
+
+export const QUESTION_11_PROMPT = 'Which month does your PI cover renew?';
+export const QUESTION_11_HINT =
+  'This does not change the count. It decides the order of the report.';
+
+export const PI_RENEWAL_MONTH_OPTIONS: readonly SingleChoiceOption<PiRenewalMonthId>[] =
+  [
+    { id: 'january', label: 'January' },
+    { id: 'february', label: 'February' },
+    { id: 'march', label: 'March' },
+    { id: 'april', label: 'April' },
+    { id: 'may', label: 'May' },
+    { id: 'june', label: 'June' },
+    { id: 'july', label: 'July' },
+    { id: 'august', label: 'August' },
+    { id: 'september', label: 'September' },
+    { id: 'october', label: 'October' },
+    { id: 'november', label: 'November' },
+    { id: 'december', label: 'December' },
+    { id: 'not_sure', label: 'Not sure' },
+  ] as const;
+
+export const PI_RENEWAL_MONTH_LABELS: Record<PiRenewalMonthId, string> = {
+  january: 'January',
+  february: 'February',
+  march: 'March',
+  april: 'April',
+  may: 'May',
+  june: 'June',
+  july: 'July',
+  august: 'August',
+  september: 'September',
+  october: 'October',
+  november: 'November',
+  december: 'December',
+  not_sure: 'Not sure',
+};
+
+/** Calendar position of each named renewal month, January being 0. */
+export const PI_RENEWAL_MONTH_INDEX: Record<KnownPiRenewalMonthId, number> = {
+  january: 0,
+  february: 1,
+  march: 2,
+  april: 3,
+  may: 4,
+  june: 5,
+  july: 6,
+  august: 7,
+  september: 8,
+  october: 9,
+  november: 10,
+  december: 11,
+};
+
 // ---------------------------------------------------------------------------
 // Result copy
 // ---------------------------------------------------------------------------
@@ -316,9 +410,9 @@ export const RESULT_ZERO_HEADLINE =
 export const RESULT_ZERO_BODY =
   'Based on what you entered, either few questions fall on regulated subjects or your answers suggest most answers can be tied back to a source. That does not mean there is no risk. It means this counter landed at zero with your figures.';
 
-/** Shown below the zero headline instead of the offer block. */
+/** Shown below the zero headline. */
 export const ZERO_RESULT_BELOW_FOLD =
-  'The compliance questions below may still be worth putting to your compliance officer. This page does not show a product offer when the counter lands at zero.';
+  'That is what your own figures produce. It is not a clean bill of health, and the questions in the report are still worth putting to your compliance officer.';
 
 export const NOT_COUNTED_HEADLINE = 'No number from these answers';
 export const NOT_COUNTED_BODY =
@@ -338,6 +432,20 @@ export const NOT_COUNTED_CLOSING =
 
 export const RESULT_TEASER_TEMPLATE =
   'Based on what you entered, the area that may need attention first is {area}.';
+
+/**
+ * Second teaser line, shown only when the firm has not told its PI insurer how
+ * it uses AI. Names the deliverable. Does not deliver it.
+ */
+export const PI_TEASER_WITH_MONTH_TEMPLATE =
+  'Your PI cover renews in {month}. The report includes a paragraph written from your own figures that you can put in front of your insurer or broker.';
+
+export const PI_TEASER_WITHOUT_MONTH =
+  'You were not sure when your PI cover renews. The report includes a paragraph written from your own figures that you can put in front of your insurer or broker.';
+
+/** Verbatim boundary line. Shown wherever the disclosure paragraph is named. */
+export const PI_BOUNDARY_LINE =
+  'This is not a disclosure. It does not satisfy any insurer, and it does not tell you what to declare.';
 
 export const SHOW_WORKING_TOGGLE_LABEL = 'Show the working';
 export const SHOW_WORKING_TOGGLE_HIDE_LABEL = 'Hide the working';
@@ -361,119 +469,132 @@ export const OFFER_BODY =
   'A Verified Assistant answers only from your signed-off source library. Every citation is checked in code before it reaches a person in your firm.';
 export const OFFER_SETUP_PRICE = '£1,200 setup';
 export const OFFER_MONTHLY_PRICE = '£250 a month';
-export const OFFER_CTA_LABEL = 'Book a demonstration';
+export const OFFER_CTA_LABEL = 'Book a call';
 export const OFFER_CTA_URL = calendlyUrl;
 
-export const EMAIL_SECTION_HEADING = 'Send yourself a copy';
+export const EMAIL_SECTION_HEADING = 'Get the four things this page does not show';
 export const EMAIL_SECTION_BODY =
-  'Optional. Enter an email after your result is shown. Only then is anything sent from this page.';
+  'The count and the working above are yours already. The report adds four things: a paragraph written from your own figures that you can put in front of your insurer or broker, the three questions to answer first with what a good answer looks like for each, what to do about them without hiring anyone, and the free ICO and FCA material named so you can read it yourself.';
 export const EMAIL_INPUT_LABEL = 'Email address';
-export const EMAIL_SUBMIT_LABEL = 'Send copy';
+export const EMAIL_SUBMIT_LABEL = 'Send the report';
 export const EMAIL_SUCCESS_MESSAGE =
   'Thank you. We will send the report to the address you entered.';
 export const EMAIL_ERROR_MESSAGE =
-  'Something went wrong. Please try again or book a demonstration instead.';
+  'Something went wrong. Please try again or book a call instead.';
 
 export const EMAIL_REPORT_CONTENTS = [
-  'What each question is really asking',
-  'What a strong answer looks like for your firm',
-  'A one-page summary you can put to your compliance officer',
-  'A checklist of the two artefacts you can act on',
+  'A paragraph written from your own figures that you can put in front of your insurer or broker',
+  'The three questions to answer first, with what a good answer looks like for each',
+  'What to do about them without hiring anyone',
+  'The free ICO and FCA material, named so you can read it yourself',
 ] as const;
 
-export const REPORT_ARTEFACTS_HEADING = 'Two artefacts you can act on';
+export const FIRM_NAME_LABEL =
+  'Add your firm name so the report is headed with it.';
+export const FIRM_NAME_PLACEHOLDER = 'Firm name (optional)';
+export const MAX_FIRM_NAME_LENGTH = 120;
 
-export const REPORT_QUESTION_GUIDANCE_HEADING =
-  'What each question is really asking';
+// ---------------------------------------------------------------------------
+// Emailed report copy. None of this appears on the result screen.
+// ---------------------------------------------------------------------------
 
-export interface ReportQuestionGuidanceEntry {
-  prompt: string;
-  meaning: string;
-  strong: string;
-}
+export const REPORT_HEADING_TEMPLATE = '{firmName}: the unverified answer count';
+export const REPORT_HEADING_NO_FIRM_NAME = 'The unverified answer count';
+export const REPORT_DATE_LINE_TEMPLATE = 'Prepared {date} from figures you entered.';
+export const REPORT_FIGURES_HEADING = 'The figures you entered';
 
-export interface ReportArtefactEntry {
+export const DISCLOSURE_HEADING =
+  'A paragraph you can put in front of your insurer or broker';
+export const DISCLOSURE_INTRO =
+  'This is written from your own figures. Read it, correct anything that does not match how the firm actually works, and decide with your broker whether any of it should be sent.';
+
+/** Used in the disclosure paragraph when no firm name was given. */
+export const DISCLOSURE_FIRM_NAME_FALLBACK = 'Our firm';
+
+export const DISCLOSURE_PARAGRAPH_COUNTED_TEMPLATE =
+  '{firmName} uses AI tools in the course of its work. As at {date}, on our own figures, {people} {peopleWord} in the firm use AI in a typical week, which we estimate at around {monthlyQuestions} work questions a month. Of those, approximately {regulatedAnswers} touch tax, pensions, FCA rules or product detail. On the same figures, approximately {untraceable} of those answers a month could not currently be tied back to a source that anyone here had approved before it was used. We are addressing this by {remedy}.';
+
+export const DISCLOSURE_PARAGRAPH_ZERO_TEMPLATE =
+  '{firmName} uses AI tools in the course of its work. As at {date}, on our own figures, {people} {peopleWord} in the firm use AI in a typical week, which we estimate at around {monthlyQuestions} work questions a month. On the figures we hold, we would expect answers on regulated subjects to be capable of being tied back to a source approved before use. We keep this under review by {remedy}.';
+
+export const DISCLOSURE_PARAGRAPH_NOT_COUNTED_TEMPLATE =
+  '{firmName} uses AI tools in the course of its work. As at {date}, we are not able to state how many AI answers on regulated subjects could not be tied back to an approved source, because at least one of the underlying questions could not yet be answered from within the firm. We are resolving that by {remedy}.';
+
+export const DISCLOSURE_REMEDY =
+  'naming someone to approve the sources AI is allowed to draw on, writing down what AI must not be used for, and keeping a record of what each AI-assisted document was based on';
+
+export const REPORT_QUESTIONS_HEADING = 'The three questions to answer first';
+export const REPORT_QUESTIONS_INTRO =
+  'These are ranked by what your answers suggest needs attention soonest.';
+export const REPORT_GOOD_ANSWER_LABEL = 'What a good answer looks like';
+
+export const NO_HIRE_HEADING = 'What to do if you never hire anyone';
+export const NO_HIRE_INTRO =
+  'None of this requires a new role or a budget line. Each one can sit with someone who already works here.';
+
+export interface ReportStepEntry {
   title: string;
   body: string;
 }
 
-/** Report-only guidance shown in the emailed report, not on the results screen. */
-export const REPORT_QUESTION_GUIDANCE: readonly ReportQuestionGuidanceEntry[] = [
+export const NO_HIRE_STEPS: readonly ReportStepEntry[] = [
   {
-    prompt: QUESTION_1_PROMPT,
-    meaning:
-      'This sets the scale of the estimate. A whole number you can give without asking anyone else is enough.',
-    strong:
-      'A figure you can stand behind for a typical week, not a peak week or a guess about contractors you never see.',
+    title: 'Name someone to approve sources',
+    body: 'One person decides which documents, providers and guidance AI is allowed to draw on, and signs off anything added later. A named person with a short list beats an unnamed committee with a long one.',
   },
   {
-    prompt: QUESTION_2_PROMPT,
-    meaning:
-      'This turns headcount into monthly volume using the midpoint of the band you chose.',
-    strong:
-      'A closed band that matches how people actually work, not an open-ended "more than" when you could narrow it.',
+    title: 'Write down what AI must not be used for',
+    body: 'A single page is enough. Name the work where AI output must not go to a client without a human source check, and say who to ask when someone is unsure.',
   },
   {
-    prompt: QUESTION_3_PROMPT,
-    meaning:
-      'Only subjects that touch tax, pensions, FCA rules or product detail feed the regulated count.',
-    strong:
-      'Honest selection of what staff actually ask about, including the unregulated drafting work.',
-  },
-  {
-    prompt: QUESTION_4_PROMPT,
-    meaning:
-      'This is the share applied to monthly questions to estimate regulated AI answers.',
-    strong:
-      'A share that matches the subjects you selected, not a high share when only admin drafting comes up.',
-  },
-  {
-    prompt: QUESTION_5_PROMPT,
-    meaning:
-      'Tools on personal accounts do not change the count. They flag where client material may leave your tenant.',
-    strong:
-      'A list you know is used, or "Not sure" if you genuinely do not know which products staff open.',
-  },
-  {
-    prompt: QUESTION_6_PROMPT,
-    meaning:
-      'This decides the checked-library factor. "Not sure" means this counter will not produce a number.',
-    strong:
-      'Yes only if there is a signed-off list the tools can actually read. Otherwise No, and find out who would know.',
-  },
-  {
-    prompt: QUESTION_7_PROMPT,
-    meaning:
-      'This sets the manual link-check rate. Manual checking scores low because it leaves no record for a client later.',
-    strong:
-      'An answer that names how often it happens in practice, not what policy says should happen.',
-  },
-  {
-    prompt: QUESTION_8_PROMPT,
-    meaning:
-      'This does not change the arithmetic. It surfaces a compliance question worth putting to your compliance officer.',
-    strong:
-      'Yes only if you could retrieve the sources without reconstructing the chat from memory.',
-  },
-  {
-    prompt: QUESTION_9_PROMPT,
-    meaning:
-      'This does not change the arithmetic. It shows whether boundaries exist in writing.',
-    strong:
-      'Yes with a document people have actually read recently, or No if nothing exists yet.',
+    title: 'Keep a record of what was checked',
+    body: 'When an AI-assisted document goes out, record which sources it drew on. A line in the file note is enough to answer a client or a compliance officer months later without reconstructing a chat.',
   },
 ] as const;
 
-export const REPORT_ARTEFACTS: readonly ReportArtefactEntry[] = [
+export interface ReportSourceLink {
+  name: string;
+  url: string;
+  note: string;
+}
+
+export const REPORT_SOURCES_HEADING = 'Free material worth reading';
+export const REPORT_SOURCES_INTRO =
+  'All three are free and published by the regulators themselves. None of them is ours.';
+
+export const REPORT_SOURCES: readonly ReportSourceLink[] = [
   {
-    title: 'A signed-off source library',
-    body: 'A list of sources someone in the firm has approved before AI can use them, with a named owner for additions and removals.',
+    name: 'ICO AI and data protection risk toolkit',
+    url: 'https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/artificial-intelligence/guidance-on-ai-and-data-protection/ai-and-data-protection-risk-toolkit/',
+    note: 'A spreadsheet that walks through the risks your own AI use creates for the people whose data goes into it.',
   },
   {
-    title: 'A retrieval trail for each answer',
-    body: 'A record of which sources an AI-assisted document drew on, so a client or compliance officer can be shown the basis without reconstructing a chat.',
+    name: 'ICO guide to accountability and governance',
+    url: 'https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/accountability-and-governance/guide-to-accountability-and-governance/',
+    note: 'The ICO position on policies, procedures and keeping records of what you do and why, including for a smaller firm.',
+  },
+  {
+    name: 'AI and the FCA: our approach',
+    url: 'https://www.fca.org.uk/firms/innovation/ai-approach',
+    note: 'The FCA states it does not plan to introduce extra regulations for AI and will rely on existing frameworks instead.',
   },
 ] as const;
+
+/** The only offer in the report, and it goes at the very bottom. */
+export const REPORT_OFFER_LINE = `Wrigital builds assistants that answer only from a source library your firm has signed off, with every citation checked in code before it reaches anyone. ${OFFER_SETUP_PRICE}, ${OFFER_MONTHLY_PRICE}.`;
+
+/**
+ * No benchmark or comparison figure until there is response data of our own or
+ * a citable public source. A number here without one would be invented.
+ */
+export interface ReportBenchmark {
+  label: string;
+  value: number;
+  sourceName: string;
+  sourceUrl: string;
+}
+
+export const REPORT_BENCHMARK: ReportBenchmark | null = null;
 
 export const EMAIL_SUBJECT = `Your ${PAGE_TITLE} report`;
 
@@ -494,7 +615,7 @@ export const EMAIL_BEYOND_SCREEN_NOTE =
 export const EMAIL_DEMO_PROMPT =
   'If you want to see how a grounded assistant changes that number:';
 
-export const EMAIL_DEMO_CTA_LABEL = 'Book a demonstration';
+export const EMAIL_DEMO_CTA_LABEL = 'Book a call';
 
 export const EMAIL_SIGNATURE_NAME = 'Terry Martin';
 
@@ -511,7 +632,7 @@ export const MARKETING_CONSENT_DEFAULT = false;
 export const CONSENT_WORDING_VERSION = '1.0';
 
 export const COMPLIANCE_OFFICER_EMAIL_LABEL =
-  'Send a copy to your compliance officer (optional)';
+  'Send a copy to your compliance officer or your broker (optional)';
 export const COMPLIANCE_OFFICER_EMAIL_HINT =
   'Leave blank if you only want the report yourself.';
 
@@ -713,6 +834,98 @@ const COMPLIANCE_AREA_BY_KEY: Record<ComplianceQuestionKey, string> = {
   q9: 'written rules on what AI must not be used for',
 };
 
+/** Report-only. What a good answer to each area looks like. */
+export const COMPLIANCE_GOOD_ANSWER_BY_KEY: Record<
+  ComplianceQuestionKey,
+  string
+> = {
+  q6: 'A named person owns a written list of sources AI is allowed to draw on, the tools can actually read that list, and additions are signed off before use rather than after.',
+  q7: 'Someone opens the link, confirms it says what the answer claimed, and records that they did. An answer that describes what happens in practice beats one that describes the policy.',
+  q8: 'You could retrieve the sources behind an AI-assisted document from the file, months later, without reconstructing a chat from memory or asking the person who wrote it.',
+  q9: 'A short document that names the work AI must not be used for, says who to ask when someone is unsure, and has been read recently by the people it applies to.',
+};
+
+export interface PrioritisedComplianceQuestion {
+  questionKey: ComplianceQuestionKey;
+  text: string;
+  goodAnswer: string;
+}
+
+// ---------------------------------------------------------------------------
+// PI answers: report copy and report ordering only
+// ---------------------------------------------------------------------------
+
+export type ReportSectionOrder = 'insurer_first' | 'compliance_first';
+
+/** Renewal this month or within this many months puts the insurer section first. */
+export const RENEWAL_SOON_MONTHS = 3;
+
+/** Whole months from now until the named renewal month. Null when not known. */
+export function monthsUntilRenewal(
+  month: PiRenewalMonthId,
+  from: Date = new Date(),
+): number | null {
+  if (month === 'not_sure') return null;
+  return (PI_RENEWAL_MONTH_INDEX[month] - from.getUTCMonth() + 12) % 12;
+}
+
+export function isRenewalSoon(
+  month: PiRenewalMonthId,
+  from: Date = new Date(),
+): boolean {
+  const months = monthsUntilRenewal(month, from);
+  return months !== null && months <= RENEWAL_SOON_MONTHS;
+}
+
+export function resolveReportSectionOrder(
+  month: PiRenewalMonthId,
+  from: Date = new Date(),
+): ReportSectionOrder {
+  return isRenewalSoon(month, from) ? 'insurer_first' : 'compliance_first';
+}
+
+export function buildPiTeaser(
+  input: Pick<CompleteUnverifiedAnswersInput, 'piDisclosure' | 'piRenewalMonth'>,
+): string | null {
+  if (input.piDisclosure === 'yes') return null;
+  if (input.piRenewalMonth === 'not_sure') return PI_TEASER_WITHOUT_MONTH;
+
+  return PI_TEASER_WITH_MONTH_TEMPLATE.replace(
+    '{month}',
+    PI_RENEWAL_MONTH_LABELS[input.piRenewalMonth],
+  );
+}
+
+/** Trimmed firm name, or null when nothing usable was given. */
+export function normaliseFirmName(
+  value: string | null | undefined,
+): string | null {
+  const trimmed = value?.trim() ?? '';
+  if (!trimmed) return null;
+  return trimmed.slice(0, MAX_FIRM_NAME_LENGTH);
+}
+
+export function buildReportHeading(
+  firmName: string | null | undefined,
+): string {
+  const name = normaliseFirmName(firmName);
+  if (!name) return REPORT_HEADING_NO_FIRM_NAME;
+  return REPORT_HEADING_TEMPLATE.replace('{firmName}', name);
+}
+
+export function formatReportDate(date: Date): string {
+  return date.toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+    timeZone: 'UTC',
+  });
+}
+
+export function buildReportDateLine(date: Date): string {
+  return REPORT_DATE_LINE_TEMPLATE.replace('{date}', formatReportDate(date));
+}
+
 // ---------------------------------------------------------------------------
 // Form state and calculation
 // ---------------------------------------------------------------------------
@@ -727,6 +940,8 @@ export interface UnverifiedAnswersInput {
   linkCheck: LinkCheckAnswer | null;
   clientTrace: ClientTraceAnswer | null;
   policy: PolicyAnswer | null;
+  piDisclosure: PiDisclosureAnswer | null;
+  piRenewalMonth: PiRenewalMonthId | null;
 }
 
 export interface CompleteUnverifiedAnswersInput {
@@ -739,6 +954,8 @@ export interface CompleteUnverifiedAnswersInput {
   linkCheck: LinkCheckAnswer;
   clientTrace: ClientTraceAnswer;
   policy: PolicyAnswer;
+  piDisclosure: PiDisclosureAnswer;
+  piRenewalMonth: PiRenewalMonthId;
 }
 
 export interface WorkingStep {
@@ -756,9 +973,12 @@ interface UnverifiedAnswersResultBase {
   subjectsLine: string;
   hasRegulatedSubject: boolean;
   prioritisedComplianceQuestions: string[];
+  reportComplianceQuestions: PrioritisedComplianceQuestion[];
   workingSteps: WorkingStep[];
   assumptionsNote: string;
   teaser: string;
+  /** Second on-screen teaser line. Null when PI cover has been disclosed. */
+  piTeaser: string | null;
   showOffer: boolean;
 }
 
@@ -918,7 +1138,7 @@ function selectComplianceQuestions(
     CompleteUnverifiedAnswersInput,
     'sourceAccess' | 'linkCheck' | 'clientTrace' | 'policy'
   >,
-): string[] {
+): PrioritisedComplianceQuestion[] {
   const answers: ComplianceQuestionEntry[] = [];
 
   const q6 = COMPLIANCE_QUESTIONS_BY_ANSWER.q6.find(
@@ -944,7 +1164,11 @@ function selectComplianceQuestions(
   return answers
     .sort((a, b) => b.severity - a.severity)
     .slice(0, PRIORITISED_COMPLIANCE_QUESTION_COUNT)
-    .map((entry) => entry.text);
+    .map((entry) => ({
+      questionKey: entry.questionKey,
+      text: entry.text,
+      goodAnswer: COMPLIANCE_GOOD_ANSWER_BY_KEY[entry.questionKey],
+    }));
 }
 
 function buildTeaser(
@@ -984,7 +1208,9 @@ export function isComplete(
     input.sourceAccess !== null &&
     input.linkCheck !== null &&
     input.clientTrace !== null &&
-    input.policy !== null
+    input.policy !== null &&
+    input.piDisclosure !== null &&
+    input.piRenewalMonth !== null
   );
 }
 
@@ -1082,25 +1308,32 @@ function buildSharedResultFields(
   'workingSteps' | 'showOffer'
 > {
   const hasRegulatedSubject = inputHasRegulatedSubject(input.subjects);
+  const notSure = countNotSureAnswers(input);
+  const complianceQuestions = selectComplianceQuestions({
+    sourceAccess: input.sourceAccess,
+    linkCheck: input.linkCheck,
+    clientTrace: input.clientTrace,
+    policy: input.policy,
+  });
 
   return {
-    notSureCount: countNotSureAnswers(input),
-    notSureCallout: notSureCallout(countNotSureAnswers(input)),
+    notSureCount: notSure,
+    notSureCallout: notSureCallout(notSure),
     personalAccountCallout: resolvePersonalAccountCallout(input),
     subjectsLine: buildSubjectsLine(input.subjects),
     hasRegulatedSubject,
-    prioritisedComplianceQuestions: selectComplianceQuestions({
-      sourceAccess: input.sourceAccess,
-      linkCheck: input.linkCheck,
-      clientTrace: input.clientTrace,
-      policy: input.policy,
-    }),
+    prioritisedComplianceQuestions: complianceQuestions.map((q) => q.text),
+    reportComplianceQuestions: complianceQuestions,
     assumptionsNote: ASSUMPTIONS_NOTE,
     teaser: buildTeaser({
       sourceAccess: input.sourceAccess,
       linkCheck: input.linkCheck,
       clientTrace: input.clientTrace,
       policy: input.policy,
+    }),
+    piTeaser: buildPiTeaser({
+      piDisclosure: input.piDisclosure,
+      piRenewalMonth: input.piRenewalMonth,
     }),
   };
 }
@@ -1363,6 +1596,48 @@ export function calculateUnverifiedAnswers(
   };
 }
 
+export interface DisclosureParagraphInput {
+  firmName?: string | null;
+  result: UnverifiedAnswersResult;
+  people: number;
+  date: Date;
+}
+
+/**
+ * The covering-letter paragraph, filled with the firm's own figures. Makes no
+ * claim about what any insurer asks for or accepts.
+ */
+export function buildDisclosureParagraph({
+  firmName,
+  result,
+  people,
+  date,
+}: DisclosureParagraphInput): string {
+  const substitutions: Record<string, string> = {
+    '{firmName}': normaliseFirmName(firmName) ?? DISCLOSURE_FIRM_NAME_FALLBACK,
+    '{date}': formatReportDate(date),
+    '{people}': formatNumber(people),
+    '{peopleWord}': people === 1 ? 'person' : 'people',
+    '{remedy}': DISCLOSURE_REMEDY,
+  };
+
+  let template = DISCLOSURE_PARAGRAPH_NOT_COUNTED_TEMPLATE;
+
+  if (isCountedResult(result)) {
+    substitutions['{monthlyQuestions}'] = formatNumber(result.monthlyQuestions);
+    substitutions['{regulatedAnswers}'] = formatNumber(result.regulatedAnswers);
+    substitutions['{untraceable}'] = formatNumber(result.untraceable);
+    template = result.isZeroResult
+      ? DISCLOSURE_PARAGRAPH_ZERO_TEMPLATE
+      : DISCLOSURE_PARAGRAPH_COUNTED_TEMPLATE;
+  }
+
+  return Object.entries(substitutions).reduce(
+    (text, [token, value]) => text.split(token).join(value),
+    template,
+  );
+}
+
 /** Default form values for a fresh session. */
 export const DEFAULT_UNVERIFIED_ANSWERS_INPUT: UnverifiedAnswersInput = {
   people: null,
@@ -1374,4 +1649,6 @@ export const DEFAULT_UNVERIFIED_ANSWERS_INPUT: UnverifiedAnswersInput = {
   linkCheck: null,
   clientTrace: null,
   policy: null,
+  piDisclosure: null,
+  piRenewalMonth: null,
 };

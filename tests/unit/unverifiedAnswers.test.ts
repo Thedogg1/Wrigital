@@ -76,6 +76,8 @@ function completeInput(
     linkCheck: 'never',
     clientTrace: 'no',
     policy: 'no',
+    piDisclosure: 'no',
+    piRenewalMonth: 'not_sure',
     ...overrides,
   };
 }
@@ -927,5 +929,326 @@ describe('type guards', () => {
 describe('disclaimer', () => {
   it('denies assessment language explicitly', () => {
     expect(DISCLAIMER_LINE).toContain('not an assessment');
+  });
+});
+
+const PI_DISCLOSURE_ANSWERS = unverifiedAnswers.PI_DISCLOSURE_OPTIONS.map(
+  (o) => o.id,
+);
+const PI_RENEWAL_MONTHS = unverifiedAnswers.PI_RENEWAL_MONTH_OPTIONS.map(
+  (o) => o.id,
+);
+
+describe('question sequence', () => {
+  it('runs eleven numbered questions with no gaps', () => {
+    expect(unverifiedAnswers.TOTAL_QUESTIONS).toBe(11);
+
+    for (let n = 1; n <= unverifiedAnswers.TOTAL_QUESTIONS; n += 1) {
+      const prompt = (unverifiedAnswers as Record<string, unknown>)[
+        `QUESTION_${n}_PROMPT`
+      ];
+      expect(typeof prompt).toBe('string');
+      expect(prompt).not.toBe('');
+    }
+
+    expect(unverifiedAnswers).not.toHaveProperty('QUESTION_12_PROMPT');
+  });
+
+  it('requires both PI answers and never the firm name', () => {
+    expect(isComplete(completeInput({ piDisclosure: null }))).toBe(false);
+    expect(isComplete(completeInput({ piRenewalMonth: null }))).toBe(false);
+    expect(isComplete(completeInput())).toBe(true);
+    expect(DEFAULT_UNVERIFIED_ANSWERS_INPUT.piDisclosure).toBeNull();
+    expect(DEFAULT_UNVERIFIED_ANSWERS_INPUT.piRenewalMonth).toBeNull();
+    expect(DEFAULT_UNVERIFIED_ANSWERS_INPUT).not.toHaveProperty('firmName');
+  });
+
+  it('drops the print button copy', () => {
+    expect(unverifiedAnswers).not.toHaveProperty('PRINT_BUTTON_LABEL');
+  });
+});
+
+describe('PI answers never touch the count', () => {
+  it('produces an identical count and working for every PI answer', () => {
+    const baseline = calculateUnverifiedAnswers(
+      completeInput({ piDisclosure: 'yes', piRenewalMonth: 'january' }),
+    );
+    assertCounted(baseline);
+
+    for (const piDisclosure of PI_DISCLOSURE_ANSWERS) {
+      for (const piRenewalMonth of PI_RENEWAL_MONTHS) {
+        const result = calculateUnverifiedAnswers(
+          completeInput({ piDisclosure, piRenewalMonth }),
+        );
+        assertCounted(result);
+
+        expect(result.untraceable).toBe(baseline.untraceable);
+        expect(result.monthlyQuestions).toBe(baseline.monthlyQuestions);
+        expect(result.regulatedShare).toBe(baseline.regulatedShare);
+        expect(result.regulatedAnswers).toBe(baseline.regulatedAnswers);
+        expect(result.manualCheckRate).toBe(baseline.manualCheckRate);
+        expect(result.checkedLibraryFactor).toBe(baseline.checkedLibraryFactor);
+        expect(result.protectionFactor).toBe(baseline.protectionFactor);
+        expect(result.workingSteps).toEqual(baseline.workingSteps);
+      }
+    }
+  });
+
+  it('leaves the not-sure count and blocking reasons alone', () => {
+    const disclosed = calculateUnverifiedAnswers(
+      completeInput({ piDisclosure: 'yes', piRenewalMonth: 'march' }),
+    );
+    const unsure = calculateUnverifiedAnswers(
+      completeInput({ piDisclosure: 'not_sure', piRenewalMonth: 'not_sure' }),
+    );
+
+    expect(unsure.notSureCount).toBe(disclosed.notSureCount);
+    expect(unsure.notSureCallout).toBe(disclosed.notSureCallout);
+    expect(unsure.status).toBe(disclosed.status);
+  });
+
+  it('names no PI answer in any working step', () => {
+    const result = calculateUnverifiedAnswers(
+      completeInput({ piDisclosure: 'no', piRenewalMonth: 'september' }),
+    );
+
+    const working = result.workingSteps
+      .map((step) => `${step.name} ${step.expression} ${step.substitution}`)
+      .join(' ')
+      .toLowerCase();
+
+    expect(working).not.toContain('renew');
+    expect(working).not.toContain('insurer');
+    expect(working).not.toContain('september');
+  });
+});
+
+describe('PI teaser', () => {
+  it('stays silent once the insurer has been told', () => {
+    const result = calculateUnverifiedAnswers(
+      completeInput({ piDisclosure: 'yes', piRenewalMonth: 'march' }),
+    );
+
+    expect(result.piTeaser).toBeNull();
+    expect(result.teaser).not.toBe('');
+  });
+
+  it('names the renewal month when one was given', () => {
+    for (const piDisclosure of ['no', 'not_sure'] as const) {
+      const result = calculateUnverifiedAnswers(
+        completeInput({ piDisclosure, piRenewalMonth: 'october' }),
+      );
+
+      expect(result.piTeaser).toContain('October');
+      expect(result.piTeaser).toContain('insurer or broker');
+    }
+  });
+
+  it('falls back to wording without a month when the month is unknown', () => {
+    const result = calculateUnverifiedAnswers(
+      completeInput({ piDisclosure: 'no', piRenewalMonth: 'not_sure' }),
+    );
+
+    expect(result.piTeaser).toBe(unverifiedAnswers.PI_TEASER_WITHOUT_MONTH);
+    expect(result.piTeaser).not.toContain('{month}');
+  });
+});
+
+describe('report section order', () => {
+  const february = new Date(Date.UTC(2026, 1, 15));
+
+  it('measures whole months to the renewal month', () => {
+    expect(unverifiedAnswers.monthsUntilRenewal('february', february)).toBe(0);
+    expect(unverifiedAnswers.monthsUntilRenewal('may', february)).toBe(3);
+    expect(unverifiedAnswers.monthsUntilRenewal('june', february)).toBe(4);
+    expect(unverifiedAnswers.monthsUntilRenewal('january', february)).toBe(11);
+    expect(unverifiedAnswers.monthsUntilRenewal('not_sure', february)).toBeNull();
+  });
+
+  it('leads with the insurer only when renewal is within three months', () => {
+    expect(unverifiedAnswers.resolveReportSectionOrder('may', february)).toBe(
+      'insurer_first',
+    );
+    expect(unverifiedAnswers.resolveReportSectionOrder('june', february)).toBe(
+      'compliance_first',
+    );
+    expect(
+      unverifiedAnswers.resolveReportSectionOrder('not_sure', february),
+    ).toBe('compliance_first');
+  });
+});
+
+describe('disclosure paragraph', () => {
+  const date = new Date(Date.UTC(2026, 1, 15));
+
+  it('fills every placeholder from the firm\'s own figures', () => {
+    const answers = completeInput();
+    const result = calculateUnverifiedAnswers(answers);
+    assertCounted(result);
+
+    const paragraph = unverifiedAnswers.buildDisclosureParagraph({
+      firmName: 'Northgate Financial',
+      result,
+      people: 5,
+      date,
+    });
+
+    expect(paragraph).toContain('Northgate Financial');
+    expect(paragraph).toContain('15 February 2026');
+    expect(paragraph).toContain(String(result.monthlyQuestions));
+    expect(paragraph).toContain(String(result.regulatedAnswers));
+    expect(paragraph).toContain(String(result.untraceable));
+    expect(paragraph).not.toMatch(/\{[a-zA-Z]+\}/);
+  });
+
+  it('uses a neutral subject when no firm name was given', () => {
+    const result = calculateUnverifiedAnswers(completeInput());
+    const paragraph = unverifiedAnswers.buildDisclosureParagraph({
+      firmName: '  ',
+      result,
+      people: 1,
+      date,
+    });
+
+    expect(paragraph).toContain(
+      unverifiedAnswers.DISCLOSURE_FIRM_NAME_FALLBACK,
+    );
+    expect(paragraph).toContain('1 person');
+  });
+
+  it('states no figure when the counter produced none', () => {
+    const answers = completeInput({ sourceAccess: 'not_sure' });
+    const result = calculateUnverifiedAnswers(answers);
+    assertNotCounted(result);
+
+    const paragraph = unverifiedAnswers.buildDisclosureParagraph({
+      firmName: 'Northgate Financial',
+      result,
+      people: 5,
+      date,
+    });
+
+    expect(paragraph).toContain('not able to state how many AI answers');
+    expect(paragraph).not.toMatch(/\{[a-zA-Z]+\}/);
+  });
+});
+
+describe('firm name handling', () => {
+  it('trims, truncates and rejects blank names', () => {
+    expect(unverifiedAnswers.normaliseFirmName('  Northgate  ')).toBe(
+      'Northgate',
+    );
+    expect(unverifiedAnswers.normaliseFirmName('   ')).toBeNull();
+    expect(unverifiedAnswers.normaliseFirmName(null)).toBeNull();
+    expect(unverifiedAnswers.normaliseFirmName(undefined)).toBeNull();
+    expect(
+      unverifiedAnswers.normaliseFirmName('x'.repeat(500)),
+    ).toHaveLength(unverifiedAnswers.MAX_FIRM_NAME_LENGTH);
+  });
+
+  it('heads the report with the name only when there is one', () => {
+    expect(unverifiedAnswers.buildReportHeading('Northgate')).toContain(
+      'Northgate',
+    );
+    expect(unverifiedAnswers.buildReportHeading(null)).toBe(
+      unverifiedAnswers.REPORT_HEADING_NO_FIRM_NAME,
+    );
+  });
+});
+
+/** Every string reachable from the module, including nested in objects. */
+function collectCopyStrings(value: unknown, seen = new Set<unknown>()): string[] {
+  if (typeof value === 'string') return [value];
+  if (typeof value !== 'object' || value === null) return [];
+  if (seen.has(value)) return [];
+  seen.add(value);
+
+  return Object.values(value).flatMap((child) =>
+    collectCopyStrings(child, seen),
+  );
+}
+
+describe('PI claim guard', () => {
+  const bannedClaims = [
+    /proposal form/i,
+    /insurers? (now |already |currently )?ask/i,
+    /required to (declare|disclose) (your |its )?(use of )?ai/i,
+  ];
+
+  it('never claims that PI proposal forms ask about AI', () => {
+    for (const copy of collectCopyStrings(unverifiedAnswers)) {
+      for (const claim of bannedClaims) {
+        expect(copy).not.toMatch(claim);
+      }
+    }
+  });
+
+  it('carries the boundary line verbatim and leaves the closing line alone', () => {
+    expect(unverifiedAnswers.PI_BOUNDARY_LINE).toBe(
+      'This is not a disclosure. It does not satisfy any insurer, and it does not tell you what to declare.',
+    );
+    expect(unverifiedAnswers.NOT_COUNTED_CLOSING).toBe(
+      'A tool that refuses to produce a number it cannot support behaves the way a grounded assistant behaves when it has no source to cite.',
+    );
+  });
+});
+
+describe('report material', () => {
+  it('gives every compliance area a good answer', () => {
+    for (const key of ['q6', 'q7', 'q8', 'q9'] as const) {
+      expect(
+        unverifiedAnswers.COMPLIANCE_GOOD_ANSWER_BY_KEY[key].length,
+      ).toBeGreaterThan(0);
+    }
+  });
+
+  it('pairs each prioritised question with its good answer', () => {
+    const result = calculateUnverifiedAnswers(completeInput());
+
+    expect(result.reportComplianceQuestions).toHaveLength(
+      PRIORITISED_COMPLIANCE_QUESTION_COUNT,
+    );
+    expect(
+      result.reportComplianceQuestions.map((q) => q.text),
+    ).toEqual(result.prioritisedComplianceQuestions);
+    for (const question of result.reportComplianceQuestions) {
+      expect(question.goodAnswer).toBe(
+        unverifiedAnswers.COMPLIANCE_GOOD_ANSWER_BY_KEY[question.questionKey],
+      );
+    }
+  });
+
+  it('names three free regulator sources over https', () => {
+    expect(unverifiedAnswers.REPORT_SOURCES).toHaveLength(3);
+    for (const source of unverifiedAnswers.REPORT_SOURCES) {
+      expect(source.url.startsWith('https://')).toBe(true);
+      expect(source.name.length).toBeGreaterThan(0);
+      expect(source.note.length).toBeGreaterThan(0);
+    }
+    expect(
+      unverifiedAnswers.REPORT_SOURCES.filter((s) =>
+        s.url.includes('ico.org.uk'),
+      ),
+    ).toHaveLength(2);
+    expect(
+      unverifiedAnswers.REPORT_SOURCES.filter((s) =>
+        s.url.includes('fca.org.uk'),
+      ),
+    ).toHaveLength(1);
+  });
+
+  it('lists three things to do without hiring anyone', () => {
+    expect(unverifiedAnswers.NO_HIRE_STEPS).toHaveLength(3);
+  });
+
+  it('carries no benchmark figure without a citable source', () => {
+    expect(unverifiedAnswers.REPORT_BENCHMARK).toBeNull();
+  });
+
+  it('promises exactly the four things the report adds', () => {
+    expect(EMAIL_REPORT_CONTENTS).toHaveLength(4);
+    expect(unverifiedAnswers.COMPLIANCE_OFFICER_EMAIL_LABEL).toContain(
+      'or your broker',
+    );
   });
 });

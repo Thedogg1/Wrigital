@@ -1,12 +1,15 @@
 import crypto from 'crypto';
 import fs from 'fs';
 import path from 'path';
-import type { CompleteUnverifiedAnswersInput } from '@/lib/unverifiedAnswers';
+import {
+  normaliseFirmName,
+  type CompleteUnverifiedAnswersInput,
+} from '@/lib/unverifiedAnswers';
 
 /** Report links expire after 30 days. */
 export const REPORT_TTL_MS = 30 * 24 * 60 * 60 * 1000;
 
-const REPORT_TOKEN_VERSION = 1;
+const REPORT_TOKEN_VERSION = 2;
 const MS_PER_DAY = 24 * 60 * 60 * 1000;
 
 export interface StoredUnverifiedReport {
@@ -14,6 +17,7 @@ export interface StoredUnverifiedReport {
   createdAt: string;
   expiresAt: string;
   email: string;
+  firmName?: string | null;
   complianceOfficerEmail?: string;
   answers: CompleteUnverifiedAnswersInput;
   marketingConsent: boolean;
@@ -23,6 +27,7 @@ export interface StoredUnverifiedReport {
 
 export interface BuildReportTokenInput {
   email: string;
+  firmName?: string | null;
   complianceOfficerEmail?: string;
   answers: CompleteUnverifiedAnswersInput;
   marketingConsent: boolean;
@@ -33,6 +38,7 @@ export interface BuildReportTokenInput {
 interface SignedReportPayload {
   v: typeof REPORT_TOKEN_VERSION;
   email: string;
+  firmName: string | null;
   answers: CompleteUnverifiedAnswersInput;
   createdAt: string;
   expiresAt: string;
@@ -126,6 +132,7 @@ export function buildReportToken(input: BuildReportTokenInput): string {
   const payload: SignedReportPayload = {
     v: REPORT_TOKEN_VERSION,
     email: input.email.trim().toLowerCase(),
+    firmName: normaliseFirmName(input.firmName),
     answers: input.answers,
     createdAt,
     expiresAt,
@@ -143,6 +150,7 @@ export async function loadReport(
     return {
       token,
       email: signed.email,
+      firmName: signed.firmName,
       answers: signed.answers,
       marketingConsent: false,
       consentWordingVersion: '1.0',

@@ -61,6 +61,8 @@ export async function GET(_request: Request, context: RouteContext) {
   const html = buildUnverifiedReportHtml({
     answers: report.answers,
     result,
+    firmName: report.firmName,
+    generatedAt: new Date(report.createdAt),
   });
 
   return new Response(html, {

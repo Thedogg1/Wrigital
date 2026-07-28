@@ -1,6 +1,7 @@
 import { Resend } from 'resend';
 
 let resend: Resend | null = null;
+let resendContacts: Resend | null = null;
 
 export function getResendClient(): Resend {
   if (!resend) {
@@ -11,6 +12,21 @@ export function getResendClient(): Resend {
     resend = new Resend(key);
   }
   return resend;
+}
+
+/**
+ * Client for Contacts / Audiences. Prefer RESEND_CONTACTS_API_KEY when the
+ * sending key is restricted to "Sending access" only.
+ */
+export function getResendContactsClient(): Resend {
+  const contactsKey = process.env.RESEND_CONTACTS_API_KEY?.trim();
+  if (contactsKey) {
+    if (!resendContacts) {
+      resendContacts = new Resend(contactsKey);
+    }
+    return resendContacts;
+  }
+  return getResendClient();
 }
 
 export function interpolateTemplate(

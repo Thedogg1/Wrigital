@@ -13,7 +13,6 @@ import {
   CLIENT_TRACE_OPTIONS,
   COMPLIANCE_OFFICER_EMAIL_HINT,
   COMPLIANCE_OFFICER_EMAIL_LABEL,
-  COMPLIANCE_QUESTIONS_HEADING,
   CONSENT_WORDING_VERSION,
   DEFAULT_UNVERIFIED_ANSWERS_INPUT,
   DISCLAIMER_LINE,
@@ -24,6 +23,8 @@ import {
   EMAIL_SECTION_HEADING,
   EMAIL_SUBMIT_LABEL,
   EMAIL_SUCCESS_MESSAGE,
+  FIRM_NAME_LABEL,
+  FIRM_NAME_PLACEHOLDER,
   FREQUENCY_OPTIONS,
   HONEYPOT_FIELD_NAME,
   INTRO_BODY,
@@ -39,20 +40,20 @@ import {
   NOT_COUNTED_CLOSING,
   NOT_COUNTED_HEADLINE,
   NOT_COUNTED_REASON_COPY,
-  OFFER_BODY,
-  OFFER_CTA_LABEL,
-  OFFER_CTA_URL,
-  OFFER_HEADING,
-  OFFER_MONTHLY_PRICE,
-  OFFER_SETUP_PRICE,
   PEOPLE_VALIDATION_ERROR,
+  PI_BOUNDARY_LINE,
+  PI_DISCLOSURE_OPTIONS,
+  PI_RENEWAL_MONTH_OPTIONS,
   POLICY_OPTIONS,
-  PRINT_BUTTON_LABEL,
   PRIVACY_NOTE,
   PROGRESS_LABEL,
   QUESTION_1_HINT,
   QUESTION_1_PROMPT,
   QUESTION_2_PROMPT,
+  QUESTION_10_HINT,
+  QUESTION_10_PROMPT,
+  QUESTION_11_HINT,
+  QUESTION_11_PROMPT,
   QUESTION_3_HINT,
   QUESTION_3_PROMPT,
   QUESTION_4_PROMPT,
@@ -82,6 +83,8 @@ import {
   type ClientTraceAnswer,
   type FrequencyBandId,
   type LinkCheckAnswer,
+  type PiDisclosureAnswer,
+  type PiRenewalMonthId,
   type PolicyAnswer,
   type RegulatedShareBandId,
   type SourceAccessAnswer,
@@ -144,6 +147,10 @@ function canAdvance(step: number, input: UnverifiedAnswersInput): boolean {
       return input.clientTrace !== null;
     case 9:
       return input.policy !== null;
+    case 10:
+      return input.piDisclosure !== null;
+    case 11:
+      return input.piRenewalMonth !== null;
     default:
       return false;
   }
@@ -169,6 +176,7 @@ export default function UnverifiedAnswersFlow() {
   const [result, setResult] = useState<UnverifiedAnswersResult | null>(null);
 
   const [email, setEmail] = useState('');
+  const [firmName, setFirmName] = useState('');
   const [complianceOfficerEmail, setComplianceOfficerEmail] = useState('');
   const [marketingConsent, setMarketingConsent] = useState(
     MARKETING_CONSENT_DEFAULT,
@@ -230,6 +238,7 @@ export default function UnverifiedAnswersFlow() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           email,
+          firmName: firmName.trim() || '',
           complianceOfficerEmail: complianceOfficerEmail.trim() || '',
           marketingConsent,
           consentWordingVersion: CONSENT_WORDING_VERSION,
@@ -243,6 +252,8 @@ export default function UnverifiedAnswersFlow() {
             linkCheck: input.linkCheck,
             clientTrace: input.clientTrace,
             policy: input.policy,
+            piDisclosure: input.piDisclosure,
+            piRenewalMonth: input.piRenewalMonth,
           },
           [HONEYPOT_FIELD_NAME]: honeypot,
         }),
@@ -335,6 +346,19 @@ export default function UnverifiedAnswersFlow() {
                   autoComplete="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  className="h-11"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="unverified-firm-name">{FIRM_NAME_LABEL}</Label>
+                <Input
+                  id="unverified-firm-name"
+                  type="text"
+                  autoComplete="organization"
+                  value={firmName}
+                  onChange={(e) => setFirmName(e.target.value)}
+                  placeholder={FIRM_NAME_PLACEHOLDER}
                   className="h-11"
                 />
               </div>
@@ -595,6 +619,46 @@ export default function UnverifiedAnswersFlow() {
         </QuestionBlock>
       )}
 
+      {step === 10 && (
+        <QuestionBlock title={QUESTION_10_PROMPT} hint={QUESTION_10_HINT}>
+          <OptionList>
+            {PI_DISCLOSURE_OPTIONS.map((option) => (
+              <button
+                key={option.id}
+                type="button"
+                className={optionButtonClass(input.piDisclosure === option.id)}
+                onClick={() =>
+                  update({ piDisclosure: option.id as PiDisclosureAnswer })
+                }
+              >
+                {option.label}
+              </button>
+            ))}
+          </OptionList>
+        </QuestionBlock>
+      )}
+
+      {step === 11 && (
+        <QuestionBlock title={QUESTION_11_PROMPT} hint={QUESTION_11_HINT}>
+          <OptionList>
+            {PI_RENEWAL_MONTH_OPTIONS.map((option) => (
+              <button
+                key={option.id}
+                type="button"
+                className={optionButtonClass(
+                  input.piRenewalMonth === option.id,
+                )}
+                onClick={() =>
+                  update({ piRenewalMonth: option.id as PiRenewalMonthId })
+                }
+              >
+                {option.label}
+              </button>
+            ))}
+          </OptionList>
+        </QuestionBlock>
+      )}
+
       <div className="mt-8 flex flex-wrap gap-3">
         <Button variant="secondary" onClick={goBack}>
           {BACK_BUTTON_LABEL}
@@ -703,6 +767,17 @@ function ResultPanel({
         </p>
       )}
 
+      {result.piTeaser && (
+        <>
+          <p className="mb-4 rounded-lg bg-[var(--color-surface)] px-4 py-3 text-[var(--color-text-primary)]">
+            {result.piTeaser}
+          </p>
+          <p className="mb-4 text-sm font-semibold text-[var(--color-primary)]">
+            {PI_BOUNDARY_LINE}
+          </p>
+        </>
+      )}
+
       {result.notSureCallout && (
         <p className="mb-4 text-sm text-[var(--color-text-secondary)]">
           {result.notSureCallout}
@@ -755,40 +830,6 @@ function ResultPanel({
           </p>
         </div>
       )}
-
-      <div className="mb-6">
-        <h2 className="mb-3 text-xl font-semibold text-[var(--color-primary)]">
-          {COMPLIANCE_QUESTIONS_HEADING}
-        </h2>
-        <ol className="list-decimal space-y-2 pl-5 text-[var(--color-text-secondary)]">
-          {result.prioritisedComplianceQuestions.map((question) => (
-            <li key={question}>{question}</li>
-          ))}
-        </ol>
-      </div>
-
-      {result.showOffer && (
-        <div className="rounded-lg border border-[var(--color-border-subtle)] bg-[var(--color-surface)] p-5">
-          <h2 className="mb-2 text-xl font-semibold text-[var(--color-primary)]">
-            {OFFER_HEADING}
-          </h2>
-          <p className="mb-4 text-[var(--color-text-secondary)]">{OFFER_BODY}</p>
-          <p className="mb-4 text-sm font-medium text-[var(--color-primary)]">
-            {OFFER_SETUP_PRICE} · {OFFER_MONTHLY_PRICE}
-          </p>
-          <Button href={OFFER_CTA_URL}>{OFFER_CTA_LABEL}</Button>
-        </div>
-      )}
-
-      <div className="mt-6">
-        <Button
-          variant="secondary"
-          onClick={() => window.print()}
-          className="print:hidden"
-        >
-          {PRINT_BUTTON_LABEL}
-        </Button>
-      </div>
     </Card>
   );
 }

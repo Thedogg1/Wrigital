@@ -21,6 +21,8 @@ const sampleAnswers: CompleteUnverifiedAnswersInput = {
   linkCheck: 'never',
   clientTrace: 'no',
   policy: 'no',
+  piDisclosure: 'no',
+  piRenewalMonth: 'not_sure',
 };
 
 const sampleInput: BuildReportTokenInput = {
@@ -41,13 +43,18 @@ afterEach(() => {
 
 describe('reportStore', () => {
   it('builds a signed token that round-trips through loadReport', async () => {
-    const token = buildReportToken(sampleInput);
+    const token = buildReportToken({
+      ...sampleInput,
+      firmName: 'Northgate Financial',
+    });
 
     expect(token).toContain('.');
 
     const loaded = await loadReport(token);
     expect(loaded?.email).toBe('principal@firm.com');
+    expect(loaded?.firmName).toBe('Northgate Financial');
     expect(loaded?.answers.people).toBe(5);
+    expect(loaded?.answers.piDisclosure).toBe('no');
   });
 
   it('returns null for tampered tokens', async () => {
