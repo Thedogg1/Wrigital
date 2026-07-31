@@ -2,17 +2,30 @@ import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { createElement } from 'react';
-import { Resend } from 'resend';
 import { kvGet } from '@/lib/kv';
 import { reportLimiter } from '@/lib/ratelimit';
 import { FigureCheckRecord } from '@/emails/FigureCheckRecord';
 import { InternalCheckAlert } from '@/emails/InternalCheckAlert';
 import type { CheckResult } from '@/lib/check-types';
+import { getResendClient } from '@/lib/email/resendClient';
+import {
+  contactEmail,
+  resendFromAddress,
+  resendReplyTo,
+} from '@/lib/email/config';
 
 const Body = z.object({
   checkId: z.string().min(6),
   email: z.string().email(),
 });
+
+function notifyAddress(): string {
+  return (
+    process.env.NOTIFY_TO?.trim() ||
+    process.env.LEAD_NOTIFY_EMAIL?.trim() ||
+    contactEmail
+  );
+}
 
 export async function POST(req: Request) {
   const ip = req.headers.get('x-forwarded-for')?.split(',')[0] ?? 'unknown';
@@ -27,15 +40,12 @@ export async function POST(req: Request) {
   if (!result)
     return NextResponse.json({ error: 'expired' }, { status: 410 });
 
-  const apiKey = process.env.RESEND_API_KEY;
-  const from = process.env.RESEND_FROM;
-  const notifyTo = process.env.NOTIFY_TO ?? 'hello@wrigital.com';
-
-  if (!apiKey || !from) {
+  if (!process.env.RESEND_API_KEY) {
     return NextResponse.json({ error: 'send_failed' }, { status: 502 });
   }
 
-  const resend = new Resend(apiKey);
+  const resend = getResendClient();
+  const from = resendFromAddress;
   const customerHtml = renderToStaticMarkup(
     createElement(FigureCheckRecord, { result }),
   );
@@ -49,7 +59,7 @@ export async function POST(req: Request) {
   const { error } = await resend.emails.send({
     from,
     to: parsed.data.email,
-    replyTo: 'hello@wrigital.com',
+    replyTo: resendReplyTo,
     subject: `Figure check: ${result.domain}, ${new Date(result.finishedAt).toLocaleDateString('en-GB')}`,
     html: customerHtml,
   });
@@ -57,7 +67,7 @@ export async function POST(req: Request) {
 
   await resend.emails.send({
     from,
-    to: notifyTo,
+    to: notifyAddress(),
     subject: `Check requested: ${result.domain} (${result.behindCount} behind)`,
     html: alertHtml,
   });
