@@ -11,7 +11,7 @@ const VERDICT_STYLE: Record<Verdict, { label: string; color: string }> = {
 
 export function FigureCheckRecord({ result }: { result: CheckResult }) {
   const date = new Date(result.finishedAt).toLocaleDateString('en-GB');
-  const checkUrl = `${siteUrl}/?domain=${encodeURIComponent(result.domain)}`;
+  const checkUrl = `${siteUrl}/RAG_Offer`;
 
   return (
     <div style={{ fontFamily: 'system-ui, sans-serif', maxWidth: 600, margin: '0 auto', color: '#0E1A26' }}>
