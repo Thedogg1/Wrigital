@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
-import { renderToStaticMarkup } from 'react-dom/server';
 import { createElement } from 'react';
 import { kvDel, kvGet, kvSetNx } from '@/lib/kv';
 import { reportLimiter } from '@/lib/ratelimit';
@@ -64,15 +63,6 @@ export async function POST(req: Request) {
 
   const resend = getResendClient();
   const from = resendFromAddress;
-  const customerHtml = renderToStaticMarkup(
-    createElement(FigureCheckRecord, { result }),
-  );
-  const alertHtml = renderToStaticMarkup(
-    createElement(InternalCheckAlert, {
-      result,
-      email,
-    }),
-  );
 
   try {
     const { error } = await resend.emails.send({
@@ -80,7 +70,7 @@ export async function POST(req: Request) {
       to: email,
       replyTo: resendReplyTo,
       subject: `Figure check: ${result.domain}, ${new Date(result.finishedAt).toLocaleDateString('en-GB')}`,
-      html: customerHtml,
+      react: createElement(FigureCheckRecord, { result }),
     });
     if (error) {
       await kvDel(emailClaimKey(email));
@@ -91,7 +81,7 @@ export async function POST(req: Request) {
       from,
       to: notifyAddress(),
       subject: `Check requested: ${result.domain} (${result.behindCount} behind)`,
-      html: alertHtml,
+      react: createElement(InternalCheckAlert, { result, email }),
     });
 
     return NextResponse.json({ ok: true });
