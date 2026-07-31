@@ -31,15 +31,14 @@ export function CheckProgress() {
       <ul className="space-y-2 font-mono text-[0.8125rem]">
         {LINES.map((line, i) => {
           const shown = i < visible;
-          const done = i < visible - 1 || (i === visible - 1 && visible === LINES.length);
+          const complete = i < visible;
           return (
             <li
               key={line}
-              className={`flex items-center gap-2 transition-opacity duration-150 ${shown ? 'opacity-100' : 'opacity-0'}`}
-              style={{ transitionDelay: `${i * 120}ms` }}
+              className={`flex items-center gap-2 transition-opacity duration-[120ms] ${shown ? 'opacity-100' : 'opacity-0'}`}
             >
               <span
-                className={`inline-block h-3 w-3 rounded-none border border-rule ${done ? 'bg-ink' : ''}`}
+                className={`inline-block h-3 w-3 border border-rule ${complete ? 'bg-ink' : 'bg-transparent'}`}
                 aria-hidden="true"
               />
               {line}

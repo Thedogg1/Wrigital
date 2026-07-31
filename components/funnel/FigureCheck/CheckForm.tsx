@@ -55,9 +55,9 @@ export function CheckForm({ variant }: { variant: 'hero' | 'inline' }) {
             {running ? 'Checking' : 'Run the check'}
           </button>
         </div>
-        <p className="mt-3 font-mono text-[0.8125rem] text-ink-soft">
-          Under a minute. Nothing to install.
-        </p>
+          <p className="mt-3 font-mono text-[0.8125rem] text-ink-soft">
+            Under a minute. Nothing to install.
+          </p>
       </form>
       {running && <CheckProgress />}
       {errored && errorCode && (
