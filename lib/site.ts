@@ -11,7 +11,7 @@ export const SITE = {
   companyNumber: '16967085',
   registeredAddress: '12 Vernon Avenue, Old Basford, Nottingham, NG6 0AE',
   email: 'hello@wrigital.com',
-  calendly: calendlyUrl,
+  calendly: 'https://calendly.com/hello-wrigital/30min',
   videoId: 'MVECWSCr7bM',
 } as const;
 

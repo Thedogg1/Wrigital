@@ -48,7 +48,6 @@ export function ReportCapture() {
             onChange={(e) => setEmail(e.target.value)}
             disabled={sending}
             className="w-full rounded border border-rule bg-paper px-4 py-3 font-mono text-[0.9375rem]"
-            placeholder="you@yourfirm.co.uk"
           />
           <button
             type="submit"
