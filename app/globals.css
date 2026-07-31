@@ -59,11 +59,28 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans);
-  --font-mono: var(--font-mono);
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) * 1.4);
+
+  /* Funnel tokens */
+  --color-ink: #0e1a26;
+  --color-ink-soft: #46586a;
+  --color-paper: #f6f7f8;
+  --color-card: #ffffff;
+  --color-rule: #d9dee3;
+  --color-source: #1740a6;
+  --color-verified: #146b52;
+  --color-stale: #8a4b08;
+
+  --font-display: var(--font-newsreader), Georgia, serif;
+  --font-body: var(--font-plex-sans), system-ui, sans-serif;
+
+  --text-display-xl: clamp(2.25rem, 1.6rem + 2.6vw, 3.75rem);
+  --text-display-lg: clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem);
+  --text-display-md: clamp(1.375rem, 1.2rem + 0.8vw, 1.75rem);
 }
 
 @layer base {
@@ -93,6 +110,33 @@
   *:focus-visible {
     outline: 2px solid var(--focus-ring-color);
     outline-offset: 2px;
+  }
+
+  .funnel {
+    -webkit-text-size-adjust: 100%;
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.7;
+    text-rendering: optimizeLegibility;
+  }
+  .funnel h1,
+  .funnel h2,
+  .funnel h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    font-variation-settings: 'opsz' 36;
+    font-size: unset;
+    line-height: unset;
+  }
+  .funnel :focus-visible {
+    outline: 2px solid var(--color-source);
+    outline-offset: 3px;
+  }
+  .funnel ::selection {
+    background: #d8e1f5;
   }
 }
 

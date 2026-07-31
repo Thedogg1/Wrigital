@@ -5,6 +5,16 @@ export const calendlyUrl =
   process.env.NEXT_PUBLIC_CALENDLY_URL ??
   'https://calendly.com/hello-wrigital/30min';
 
+/** Funnel constants. Calendly matches calendlyUrl. */
+export const SITE = {
+  name: 'Wrigital Ltd',
+  companyNumber: '16967085',
+  registeredAddress: '12 Vernon Avenue, Old Basford, Nottingham, NG6 0AE',
+  email: 'hello@wrigital.com',
+  calendly: calendlyUrl,
+  videoId: 'MVECWSCr7bM',
+} as const;
+
 /** Separate Calendly event for the Facebook /local “Donkey Work Assessment” lane. */
 export const calendlyDonkeyUrl =
   process.env.NEXT_PUBLIC_CALENDLY_DONKEY_URL ?? calendlyUrl;
