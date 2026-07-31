@@ -2,9 +2,10 @@ type RedisClient = {
   set: (
     key: string,
     value: unknown,
-    opts?: { ex: number },
-  ) => Promise<unknown>;
+    opts?: { ex?: number; nx?: boolean },
+  ) => Promise<'OK' | null | unknown>;
   get: <T>(key: string) => Promise<T | null>;
+  del: (...keys: string[]) => Promise<number>;
 };
 
 function createRedis(): RedisClient | null {
@@ -31,6 +32,36 @@ export async function kvSet(key: string, value: unknown, exSeconds: number) {
     return;
   }
   memory.set(key, { value, expiresAt: Date.now() + exSeconds * 1000 });
+}
+
+/** Returns true if the key was set; false if it already existed. */
+export async function kvSetNx(
+  key: string,
+  value: unknown,
+  exSeconds?: number,
+): Promise<boolean> {
+  if (redis) {
+    const opts: { nx: boolean; ex?: number } = { nx: true };
+    if (exSeconds != null) opts.ex = exSeconds;
+    const result = await redis.set(key, value, opts);
+    return result === 'OK';
+  }
+  const existing = await kvGet(key);
+  if (existing != null) return false;
+  if (exSeconds != null) {
+    memory.set(key, { value, expiresAt: Date.now() + exSeconds * 1000 });
+  } else {
+    memory.set(key, { value, expiresAt: Number.MAX_SAFE_INTEGER });
+  }
+  return true;
+}
+
+export async function kvDel(key: string) {
+  if (redis) {
+    await redis.del(key);
+    return;
+  }
+  memory.delete(key);
 }
 
 export async function kvGet<T>(key: string): Promise<T | null> {

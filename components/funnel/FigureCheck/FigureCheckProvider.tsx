@@ -91,11 +91,13 @@ export function FigureCheckProvider({ children }: { children: ReactNode }) {
           return {
             ok: false,
             message:
-              data.error === 'send_failed' || res.status === 502
-                ? 'The record did not send. Try again, or email hello@wrigital.com and I will send the record by hand.'
-                : data.error === 'rate_limited'
-                  ? "That's several checks from this connection. Try again in an hour, or book a call and I will run the check with you."
-                  : 'The record did not send. Try again, or email hello@wrigital.com and I will send the record by hand.',
+              data.error === 'email_used'
+                ? 'That email has already been used for a record. Book a call and I will run a fresh check with you.'
+                : data.error === 'send_failed' || res.status === 502
+                  ? 'The record did not send. Try again, or email hello@wrigital.com and I will send the record by hand.'
+                  : data.error === 'rate_limited'
+                    ? "That's several checks from this connection. Try again in an hour, or book a call and I will run the check with you."
+                    : 'The record did not send. Try again, or email hello@wrigital.com and I will send the record by hand.',
           };
         }
         track('report_requested', { behind_count: result.behindCount });

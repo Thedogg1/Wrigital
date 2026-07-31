@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { createElement } from 'react';
-import { kvGet } from '@/lib/kv';
+import { kvDel, kvGet, kvSetNx } from '@/lib/kv';
 import { reportLimiter } from '@/lib/ratelimit';
 import { FigureCheckRecord } from '@/emails/FigureCheckRecord';
 import { InternalCheckAlert } from '@/emails/InternalCheckAlert';
@@ -27,6 +27,14 @@ function notifyAddress(): string {
   );
 }
 
+function normaliseEmail(email: string) {
+  return email.trim().toLowerCase();
+}
+
+function emailClaimKey(email: string) {
+  return `funnel-report-email:${normaliseEmail(email)}`;
+}
+
 export async function POST(req: Request) {
   const ip = req.headers.get('x-forwarded-for')?.split(',')[0] ?? 'unknown';
   if (!(await reportLimiter.limit(ip)).success)
@@ -36,12 +44,22 @@ export async function POST(req: Request) {
   if (!parsed.success)
     return NextResponse.json({ error: 'invalid_email' }, { status: 400 });
 
+  const email = normaliseEmail(parsed.data.email);
   const result = await kvGet<CheckResult>(`check:${parsed.data.checkId}`);
   if (!result)
     return NextResponse.json({ error: 'expired' }, { status: 410 });
 
   if (!process.env.RESEND_API_KEY) {
     return NextResponse.json({ error: 'send_failed' }, { status: 502 });
+  }
+
+  const claimed = await kvSetNx(emailClaimKey(email), {
+    checkId: result.checkId,
+    domain: result.domain,
+    claimedAt: new Date().toISOString(),
+  });
+  if (!claimed) {
+    return NextResponse.json({ error: 'email_used' }, { status: 409 });
   }
 
   const resend = getResendClient();
@@ -52,25 +70,33 @@ export async function POST(req: Request) {
   const alertHtml = renderToStaticMarkup(
     createElement(InternalCheckAlert, {
       result,
-      email: parsed.data.email,
+      email,
     }),
   );
 
-  const { error } = await resend.emails.send({
-    from,
-    to: parsed.data.email,
-    replyTo: resendReplyTo,
-    subject: `Figure check: ${result.domain}, ${new Date(result.finishedAt).toLocaleDateString('en-GB')}`,
-    html: customerHtml,
-  });
-  if (error) return NextResponse.json({ error: 'send_failed' }, { status: 502 });
+  try {
+    const { error } = await resend.emails.send({
+      from,
+      to: email,
+      replyTo: resendReplyTo,
+      subject: `Figure check: ${result.domain}, ${new Date(result.finishedAt).toLocaleDateString('en-GB')}`,
+      html: customerHtml,
+    });
+    if (error) {
+      await kvDel(emailClaimKey(email));
+      return NextResponse.json({ error: 'send_failed' }, { status: 502 });
+    }
 
-  await resend.emails.send({
-    from,
-    to: notifyAddress(),
-    subject: `Check requested: ${result.domain} (${result.behindCount} behind)`,
-    html: alertHtml,
-  });
+    await resend.emails.send({
+      from,
+      to: notifyAddress(),
+      subject: `Check requested: ${result.domain} (${result.behindCount} behind)`,
+      html: alertHtml,
+    });
 
-  return NextResponse.json({ ok: true });
+    return NextResponse.json({ ok: true });
+  } catch {
+    await kvDel(emailClaimKey(email));
+    return NextResponse.json({ error: 'send_failed' }, { status: 502 });
+  }
 }
