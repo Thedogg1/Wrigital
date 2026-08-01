@@ -74,6 +74,7 @@
   --color-source: #1740a6;
   --color-verified: #146b52;
   --color-stale: #8a4b08;
+  --color-attention: #a16207;
 
   --font-display: var(--font-newsreader), Georgia, serif;
   --font-body: var(--font-plex-sans), system-ui, sans-serif;
@@ -153,6 +154,15 @@
 
 .funnel-finding-row {
   animation: funnel-finding-in 120ms ease-out both;
+}
+
+.funnel-nav-tabs {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.funnel-nav-tabs::-webkit-scrollbar {
+  display: none;
 }
 
 @media (prefers-reduced-motion: reduce) {

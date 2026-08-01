@@ -1,5 +1,4 @@
 import { Newsreader, IBM_Plex_Sans, IBM_Plex_Mono } from 'next/font/google';
-import { SiteHeader } from '@/components/funnel/SiteHeader';
 import { SiteFooter } from '@/components/funnel/SiteFooter';
 
 const newsreader = Newsreader({
@@ -36,7 +35,6 @@ export default function FunnelLayout({
       >
         Skip to content
       </a>
-      <SiteHeader />
       <main id="main">{children}</main>
       <SiteFooter />
     </div>
