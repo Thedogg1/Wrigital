@@ -11,6 +11,9 @@ export const RESEND_CONTACT_PROPERTY_KEYS = [
   'pi_disclosure',
   'pi_renewal_month',
   'marketing_consent',
+  'check_domain',
+  'check_behind',
+  'budget_recheck',
 ] as const;
 
 export interface SyncResendContactInput {
@@ -21,6 +24,17 @@ export interface SyncResendContactInput {
   untraceable: number | null;
   piDisclosure: string;
   piRenewalMonth: string;
+  /** Path or label stored on the Resend contact `source` property. */
+  source?: string;
+}
+
+export interface SyncResendAudienceContactInput {
+  email: string;
+  source: string;
+  /** When true, contact may receive marketing. When false, do not force-unsubscribe an existing opted-in contact. */
+  marketingConsent?: boolean;
+  firmName?: string | null;
+  properties?: Record<string, string>;
 }
 
 type ResendErrorLike = {
@@ -46,32 +60,35 @@ function throwIfRestricted(error: ResendErrorLike): void {
   );
 }
 
-function buildContactPayload(input: SyncResendContactInput) {
-  const firmName = normaliseFirmName(input.firmName);
-
-  return {
-    email: input.email.trim().toLowerCase(),
-    unsubscribed: !input.marketingConsent,
-    ...(firmName ? { firstName: firmName } : {}),
-    properties: {
-      source: RESEND_CONTACT_SOURCE,
-      firm_name: firmName ?? '',
-      result_status: input.resultStatus,
-      untraceable:
-        input.untraceable === null ? '' : String(input.untraceable),
-      pi_disclosure: input.piDisclosure,
-      pi_renewal_month: input.piRenewalMonth,
-      marketing_consent: input.marketingConsent ? 'yes' : 'no',
-    },
-    ...(getOptionalSegmentId()
-      ? { segments: [{ id: getOptionalSegmentId()! }] }
-      : {}),
-  };
-}
-
 function getOptionalSegmentId(): string | undefined {
   const id = process.env.RESEND_UNVERIFIED_SEGMENT_ID?.trim();
   return id || undefined;
+}
+
+function mergeSource(existing: string | undefined, next: string): string {
+  const parts = new Set(
+    `${existing ?? ''},${next}`
+      .split(',')
+      .map((s) => s.trim())
+      .filter(Boolean),
+  );
+  return [...parts].join(', ');
+}
+
+function asPropertyMap(value: unknown): Record<string, string> {
+  if (!value || typeof value !== 'object') return {};
+  const out: Record<string, string> = {};
+  for (const [key, raw] of Object.entries(value as Record<string, unknown>)) {
+    if (raw == null) continue;
+    if (typeof raw === 'object' && raw !== null && 'value' in raw) {
+      const nested = (raw as { value: unknown }).value;
+      if (nested == null) continue;
+      out[key] = String(nested);
+      continue;
+    }
+    out[key] = String(raw);
+  }
+  return out;
 }
 
 let propertiesEnsured = false;
@@ -121,32 +138,109 @@ export function resetResendContactPropertiesCache(): void {
 }
 
 /**
- * Upserts the submitter in Resend Contacts. Non-fatal at the route: callers
- * should catch failures so report delivery still succeeds.
+ * Upserts one Resend contact by email. Existing contacts are updated in place
+ * (no duplicate). Properties and sources are merged so figure-check and
+ * unverified-answer flows can both write without wiping each other.
  */
-export async function syncResendContact(
-  input: SyncResendContactInput,
+export async function syncResendAudienceContact(
+  input: SyncResendAudienceContactInput,
 ): Promise<void> {
   const resend = getResendContactsClient();
   await ensureResendContactProperties();
 
-  const payload = buildContactPayload(input);
+  const email = input.email.trim().toLowerCase();
+  const firmName = normaliseFirmName(input.firmName);
+  const segmentId = getOptionalSegmentId();
 
-  const created = await resend.contacts.create(payload);
+  const existing = await resend.contacts.get({ email });
+  throwIfRestricted(existing.error);
+
+  const existingProps = asPropertyMap(
+    (existing.data as { properties?: unknown } | null)?.properties,
+  );
+  const mergedProperties: Record<string, string> = {
+    ...existingProps,
+    ...(input.properties ?? {}),
+    source: mergeSource(existingProps.source, input.source),
+  };
+  if (firmName) {
+    mergedProperties.firm_name = firmName;
+  }
+
+  const currentlyUnsubscribed = Boolean(
+    (existing.data as { unsubscribed?: boolean } | null)?.unsubscribed,
+  );
+  let unsubscribed = currentlyUnsubscribed;
+  if (input.marketingConsent === true) {
+    unsubscribed = false;
+  } else if (input.marketingConsent === false && !existing.data) {
+    // New contact with no marketing opt-in.
+    unsubscribed = true;
+  }
+
+  if (existing.data && !existing.error) {
+    const updated = await resend.contacts.update({
+      email,
+      unsubscribed,
+      firstName: firmName ?? undefined,
+      properties: mergedProperties,
+      ...(segmentId ? { segments: [{ id: segmentId }] } : {}),
+    });
+    throwIfRestricted(updated.error);
+    if (updated.error) {
+      throw new Error(updated.error.message);
+    }
+    return;
+  }
+
+  const created = await resend.contacts.create({
+    email,
+    unsubscribed,
+    ...(firmName ? { firstName: firmName } : {}),
+    properties: mergedProperties,
+    ...(segmentId ? { segments: [{ id: segmentId }] } : {}),
+  });
   throwIfRestricted(created.error);
+
   if (!created.error) {
     return;
   }
 
+  // Race: created elsewhere between get and create — update instead.
   const updated = await resend.contacts.update({
-    email: payload.email,
-    unsubscribed: payload.unsubscribed,
-    firstName: payload.firstName ?? null,
-    properties: payload.properties,
+    email,
+    unsubscribed,
+    firstName: firmName ?? undefined,
+    properties: mergedProperties,
+    ...(segmentId ? { segments: [{ id: segmentId }] } : {}),
   });
   throwIfRestricted(updated.error);
-
   if (updated.error) {
     throw new Error(updated.error.message);
   }
+}
+
+/**
+ * Upserts the unverified-answers submitter in Resend Contacts. Non-fatal at
+ * the route: callers should catch failures so report delivery still succeeds.
+ */
+export async function syncResendContact(
+  input: SyncResendContactInput,
+): Promise<void> {
+  const firmName = normaliseFirmName(input.firmName);
+  await syncResendAudienceContact({
+    email: input.email,
+    source: input.source?.trim() || RESEND_CONTACT_SOURCE,
+    marketingConsent: input.marketingConsent,
+    firmName,
+    properties: {
+      firm_name: firmName ?? '',
+      result_status: input.resultStatus,
+      untraceable:
+        input.untraceable === null ? '' : String(input.untraceable),
+      pi_disclosure: input.piDisclosure,
+      pi_renewal_month: input.piRenewalMonth,
+      marketing_consent: input.marketingConsent ? 'yes' : 'no',
+    },
+  });
 }

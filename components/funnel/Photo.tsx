@@ -20,7 +20,7 @@ export function Photo({
         className="rounded border border-rule"
         sizes="400px"
       />
-      <figcaption className="mt-3 font-mono text-[0.8125rem] text-ink-soft">
+      <figcaption className="mt-3 text-sm text-ink-soft">
         {caption}
       </figcaption>
     </figure>

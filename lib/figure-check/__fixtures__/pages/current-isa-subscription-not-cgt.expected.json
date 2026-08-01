@@ -1,0 +1,16 @@
+[
+  {
+    "figureId": "cgt-annual-exempt-amount",
+    "classification": "CURRENT",
+    "matchedKeyword": "cgt allowance",
+    "historicContext": false,
+    "numberFound": 3000
+  },
+  {
+    "figureId": "isa-annual-subscription",
+    "classification": "CURRENT",
+    "matchedKeyword": "annual subscription",
+    "historicContext": false,
+    "numberFound": 20000
+  }
+]

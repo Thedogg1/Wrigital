@@ -65,16 +65,16 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) * 1.4);
 
-  /* Funnel tokens */
-  --color-ink: #0e1a26;
-  --color-ink-soft: #46586a;
-  --color-paper: #f6f7f8;
+  /* Funnel tokens — aligned with main Wrigital brand (cream / navy / gold) */
+  --color-ink: #0a2342;
+  --color-ink-soft: #475569;
+  --color-paper: #faf7f0;
   --color-card: #ffffff;
-  --color-rule: #d9dee3;
-  --color-source: #1740a6;
-  --color-verified: #146b52;
-  --color-stale: #8a4b08;
-  --color-attention: #a16207;
+  --color-rule: #e4dcce;
+  --color-source: #0a2342;
+  --color-verified: #2e7d5b;
+  --color-stale: #b8860b;
+  --color-attention: #b8860b;
 
   --font-display: var(--font-newsreader), Georgia, serif;
   --font-body: var(--font-plex-sans), system-ui, sans-serif;
@@ -137,7 +137,7 @@
     outline-offset: 3px;
   }
   .funnel ::selection {
-    background: #d8e1f5;
+    background: #e8dcc4;
   }
 }
 

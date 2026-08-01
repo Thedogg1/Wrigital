@@ -3,13 +3,16 @@
 import { useEffect, useState } from 'react';
 
 export function ThankYouHeading() {
-  const [email, setEmail] = useState<string | null>(null);
+  const [shown, setShown] = useState('your inbox');
 
   useEffect(() => {
-    setEmail(sessionStorage.getItem('wrigital:lastEmail'));
+    const stored = sessionStorage.getItem('wrigital:lastEmail');
+    if (stored) setShown(stored);
   }, []);
 
-  const shown = email ?? 'your inbox';
-
-  return <h1 className="text-display-xl">On its way to {shown}</h1>;
+  return (
+    <h1 className="text-display-xl" suppressHydrationWarning>
+      On its way to {shown}
+    </h1>
+  );
 }

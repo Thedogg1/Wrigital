@@ -28,7 +28,7 @@ export function CheckProgress() {
       className="mt-6 flex items-start justify-between gap-4"
       aria-live="polite"
     >
-      <ul className="space-y-2 font-mono text-[0.8125rem]">
+      <ul className="space-y-2 text-sm">
         {LINES.map((line, i) => {
           const shown = i < visible;
           const complete = i < visible;
@@ -46,9 +46,7 @@ export function CheckProgress() {
           );
         })}
       </ul>
-      <p className="shrink-0 font-mono text-[0.8125rem] text-ink-soft">
-        {elapsed}s
-      </p>
+      <p className="shrink-0 text-sm text-ink-soft">{elapsed}s</p>
     </div>
   );
 }

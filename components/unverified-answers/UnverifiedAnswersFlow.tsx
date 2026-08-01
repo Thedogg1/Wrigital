@@ -93,6 +93,8 @@ import {
   type UnverifiedAnswersInput,
   type UnverifiedAnswersResult,
 } from '@/lib/unverifiedAnswers';
+import { VERIFIED_PAGE } from '@/content/copy';
+import { track } from '@/lib/analytics';
 
 type Phase = 'intro' | 'questions' | 'result';
 
@@ -164,8 +166,20 @@ const optionButtonClass = (selected: boolean) =>
       : 'border-[var(--color-border-subtle)] bg-[var(--color-bg)] text-[var(--color-text-primary)] hover:border-[var(--color-primary)]',
   );
 
-export default function UnverifiedAnswersFlow() {
-  const [phase, setPhase] = useState<Phase>('intro');
+type FlowProps = {
+  /** Funnel embed: skip standalone intro, use funnel tokens and copy. */
+  variant?: 'standalone' | 'funnel';
+  onExitIntro?: () => void;
+  onComplete?: (monthlyUnverified: number) => void;
+};
+
+export default function UnverifiedAnswersFlow({
+  variant = 'standalone',
+  onExitIntro,
+  onComplete,
+}: FlowProps) {
+  const funnel = variant === 'funnel';
+  const [phase, setPhase] = useState<Phase>(funnel ? 'questions' : 'intro');
   const [step, setStep] = useState(1);
   const [input, setInput] = useState<UnverifiedAnswersInput>(
     DEFAULT_UNVERIFIED_ANSWERS_INPUT,
@@ -213,12 +227,22 @@ export default function UnverifiedAnswersFlow() {
     }
 
     if (!isComplete(nextInput)) return;
-    setResult(calculateUnverifiedAnswers(nextInput));
+    const calculated = calculateUnverifiedAnswers(nextInput);
+    setResult(calculated);
     setPhase('result');
+    if (isCountedResult(calculated)) {
+      onComplete?.(calculated.untraceable);
+    } else {
+      onComplete?.(0);
+    }
   };
 
   const goBack = () => {
     if (step === 1) {
+      if (funnel && onExitIntro) {
+        onExitIntro();
+        return;
+      }
       setPhase('intro');
       return;
     }
@@ -242,6 +266,9 @@ export default function UnverifiedAnswersFlow() {
           complianceOfficerEmail: complianceOfficerEmail.trim() || '',
           marketingConsent,
           consentWordingVersion: CONSENT_WORDING_VERSION,
+          source: funnel
+            ? '/RAG_Offer/verified-answers'
+            : '/unverified-answer-count',
           answers: {
             people: input.people,
             frequencyBand: input.frequencyBand,
@@ -268,6 +295,13 @@ export default function UnverifiedAnswersFlow() {
       }
 
       setEmailStatus('success');
+      if (funnel && isCountedResult(result!)) {
+        track('wizard_report_requested', {
+          monthly_unverified: result!.untraceable,
+        });
+      } else if (funnel) {
+        track('wizard_report_requested', { monthly_unverified: 0 });
+      }
     } catch {
       setEmailStatus('error');
       setEmailError(EMAIL_ERROR_MESSAGE);
@@ -310,6 +344,99 @@ export default function UnverifiedAnswersFlow() {
   }
 
   if (phase === 'result' && result) {
+    const counted = isCountedResult(result);
+
+    if (funnel) {
+      return (
+        <div className="space-y-10" aria-live="polite">
+          <div>
+            {counted && !result.isZeroResult ? (
+              <>
+                <h2 className="text-display-lg">
+                  {result.untraceable.toLocaleString('en-GB')}
+                  {VERIFIED_PAGE.resultHeadingSuffix}
+                </h2>
+                <p className="mt-4 text-[1.0625rem] leading-[1.7]">
+                  {VERIFIED_PAGE.resultBody}
+                </p>
+              </>
+            ) : null}
+            <div className="mt-8">
+              <ResultPanel
+                result={result}
+                showWorking={showWorking}
+                onToggleWorking={() => setShowWorking((v) => !v)}
+                funnel
+                hideHeadline={counted && !result.isZeroResult}
+              />
+            </div>
+          </div>
+
+          <div className="max-w-4xl rounded border border-rule bg-card p-6 lg:p-8">
+            <h3 className="text-display-md">{VERIFIED_PAGE.reportHeading}</h3>
+            <p className="mt-4 text-[1.0625rem] leading-[1.7] text-ink-soft">
+              {VERIFIED_PAGE.reportLead}
+            </p>
+            <ul className="mt-4 list-disc space-y-2 pl-5 text-[1.0625rem] leading-[1.7] text-ink-soft">
+              {VERIFIED_PAGE.reportBullets.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+
+            {emailStatus === 'success' ? (
+              <p
+                className="mt-6 text-sm text-ink-soft"
+                role="status"
+              >
+                {VERIFIED_PAGE.reportConfirm}
+              </p>
+            ) : (
+              <form onSubmit={handleEmailSubmit} className="relative mt-6">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-stretch">
+                  <input
+                    type="email"
+                    required
+                    autoComplete="email"
+                    placeholder="Email address"
+                    aria-label="Email address"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-full rounded border border-rule bg-paper px-4 py-3 text-[0.9375rem] text-ink"
+                  />
+                  <button
+                    type="submit"
+                    disabled={emailStatus === 'sending'}
+                    className="inline-flex shrink-0 items-center justify-center rounded bg-source px-6 py-3.5 font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-60"
+                  >
+                    {emailStatus === 'sending'
+                      ? 'Sending…'
+                      : VERIFIED_PAGE.reportButton}
+                  </button>
+                </div>
+                <div className="absolute -left-[9999px]" aria-hidden="true">
+                  <input
+                    name={HONEYPOT_FIELD_NAME}
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={honeypot}
+                    onChange={(e) => setHoneypot(e.target.value)}
+                  />
+                </div>
+                {(emailStatus === 'error' || emailError) && (
+                  <p className="mt-3 text-sm text-stale" role="alert">
+                    {emailError || EMAIL_ERROR_MESSAGE}
+                  </p>
+                )}
+                <p className="mt-3 text-sm text-ink-soft">
+                  {VERIFIED_PAGE.reportSmall}
+                </p>
+              </form>
+            )}
+          </div>
+        </div>
+      );
+    }
+
     return (
       <div className="mx-auto max-w-3xl space-y-8">
         <ResultPanel
@@ -427,8 +554,14 @@ export default function UnverifiedAnswersFlow() {
   }
 
   return (
-    <Card className="mx-auto max-w-2xl">
-      <p className="mb-6 text-sm font-medium text-[var(--color-accent)]">
+    <Card className={funnel ? 'max-w-none border-rule bg-card shadow-none' : 'mx-auto max-w-2xl'}>
+      <p
+        className={
+          funnel
+            ? 'mb-6 text-sm text-ink-soft'
+            : 'mb-6 text-sm font-medium text-[var(--color-accent)]'
+        }
+      >
         {progressLabel(step)}
       </p>
 
@@ -701,59 +834,81 @@ function ResultPanel({
   result,
   showWorking,
   onToggleWorking,
+  funnel = false,
+  hideHeadline = false,
 }: {
   result: UnverifiedAnswersResult;
   showWorking: boolean;
   onToggleWorking: () => void;
+  funnel?: boolean;
+  hideHeadline?: boolean;
 }) {
   const counted = isCountedResult(result);
+  const titleClass = funnel
+    ? 'mb-4 text-display-lg text-ink'
+    : 'mb-4 text-3xl font-semibold text-[var(--color-primary)]';
+  const bodyClass = funnel
+    ? 'mb-4 text-[1.0625rem] leading-[1.7] text-ink-soft'
+    : 'mb-4 text-lg text-[var(--color-text-secondary)]';
 
   return (
-    <Card>
-      {!counted ? (
+    <Card className={funnel ? 'border-rule bg-card shadow-none' : undefined}>
+      {!hideHeadline && !counted ? (
         <>
-          <h1 className="mb-4 text-3xl font-semibold text-[var(--color-primary)]">
-            {NOT_COUNTED_HEADLINE}
-          </h1>
-          <p className="mb-4 text-lg text-[var(--color-text-secondary)]">
-            {NOT_COUNTED_BODY}
-          </p>
-          <ul className="mb-4 list-disc space-y-2 pl-5 text-[var(--color-text-secondary)]">
+          <h1 className={titleClass}>{NOT_COUNTED_HEADLINE}</h1>
+          <p className={bodyClass}>{NOT_COUNTED_BODY}</p>
+          <ul
+            className={
+              funnel
+                ? 'mb-4 list-disc space-y-2 pl-5 text-ink-soft'
+                : 'mb-4 list-disc space-y-2 pl-5 text-[var(--color-text-secondary)]'
+            }
+          >
             {result.reasons.map((reason) => (
               <li key={reason}>{NOT_COUNTED_REASON_COPY[reason]}</li>
             ))}
           </ul>
-          <p className="mb-6 text-[var(--color-text-secondary)]">
-            {NOT_COUNTED_CLOSING}
-          </p>
+          <p className={bodyClass}>{NOT_COUNTED_CLOSING}</p>
         </>
-      ) : result.isZeroResult ? (
+      ) : !hideHeadline && counted && result.isZeroResult ? (
         <>
-          <h1 className="mb-4 text-3xl font-semibold text-[var(--color-primary)]">
-            {RESULT_ZERO_HEADLINE}
-          </h1>
-          <p className="mb-4 text-lg text-[var(--color-text-secondary)]">
-            {RESULT_ZERO_BODY}
-          </p>
-          <p className="mb-6 text-[var(--color-text-secondary)]">
-            {ZERO_RESULT_BELOW_FOLD}
-          </p>
+          <h1 className={titleClass}>{RESULT_ZERO_HEADLINE}</h1>
+          <p className={bodyClass}>{RESULT_ZERO_BODY}</p>
+          <p className={bodyClass}>{ZERO_RESULT_BELOW_FOLD}</p>
         </>
-      ) : (
+      ) : !hideHeadline && counted ? (
         <>
-          <p className="mb-2 text-sm text-[var(--color-text-secondary)]">
+          <p
+            className={
+              funnel
+                ? 'mb-2 text-sm text-ink-soft'
+                : 'mb-2 text-sm text-[var(--color-text-secondary)]'
+            }
+          >
             {RESULT_INTRO}
           </p>
-          <h1 className="mb-4 text-4xl font-bold leading-tight text-[var(--color-primary)] sm:text-5xl">
-            <span className="block text-5xl sm:text-6xl">
+          <h1
+            className={
+              funnel
+                ? 'mb-4 text-display-lg text-ink'
+                : 'mb-4 text-4xl font-bold leading-tight text-[var(--color-primary)] sm:text-5xl'
+            }
+          >
+            <span className={funnel ? 'block' : 'block text-5xl sm:text-6xl'}>
               {result.untraceable.toLocaleString('en-GB')}
             </span>
-            <span className="mt-2 block text-xl font-semibold sm:text-2xl">
+            <span
+              className={
+                funnel
+                  ? 'mt-2 block text-display-md font-medium'
+                  : 'mt-2 block text-xl font-semibold sm:text-2xl'
+              }
+            >
               {result.headlineSuffix}
             </span>
           </h1>
         </>
-      )}
+      ) : null}
 
       {result.subjectsLine && (
         <p className="mb-4 text-[var(--color-text-secondary)]">

@@ -1,5 +1,8 @@
 export type Verdict = 'current' | 'behind' | 'unconfirmed';
 
+/** Core service/tax pages vs blog/insight articles (lower urgency). */
+export type PageKind = 'core' | 'blog';
+
 export interface Finding {
   id: string;
   label: string;
@@ -11,6 +14,7 @@ export interface Finding {
   sourceUrl: string;
   sourceHost: string;
   verdict: Verdict;
+  pageKind: PageKind;
 }
 
 export interface CheckResult {

@@ -1,0 +1,16 @@
+[
+  {
+    "figureId": "pension-annual-allowance",
+    "classification": "CURRENT",
+    "matchedKeyword": "pension annual allowance",
+    "historicContext": false,
+    "numberFound": 60000
+  },
+  {
+    "figureId": "isa-annual-subscription",
+    "classification": "CURRENT",
+    "matchedKeyword": "isa",
+    "historicContext": false,
+    "numberFound": 20000
+  }
+]

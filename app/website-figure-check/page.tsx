@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation';
 
-export default function Page() {
-  redirect('/RAG_Offer');
+export default function WebsiteFigureCheckRedirect() {
+  redirect('/RAG_Offer/website-figure-check');
 }

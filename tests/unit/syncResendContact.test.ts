@@ -2,11 +2,13 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   RESEND_CONTACT_SOURCE,
   resetResendContactPropertiesCache,
+  syncResendAudienceContact,
   syncResendContact,
 } from '@/lib/unverified-answers/syncResendContact';
 
 const contactsCreate = vi.fn();
 const contactsUpdate = vi.fn();
+const contactsGet = vi.fn();
 const contactPropertiesList = vi.fn();
 const contactPropertiesCreate = vi.fn();
 
@@ -15,6 +17,7 @@ vi.mock('@/lib/email/resendClient', () => ({
     contacts: {
       create: contactsCreate,
       update: contactsUpdate,
+      get: contactsGet,
     },
     contactProperties: {
       list: contactPropertiesList,
@@ -35,6 +38,10 @@ describe('syncResendContact', () => {
     contactPropertiesCreate.mockResolvedValue({
       data: { id: 'prop-1', object: 'contact_property' },
       error: null,
+    });
+    contactsGet.mockResolvedValue({
+      data: null,
+      error: { message: 'not found', statusCode: 404 },
     });
     contactsCreate.mockResolvedValue({ data: { id: 'contact-1' }, error: null });
     contactsUpdate.mockResolvedValue({ data: { id: 'contact-1' }, error: null });
@@ -92,7 +99,48 @@ describe('syncResendContact', () => {
     );
   });
 
-  it('updates an existing contact when create fails', async () => {
+  it('updates an existing contact in place without creating a duplicate', async () => {
+    contactsGet.mockResolvedValueOnce({
+      data: {
+        id: 'contact-1',
+        email: 'principal@firm.com',
+        unsubscribed: false,
+        properties: {
+          source: '/RAG_Offer/website-figure-check',
+          check_domain: 'example.co.uk',
+        },
+      },
+      error: null,
+    });
+
+    await syncResendContact({
+      email: 'principal@firm.com',
+      firmName: 'Northgate Financial',
+      marketingConsent: true,
+      resultStatus: 'counted',
+      untraceable: 12,
+      piDisclosure: 'yes',
+      piRenewalMonth: 'june',
+      source: '/RAG_Offer/verified-answers',
+    });
+
+    expect(contactsCreate).not.toHaveBeenCalled();
+    expect(contactsUpdate).toHaveBeenCalledWith(
+      expect.objectContaining({
+        email: 'principal@firm.com',
+        unsubscribed: false,
+        firstName: 'Northgate Financial',
+        properties: expect.objectContaining({
+          source:
+            '/RAG_Offer/website-figure-check, /RAG_Offer/verified-answers',
+          check_domain: 'example.co.uk',
+          untraceable: '12',
+        }),
+      }),
+    );
+  });
+
+  it('falls back to update when create races with another writer', async () => {
     contactsCreate.mockResolvedValueOnce({
       data: null,
       error: { message: 'Contact already exists' },
@@ -157,5 +205,46 @@ describe('syncResendContact', () => {
         piRenewalMonth: 'january',
       }),
     ).rejects.toThrow(/RESEND_CONTACTS_API_KEY|Full access/);
+  });
+
+  it('figure-check sync merges onto an existing unverified contact', async () => {
+    contactsGet.mockResolvedValueOnce({
+      data: {
+        id: 'contact-1',
+        email: 'principal@firm.com',
+        unsubscribed: false,
+        properties: {
+          source: { type: 'string', value: '/RAG_Offer/verified-answers' },
+          untraceable: { type: 'string', value: '40' },
+          marketing_consent: { type: 'string', value: 'yes' },
+        },
+      },
+      error: null,
+    });
+
+    await syncResendAudienceContact({
+      email: 'principal@firm.com',
+      source: '/RAG_Offer/website-figure-check',
+      marketingConsent: false,
+      properties: {
+        check_domain: 'firm.co.uk',
+        check_behind: '2',
+        budget_recheck: 'yes',
+      },
+    });
+
+    expect(contactsCreate).not.toHaveBeenCalled();
+    expect(contactsUpdate).toHaveBeenCalledWith(
+      expect.objectContaining({
+        unsubscribed: false,
+        properties: expect.objectContaining({
+          source:
+            '/RAG_Offer/verified-answers, /RAG_Offer/website-figure-check',
+          untraceable: '40',
+          check_domain: 'firm.co.uk',
+          check_behind: '2',
+        }),
+      }),
+    );
   });
 });

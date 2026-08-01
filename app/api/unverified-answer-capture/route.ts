@@ -93,6 +93,7 @@ export async function POST(request: NextRequest) {
       marketingConsent,
       consentWordingVersion,
       answers,
+      source,
     } = parsed.data;
 
     const ip = clientIp(request);
@@ -127,7 +128,7 @@ export async function POST(request: NextRequest) {
         resultStatus: result.status,
         untraceable: isCountedResult(result) ? result.untraceable : null,
         reportToken: token,
-        source: '/unverified-answer-count',
+        source: source ?? '/unverified-answer-count',
         submittedAt: consentCapturedAt,
         clientIp: ip,
       });
@@ -145,6 +146,7 @@ export async function POST(request: NextRequest) {
         untraceable: isCountedResult(result) ? result.untraceable : null,
         piDisclosure: completeAnswers.piDisclosure,
         piRenewalMonth: completeAnswers.piRenewalMonth,
+        source: source ?? '/unverified-answer-count',
       });
     } catch (contactError) {
       console.error('Failed to sync Resend contact:', contactError);

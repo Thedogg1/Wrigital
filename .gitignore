@@ -13,6 +13,8 @@
 
 # testing
 /coverage
+/figure-check-review.html
+/figure-check-selfcheck.json
 
 # next.js
 /.next/
@@ -45,4 +47,5 @@ next-env.d.ts
 /data/uk-leads.jsonl
 /data/us-leads.jsonl
 /data/unverified-leads.jsonl
+/data/figure-check-leads.jsonl
 /data/unverified-reports/

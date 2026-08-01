@@ -1,4 +1,4 @@
-import { FunnelNav } from '@/components/funnel/FunnelNav';
+import { TabBar } from '@/components/funnel/TabBar';
 
 export default function RagOfferLayout({
   children,
@@ -7,7 +7,7 @@ export default function RagOfferLayout({
 }) {
   return (
     <>
-      <FunnelNav />
+      <TabBar />
       {children}
     </>
   );

@@ -20,7 +20,10 @@ interface Ctx {
   error: string | null;
   errorCode: CheckErrorCode | null;
   run: (domain: string, variant: 'hero' | 'inline') => Promise<void>;
-  sendReport: (email: string) => Promise<{ ok: boolean; message?: string }>;
+  sendReport: (
+    email: string,
+    budgetRecheck: boolean,
+  ) => Promise<{ ok: boolean; message?: string }>;
 }
 
 const FigureCheckContext = createContext<Ctx | null>(null);
@@ -78,13 +81,17 @@ export function FigureCheckProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const sendReport = useCallback(
-    async (email: string) => {
+    async (email: string, budgetRecheck: boolean) => {
       if (!result) return { ok: false, message: 'No check result' };
       try {
         const res = await fetch('/api/check/report', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ checkId: result.checkId, email }),
+          body: JSON.stringify({
+            checkId: result.checkId,
+            email,
+            budgetRecheck,
+          }),
         });
         const data = await res.json();
         if (!res.ok) {

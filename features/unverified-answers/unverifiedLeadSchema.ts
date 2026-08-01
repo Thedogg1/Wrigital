@@ -96,6 +96,12 @@ export const unverifiedLeadSchema = z
     marketingConsent: z.boolean().default(false),
     consentWordingVersion: z.literal(CONSENT_WORDING_VERSION),
     answers: unverifiedAnswersPayloadSchema,
+    source: z
+      .string()
+      .trim()
+      .max(200)
+      .optional()
+      .transform((value) => value || undefined),
     [HONEYPOT_FIELD_NAME]: z.string().optional(),
   })
   .superRefine((data, ctx) => {

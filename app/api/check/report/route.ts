@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
-import { createElement } from 'react';
 import { kvDel, kvGet, kvSetNx } from '@/lib/kv';
 import { reportLimiter } from '@/lib/ratelimit';
-import { FigureCheckRecord } from '@/emails/FigureCheckRecord';
-import { InternalCheckAlert } from '@/emails/InternalCheckAlert';
+import { buildFigureCheckRecordHtml } from '@/emails/FigureCheckRecord';
+import { buildInternalCheckAlertHtml } from '@/emails/InternalCheckAlert';
 import type { CheckResult } from '@/lib/check-types';
 import { getResendClient } from '@/lib/email/resendClient';
+import { syncResendAudienceContact } from '@/lib/unverified-answers/syncResendContact';
 import {
   contactEmail,
   resendFromAddress,
@@ -16,6 +16,7 @@ import {
 const Body = z.object({
   checkId: z.string().min(6),
   email: z.string().email(),
+  budgetRecheck: z.boolean().optional().default(false),
 });
 
 function notifyAddress(): string {
@@ -24,6 +25,10 @@ function notifyAddress(): string {
     process.env.LEAD_NOTIFY_EMAIL?.trim() ||
     contactEmail
   );
+}
+
+function emailFromAddress(): string {
+  return process.env.EMAIL_FROM?.trim() || resendFromAddress;
 }
 
 function normaliseEmail(email: string) {
@@ -62,30 +67,64 @@ export async function POST(req: Request) {
   }
 
   const resend = getResendClient();
-  const from = resendFromAddress;
+  const from = emailFromAddress();
 
   try {
+    const date = new Date(result.finishedAt).toLocaleDateString('en-GB');
+    const hasFindings = result.findings.length > 0;
+    const subject = hasFindings
+      ? `Your figure check: ${result.domain}, ${date}`
+      : `Your figure check: ${result.domain} is clean, ${date}`;
+
     const { error } = await resend.emails.send({
       from,
-      to: email,
+      to: [email],
       replyTo: resendReplyTo,
-      subject: `Figure check: ${result.domain}, ${new Date(result.finishedAt).toLocaleDateString('en-GB')}`,
-      react: createElement(FigureCheckRecord, { result }),
+      subject,
+      html: buildFigureCheckRecordHtml(result, parsed.data.budgetRecheck),
     });
     if (error) {
+      console.error('[api/check/report] Resend error', error);
       await kvDel(emailClaimKey(email));
       return NextResponse.json({ error: 'send_failed' }, { status: 502 });
     }
 
-    await resend.emails.send({
-      from,
-      to: notifyAddress(),
-      subject: `Check requested: ${result.domain} (${result.behindCount} behind)`,
-      react: createElement(InternalCheckAlert, { result, email }),
-    });
+    try {
+      await syncResendAudienceContact({
+        email,
+        source: '/RAG_Offer/website-figure-check',
+        // Record only: no newsletter opt-in. Existing marketing opt-ins are kept.
+        marketingConsent: false,
+        properties: {
+          check_domain: result.domain,
+          check_behind: String(result.behindCount),
+          budget_recheck: parsed.data.budgetRecheck ? 'yes' : 'no',
+        },
+      });
+    } catch (contactError) {
+      console.error(
+        '[api/check/report] Resend contact sync failed',
+        contactError,
+      );
+    }
+
+    const notifyTo = notifyAddress().toLowerCase();
+    if (notifyTo && notifyTo !== email) {
+      const { error: notifyError } = await resend.emails.send({
+        from,
+        to: [notifyTo],
+        replyTo: resendReplyTo,
+        subject: `Check requested: ${result.domain} (${result.behindCount} behind)`,
+        html: buildInternalCheckAlertHtml(result, email),
+      });
+      if (notifyError) {
+        console.error('[api/check/report] notify error', notifyError);
+      }
+    }
 
     return NextResponse.json({ ok: true });
-  } catch {
+  } catch (e) {
+    console.error('[api/check/report] unexpected', e);
     await kvDel(emailClaimKey(email));
     return NextResponse.json({ error: 'send_failed' }, { status: 502 });
   }

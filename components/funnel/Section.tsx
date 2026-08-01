@@ -1,9 +1,9 @@
 export function Section({
-  label,
   tone = 'paper',
   id,
   children,
 }: {
+  /** @deprecated Section markers removed; accepted so call sites need not change. */
   label?: string;
   tone?: 'paper' | 'ink';
   id?: string;
@@ -15,16 +15,7 @@ export function Section({
       id={id}
       className={`border-t border-rule ${dark ? 'bg-ink text-paper' : ''}`}
     >
-      <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-5 py-20 lg:grid-cols-[140px_minmax(0,1fr)] lg:py-28">
-        <div aria-hidden="true" className="hidden lg:block">
-          {label && (
-            <p
-              className={`sticky top-8 font-mono text-[0.6875rem] uppercase tracking-[0.12em] ${dark ? 'text-paper/60' : 'text-ink-soft'}`}
-            >
-              {label}
-            </p>
-          )}
-        </div>
+      <div className="mx-auto max-w-6xl px-5 py-20 lg:py-28">
         <div className="max-w-[68ch]">{children}</div>
       </div>
     </section>

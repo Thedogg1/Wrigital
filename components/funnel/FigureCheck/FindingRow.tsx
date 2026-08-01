@@ -3,9 +3,9 @@
 import type { Finding, Verdict } from '@/lib/check-types';
 
 const VERDICT_LABEL: Record<Verdict, string> = {
-  current: 'CURRENT',
-  behind: 'BEHIND',
-  unconfirmed: 'NOT CONFIRMED',
+  current: 'Current',
+  behind: 'Behind',
+  unconfirmed: 'Not confirmed',
 };
 
 export function FindingRowMobile({
@@ -26,39 +26,29 @@ export function FindingRowMobile({
           <dd className="font-semibold">{finding.label}</dd>
         </div>
         <div>
-          <dt className="font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-ink-soft">
-            On your page
-          </dt>
+          <dt className="text-sm text-ink-soft">On your page</dt>
           <dd
-            className={`mt-1 font-mono ${finding.verdict === 'behind' ? 'text-stale' : ''}`}
+            className={`mt-1 tabular-nums ${finding.verdict === 'behind' ? 'text-stale' : ''}`}
           >
             {finding.quotedValue}
             {finding.verdict === 'behind' && (
-              <span className="ml-2 font-mono text-[11px] uppercase text-stale">
-                Behind
-              </span>
+              <span className="ml-2 text-sm text-stale">Behind</span>
             )}
           </dd>
         </div>
         <div>
-          <dt className="font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-ink-soft">
-            Published value
-          </dt>
+          <dt className="text-sm text-ink-soft">Published value</dt>
           <dd
-            className={`mt-1 font-mono ${finding.verdict === 'current' ? 'text-verified' : ''}`}
+            className={`mt-1 tabular-nums ${finding.verdict === 'current' ? 'text-verified' : ''}`}
           >
             {finding.publishedValue}
             {finding.verdict === 'current' && (
-              <span className="ml-2 font-mono text-[11px] uppercase text-verified">
-                Current
-              </span>
+              <span className="ml-2 text-sm text-verified">Current</span>
             )}
           </dd>
         </div>
         <div>
-          <dt className="font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-ink-soft">
-            Source
-          </dt>
+          <dt className="text-sm text-ink-soft">Source</dt>
           <dd className="mt-1">
             <a
               href={finding.pageUrl}
@@ -66,21 +56,21 @@ export function FindingRowMobile({
               rel="noopener noreferrer"
               className="text-source underline underline-offset-4"
             >
-              Your page
+              {finding.pageKind === 'blog' ? 'Blog post' : 'Your page'}
             </a>
             {' · '}
             <a
               href={finding.sourceUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-mono text-source underline underline-offset-4"
+              className="text-source underline underline-offset-4"
             >
               {finding.sourceHost}
             </a>
           </dd>
         </div>
         <div>
-          <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-ink-soft">
+          <span className="text-sm text-ink-soft">
             {VERDICT_LABEL[finding.verdict]}
           </span>
         </div>
@@ -103,19 +93,19 @@ export function FindingRowDesktop({
     >
       <td className="py-4 pr-4 align-top font-semibold">{finding.label}</td>
       <td
-        className={`py-4 pr-4 align-top font-mono ${finding.verdict === 'behind' ? 'text-stale' : ''}`}
+        className={`py-4 pr-4 align-top tabular-nums ${finding.verdict === 'behind' ? 'text-stale' : ''}`}
       >
         {finding.quotedValue}
         {finding.verdict === 'behind' && (
-          <span className="ml-2 text-[11px] uppercase">Behind</span>
+          <span className="ml-2 text-sm">Behind</span>
         )}
       </td>
       <td
-        className={`py-4 pr-4 align-top font-mono ${finding.verdict === 'current' ? 'text-verified' : ''}`}
+        className={`py-4 pr-4 align-top tabular-nums ${finding.verdict === 'current' ? 'text-verified' : ''}`}
       >
         {finding.publishedValue}
         {finding.verdict === 'current' && (
-          <span className="ml-2 text-[11px] uppercase">Current</span>
+          <span className="ml-2 text-sm">Current</span>
         )}
       </td>
       <td className="py-4 align-top">
@@ -125,17 +115,17 @@ export function FindingRowDesktop({
           rel="noopener noreferrer"
           className="block text-source underline underline-offset-4"
         >
-          Your page
+          {finding.pageKind === 'blog' ? 'Blog post' : 'Your page'}
         </a>
         <a
           href={finding.sourceUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-1 block font-mono text-source underline underline-offset-4"
+          className="mt-1 block text-source underline underline-offset-4"
         >
           {finding.sourceHost}
         </a>
-        <span className="mt-2 block font-mono text-[11px] uppercase tracking-[0.12em] text-ink-soft">
+        <span className="mt-2 block text-sm text-ink-soft">
           {VERDICT_LABEL[finding.verdict]}
         </span>
       </td>

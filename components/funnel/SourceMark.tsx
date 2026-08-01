@@ -15,7 +15,7 @@ export function SourceMark({
       className="group text-ink underline decoration-source decoration-dotted underline-offset-[5px] transition-[text-decoration-style] duration-150 hover:decoration-solid focus-visible:decoration-solid"
     >
       {children}
-      <sup className="ml-0.5 font-mono text-[0.625rem] text-source">{n}</sup>
+      <sup className="ml-0.5 text-[0.625rem] text-source">{n}</sup>
       <span className="sr-only"> (opens the published source in a new tab)</span>
     </a>
   );

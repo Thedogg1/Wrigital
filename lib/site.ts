@@ -13,6 +13,20 @@ export const SITE = {
   email: 'hello@wrigital.com',
   calendly: 'https://calendly.com/hello-wrigital/30min',
   videoId: 'MVECWSCr7bM',
+  base: '/RAG_Offer',
+} as const;
+
+export const TABS = [
+  { label: 'Check your site', href: '/RAG_Offer/website-figure-check' },
+  { label: 'No hallucinations', href: '/RAG_Offer/how-i-stop-hallucinations' },
+  { label: 'The assistant', href: '/RAG_Offer/see-it-working' },
+  { label: "What's included", href: '/RAG_Offer/features' },
+  { label: 'Count your answers', href: '/RAG_Offer/verified-answers' },
+] as const;
+
+export const BOOK_TAB = {
+  label: 'Book a call',
+  href: '/RAG_Offer/book-a-call',
 } as const;
 
 /** Separate Calendly event for the Facebook /local “Donkey Work Assessment” lane. */

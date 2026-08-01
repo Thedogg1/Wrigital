@@ -40,7 +40,7 @@ export function buildFigureCheckRecordHtml(
   const confirmed = result.findings.filter((f) => f.verdict === 'current');
 
   const summary = hasFindings
-    ? `${result.pagesScanned} pages read. ${result.figuresFound} figures found. ${confirmedCount} confirmed against the current published value. ${toChange.length} not. Unconfirmed matches on blog posts are omitted — those are usually scenario examples, not published claims.`
+    ? `${result.pagesScanned} pages read. ${result.figuresFound} figures found. ${confirmedCount} confirmed against the current published value. ${toChange.length} not. Unconfirmed matches on blog posts are omitted - those are usually scenario examples, not published claims.`
     : `${result.pagesScanned} pages read. ${result.figuresFound} figures found. Every figure matches the current published value.`;
 
   const changeSection =
@@ -64,11 +64,11 @@ export function buildFigureCheckRecordHtml(
     ? `<p style="margin-top:24px;">You asked for a re-check after the autumn Budget. The check will run again then and the results will arrive by email. Reply to stop at any time.</p>`
     : '';
 
-  const videoUrl = `${siteUrl}/thank-you?domain=${encodeURIComponent(result.domain)}`;
+  const layersUrl = `${siteUrl}/RAG_Offer/how-i-stop-hallucinations`;
 
   return `<!DOCTYPE html>
 <html>
-<body style="font-family:system-ui,sans-serif;max-width:600px;margin:0 auto;color:#0E1A26;">
+<body style="font-family:system-ui,sans-serif;max-width:600px;margin:0 auto;color:#0a2342;">
   <p style="font-size:22px;font-weight:600;">Wrigital</p>
   <p style="margin-top:24px;">This is the full record of the check on ${escapeHtml(result.domain)}, run on ${escapeHtml(date)}.</p>
   <p style="margin-top:16px;">${escapeHtml(summary)}</p>
@@ -77,24 +77,21 @@ export function buildFigureCheckRecordHtml(
   ${confirmedBody}
   ${budgetBlock}
   <p style="margin-top:24px;">Keep this. The record is dated, so a year from now you can see what was checked and when.</p>
-  <p style="margin-top:24px;color:#46586A;font-size:14px;">This checks whether published figures are current. The check doesn't assess compliance, suitability or financial promotion rules, and doesn't replace anyone's review.</p>
-  <div style="margin-top:32px;padding:20px;border:1px solid #D9DEE3;background:#F6F7F8;">
-    <h2 style="margin:0 0 10px 0;font-size:18px;">Four minutes: the same checking, inside a working assistant</h2>
-    <p style="margin:0 0 14px 0;font-size:14px;line-height:1.6;color:#46586A;">
-      Watch the assistant in action. See the numbers brief, clickable citations, and the audit reports showing the origin of every figure and information block.
-    </p>
-    <p style="margin:0;">
-      <a href="${escapeHtml(videoUrl)}" style="display:inline-block;background:#1740A6;color:#FFFFFF;text-decoration:none;font-weight:600;padding:12px 18px;border-radius:4px;">
-        Watch the four-minute video
-      </a>
-    </p>
-  </div>
-  <p style="margin-top:24px;font-size:14px;">
-    <a href="${escapeHtml(`${siteUrl}/RAG_Offer/verified-answers`)}">What verification actually is</a>
+  <p style="margin-top:24px;color:#475569;font-size:14px;">This checks whether published figures are current. The check doesn't assess compliance, suitability or financial promotion rules, and doesn't replace anyone's review.</p>
+  <h2 style="margin-top:32px;font-size:18px;">Where this check came from</h2>
+  <p style="margin-top:16px;font-size:15px;line-height:1.6;">The tool you just used is not a marketing gadget. The same engineering is layer four of five inside the assistant I build for advice firms, pointed at your public pages rather than at a knowledge library.</p>
+  <p style="margin-top:16px;font-size:15px;line-height:1.6;">On a recent build, 250 candidate sources were checked and 21 were dropped before reaching the library. Seven pages could not be retrieved at all, including a gov.uk Corporation Tax page returning a 404. The other 14 existed but did not support the claim closely enough. Every one of the 21 would have appeared in a generic tool's answer, with a link, and nobody would have known.</p>
+  <p style="margin-top:16px;font-size:15px;line-height:1.6;">The Budget is the same problem on a timer. Figures move, published pages stay where they are, and a system with no checking carries the old number forward without a flicker.</p>
+  <p style="margin-top:16px;font-size:15px;line-height:1.6;">The page below sets out all five layers and why every one of them runs before an adviser asks a single question.</p>
+  <p style="margin-top:24px;font-size:15px;">
+    <a href="${escapeHtml(layersUrl)}" style="color:#0a2342;font-weight:600;">How I stop hallucinations</a>
   </p>
-  <p style="margin-top:32px;font-size:12px;color:#46586A;">
+  <p style="margin-top:12px;font-size:15px;">
+    <a href="${escapeHtml(SITE.calendly)}" style="color:#0a2342;font-weight:600;">Book a call</a>
+  </p>
+  <p style="margin-top:32px;font-size:12px;color:#475569;">
     ${escapeHtml(SITE.name)}, company number ${escapeHtml(SITE.companyNumber)}. ${escapeHtml(SITE.registeredAddress)}.
-    <a href="${escapeHtml(`${siteUrl}/privacy`)}">Privacy</a>
+    <a href="${escapeHtml(`${siteUrl}/RAG_Offer/privacy`)}">Privacy</a>
   </p>
 </body>
 </html>`;

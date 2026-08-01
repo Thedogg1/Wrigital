@@ -8,6 +8,7 @@ import { PAGE_DESCRIPTION, PAGE_TITLE } from '@/lib/unverifiedAnswers';
 export const metadata: Metadata = {
   title: PAGE_TITLE,
   description: PAGE_DESCRIPTION,
+  robots: { index: false, follow: false },
   alternates: { canonical: '/unverified-answer-count' },
 };
 

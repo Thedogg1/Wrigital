@@ -63,7 +63,7 @@ export default function RootLayout({
         />
         {children}
         <Toaster />
-        <Analytics />
+        {process.env.VERCEL ? <Analytics /> : null}
       </body>
     </html>
   );

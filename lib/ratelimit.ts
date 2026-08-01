@@ -51,12 +51,20 @@ function createUpstashLimiter(max: number, prefix: string): Limiter | null {
   }
 }
 
+/** 5 figure checks per IP per hour. */
 export const checkLimiter: Limiter =
   createUpstashLimiter(5, 'rl:check') ?? {
     limit: async (id: string) => memoryLimit(`check:${id}`, 5, 60 * 60 * 1000),
   };
 
+/** 3 report emails per IP per hour. */
 export const reportLimiter: Limiter =
   createUpstashLimiter(3, 'rl:report') ?? {
     limit: async (id: string) => memoryLimit(`report:${id}`, 3, 60 * 60 * 1000),
+  };
+
+/** 3 wizard reports per IP per hour. */
+export const wizardLimiter: Limiter =
+  createUpstashLimiter(3, 'rl:wizard') ?? {
+    limit: async (id: string) => memoryLimit(`wizard:${id}`, 3, 60 * 60 * 1000),
   };
