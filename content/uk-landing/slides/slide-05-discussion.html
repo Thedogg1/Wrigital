@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>FinPrint — The Adviser Shapes the Conversation Before It Starts</title>
+  <title>FinPrint. Turn Analysis Into a Better Discovery Conversation</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet"/>
   <style>
     :root {
@@ -56,14 +56,37 @@
       border-bottom: 1px solid var(--divider);
     }
 
-    .report-brand-name {
+    .brand-lockup {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-mark {
+      width: 24px;
+      height: 27px;
+      flex-shrink: 0;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.15;
+    }
+
+    .brand-name {
+      font-family: 'DM Serif Display', serif;
       font-size: 15px;
-      font-weight: 700;
+      font-weight: 400;
       letter-spacing: -0.02em;
       color: var(--white);
     }
 
-    .report-brand-name span { color: var(--cyan); }
+    .brand-byline {
+      font-size: 10px;
+      font-weight: 400;
+      color: var(--text-muted);
+    }
 
     .report-label-tag {
       margin-left: auto;
@@ -223,6 +246,42 @@
 
     .point-body strong { color: var(--white); }
 
+    .timeline-bar {
+      margin-top: 40px;
+      padding-top: 28px;
+      border-top: 1px solid var(--divider);
+    }
+
+    .timeline-steps {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .timeline-step {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      background: rgba(0,200,224,0.1);
+      padding: 8px 12px;
+      border-radius: 6px;
+    }
+
+    .timeline-arrow {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    .timeline-note {
+      font-size: 13px;
+      color: var(--text-body);
+      line-height: 1.65;
+    }
+
     @media (max-width: 900px) {
       .slide { grid-template-columns: 1fr; }
       .report-panel, .explain-panel { padding: 40px 24px; }
@@ -237,13 +296,26 @@
     <div class="report-panel">
 
       <div class="report-brand">
-        <div class="report-brand-name">Velocity<span>IQ</span></div>
-        <div class="report-label-tag">Pre-Meeting Intelligence Report</div>
+        <div class="brand-lockup">
+          <svg class="brand-mark" viewBox="0 0 36 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="2" y="4" width="32" height="2.75" rx="1.25" fill="#FFFFFF"/>
+            <rect x="2" y="9.5" width="32" height="2.75" rx="1.25" fill="#00C8E0"/>
+            <rect x="2" y="15" width="32" height="2.75" rx="1.25" fill="#FFFFFF"/>
+            <rect x="2" y="20.5" width="32" height="2.75" rx="1.25" fill="#00C8E0"/>
+            <rect x="2" y="26" width="32" height="2.75" rx="1.25" fill="#FFFFFF"/>
+            <rect x="2" y="31.5" width="32" height="2.75" rx="1.25" fill="#00C8E0"/>
+          </svg>
+          <div class="brand-text">
+            <span class="brand-name">FinPrint</span>
+            <span class="brand-byline">by Wrigital</span>
+          </div>
+        </div>
+        <div class="report-label-tag">Financial Pathway Pack</div>
       </div>
 
-      <p class="report-eyebrow">For Your Meeting</p>
+      <p class="report-eyebrow">For Discovery</p>
       <h2 class="report-title">What to Discuss With Your Adviser</h2>
-      <p class="report-intro">These are the must-know topics for your next conversation, in priority order.</p>
+      <p class="report-intro">Priority topics drawn from the prospect&apos;s circumstances. Ready for the adviser to challenge, refine or discard.</p>
 
       <ul class="discussion-list">
 
@@ -293,35 +365,46 @@
 
     <!-- Right: explanation -->
     <div class="explain-panel">
-      <p class="slide-eyebrow">Meeting Architecture</p>
-      <h1 class="slide-title">The Adviser Shapes the Conversation Before It Starts</h1>
+      <p class="slide-eyebrow">Discovery</p>
+      <h1 class="slide-title">Turn Analysis Into a Better Discovery Conversation</h1>
 
       <div class="numbered-points">
 
         <div class="numbered-point">
           <div class="point-number">1</div>
           <div class="point-content">
-            <h3 class="point-title">Designed by the Adviser</h3>
-            <p class="point-body">The prospect receives a prioritised list of topics that matter most to their situation, but the adviser has quietly designed it.</p>
+            <h3 class="point-title">Surface What Matters</h3>
+            <p class="point-body">FinPrint highlights issues and questions that may warrant further exploration rather than leaving important considerations buried in the detail.</p>
           </div>
         </div>
 
         <div class="numbered-point">
           <div class="point-number">2</div>
           <div class="point-content">
-            <h3 class="point-title">Meeting Architecture</h3>
-            <p class="point-body">The topics reflect the strategic questions the adviser wants to be paid to answer. This isn't just prospect engagement — it's <strong>meeting architecture</strong>.</p>
+            <h3 class="point-title">Give Discovery a Starting Point</h3>
+            <p class="point-body">The adviser enters the conversation with a structured view of the prospect&apos;s circumstances, while remaining free to challenge, refine or discard assumptions.</p>
           </div>
         </div>
 
         <div class="numbered-point">
           <div class="point-number">3</div>
           <div class="point-content">
-            <h3 class="point-title">Prospect Arrives Ready</h3>
-            <p class="point-body">The prospect arrives at the first meeting already engaged, already thinking, already invested in the conversation.</p>
+            <h3 class="point-title">Deepen the Picture</h3>
+            <p class="point-body">Discovery adds the motivations, concerns, priorities and nuance that data alone cannot reveal.</p>
           </div>
         </div>
 
+      </div>
+
+      <div class="timeline-bar">
+        <div class="timeline-steps">
+          <span class="timeline-step">Initial Pack</span>
+          <span class="timeline-arrow">→</span>
+          <span class="timeline-step">Discovery</span>
+          <span class="timeline-arrow">→</span>
+          <span class="timeline-step">Updated Pack</span>
+        </div>
+        <p class="timeline-note">After discovery, FinPrint is designed to support an updated, adviser-reviewed Pack reaching the prospect within two hours, while the appointment decision may still be live.</p>
       </div>
     </div>
 

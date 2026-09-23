@@ -55,7 +55,7 @@ export default function UsaLandingPage() {
             </div>
             <div className='flex flex-col sm:flex-row gap-4 justify-center items-center mb-4'>
               <Button href='#calculator' className='bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-strong)] border-none'>
-                Calculate Your Client&apos;s Exit Tax Position � Free
+                Calculate Your Client&apos;s Exit Tax Position for Free
               </Button>
             </div>
             <p className='text-sm text-[#94A3B8] italic'>
@@ -129,7 +129,7 @@ export default function UsaLandingPage() {
                 for it.
               </p>
               <p>
-                Empathy alone doesn&apos;t convert � not reliably, not consistently, not at the
+                Empathy alone doesn&apos;t convert. Not reliably, not consistently, not at the
                 volume a growing firm requires. The prospect feels heard in the room and forgotten
                 by the follow-up email. That gap is where deals die.
               </p>
@@ -230,11 +230,11 @@ export default function UsaLandingPage() {
                 <ul className='text-[var(--color-text-secondary)] text-sm leading-relaxed mt-2 list-disc pl-5 space-y-1'>
                   <li>Executive Summary</li>
                   <li>
-                    Your Story � a narrative that converts the numbers into plain-language insight
+                    Your Story, a narrative that converts the numbers into plain-language insight
                     around the client&apos;s real concerns.
                   </li>
                   <li>
-                    What to Discuss With Your Advisor � frames the agenda without the prospect
+                    What to Discuss With Your Advisor, which frames the agenda without the prospect
                     realising you influenced it.
                   </li>
                   <li>Relevant pivot tables built from the formula calculations.</li>
@@ -272,7 +272,7 @@ export default function UsaLandingPage() {
               From Sparse Notes to SEC-Ready Intelligence
             </h2>
             <p className='text-[#CBD5E1] mb-10 max-w-2xl'>
-              Walk through a sample pre-meeting report � built for US financial advisors working with
+              Walk through a sample pre-meeting report, built for US financial advisors working with
               HNW business owner clients.
             </p>
             <LandingSlideViewer slides={slides} />
@@ -284,7 +284,7 @@ export default function UsaLandingPage() {
           <div className='max-w-4xl mx-auto px-6'>
             <SectionLabel>Free Tool</SectionLabel>
             <h2 className='text-3xl sm:text-4xl font-bold text-[var(--color-primary)] mb-3'>
-              See What Your Client Is Liable For on Exit � Right Now
+              See What Your Client Is Liable For on Exit, Right Now
             </h2>
             <p className='text-xl text-[var(--color-text-secondary)] mb-8'>
               The FinPrint Exit Tax Optimization Calculator
@@ -308,7 +308,7 @@ export default function UsaLandingPage() {
               <p>
                 Enter six figures about your client&apos;s exit position. In under two minutes you have
                 their estimated net proceeds after capital gains tax, their QSBS eligibility and their
-                concentration risk � clearly laid out and ready to show.
+                concentration risk, clearly laid out and ready to show.
               </p>
               <p className='font-semibold text-[var(--color-text-primary)]'>
                 This calculator doesn&apos;t replace your accountant. It makes you the person who knew
@@ -327,7 +327,7 @@ export default function UsaLandingPage() {
           <div className='max-w-3xl mx-auto px-6'>
             <SectionLabel>Who It&apos;s Built For</SectionLabel>
             <h2 className='text-3xl sm:text-4xl font-bold text-[var(--color-primary)] mb-8'>
-              Built for Ambitious Advisors Who Want to Win Clients � Not Just Serve Them
+              Built for Ambitious Advisors Who Want to Win Clients, Not Just Serve Them
             </h2>
             <div className='space-y-6 text-[var(--color-text-secondary)] text-lg leading-relaxed'>
               <p>
@@ -375,8 +375,8 @@ export default function UsaLandingPage() {
               <p>
                 <strong className='text-[var(--color-text-primary)]'>During the meeting:</strong> You
                 already know the numbers. The conversation is about planning, not discovery. The
-                emotional motivator � fear of falling behind, ambition to protect what they&apos;ve
-                built � stays at the centre of the conversation rather than being buried under
+                emotional motivator, fear of falling behind and ambition to protect what they&apos;ve
+                built, stays at the centre of the conversation rather than being buried under
                 credentials and features.
               </p>
               <p>
@@ -397,7 +397,7 @@ export default function UsaLandingPage() {
                 defensible.
               </p>
               <p className='font-semibold text-[var(--color-text-primary)]'>
-                The trust that was built in the meeting is reinforced every time you make contact �
+                The trust that was built in the meeting is reinforced every time you make contact,
                 because every contact is built on intelligence, not guesswork.
               </p>
             </div>
@@ -447,7 +447,7 @@ export default function UsaLandingPage() {
               The Window Is Open Now. It Will Not Stay Open.
             </h2>
             <p className='text-[#CBD5E1] text-lg mb-6 leading-relaxed'>
-              Right now, most Advisor firms are using AI around the edges � meeting notes, compliance
+              Right now, most Advisor firms are using AI around the edges. Meeting notes, compliance
               summaries, drafted emails. That&apos;s useful. It is not a competitive differentiator.
             </p>
             <p className='text-[#CBD5E1] text-lg mb-6 leading-relaxed'>
@@ -476,7 +476,7 @@ export default function UsaLandingPage() {
                   then book a discovery call to find out more.
                 </p>
                 <Button href='#calculator' className='bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-strong)] border-none w-full sm:w-auto'>
-                  Calculate Your Client&apos;s Exit Tax Position � Free ?
+                  Calculate Your Client&apos;s Exit Tax Position for Free
                 </Button>
               </div>
             </div>

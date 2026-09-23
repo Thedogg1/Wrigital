@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>FinPrint — Your Prospect Has Already Used ChatGPT</title>
+  <title>FinPrint. Founding Partners Programme</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet"/>
   <style>
     :root {
@@ -35,7 +35,6 @@
       min-height: 100vh;
     }
 
-    /* Left — image panel */
     .image-panel {
       position: relative;
       background: linear-gradient(135deg, #0f1624 0%, #1a2340 100%);
@@ -50,7 +49,6 @@
         linear-gradient(160deg, #0a0f1e 0%, #1a2340 100%);
     }
 
-    /* Illustrative abstract — finance/data aesthetic */
     .abstract-graphic {
       position: absolute;
       inset: 0;
@@ -88,30 +86,52 @@
       opacity: 0.85;
     }
 
-    /* Right — content panel */
     .content-panel {
       background: var(--navy);
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 80px 64px;
+      padding: 64px 56px;
     }
 
     .brand-bar {
       display: flex;
       align-items: center;
       gap: 10px;
-      margin-bottom: 64px;
+      margin-bottom: 40px;
+    }
+
+    .brand-lockup {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-mark {
+      width: 28px;
+      height: 31px;
+      flex-shrink: 0;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.15;
     }
 
     .brand-name {
+      font-family: 'DM Serif Display', serif;
       font-size: 18px;
-      font-weight: 700;
+      font-weight: 400;
       letter-spacing: -0.02em;
       color: var(--white);
     }
 
-    .brand-name span { color: var(--cyan); }
+    .brand-byline {
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--text-muted);
+    }
 
     .slide-eyebrow {
       font-size: 11px;
@@ -119,29 +139,29 @@
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--cyan);
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
 
     .slide-title {
       font-family: 'DM Serif Display', serif;
-      font-size: 48px;
+      font-size: 36px;
       font-weight: 400;
-      line-height: 1.1;
+      line-height: 1.15;
       color: var(--white);
-      margin-bottom: 40px;
+      margin-bottom: 28px;
       letter-spacing: -0.01em;
     }
 
     .slide-body {
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 16px;
     }
 
     .slide-para {
-      font-size: 16px;
+      font-size: 15px;
       color: var(--text-body);
-      line-height: 1.75;
+      line-height: 1.7;
     }
 
     .slide-para strong {
@@ -150,12 +170,13 @@
     }
 
     .cta-line {
-      margin-top: 48px;
-      padding-top: 32px;
+      margin-top: 36px;
+      padding-top: 28px;
       border-top: 1px solid var(--divider);
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
-      gap: 16px;
+      gap: 12px;
     }
 
     .cta-badge {
@@ -166,33 +187,38 @@
       color: var(--navy-dark);
       font-size: 13px;
       font-weight: 700;
-      padding: 10px 20px;
+      padding: 10px 18px;
       border-radius: 6px;
       letter-spacing: 0.02em;
     }
 
-    .cta-label {
+    .cta-badge-secondary {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--divider);
+      color: var(--text-body);
       font-size: 13px;
-      color: var(--text-muted);
+      font-weight: 600;
+      padding: 10px 18px;
+      border-radius: 6px;
     }
 
     @media (max-width: 900px) {
       .slide { grid-template-columns: 1fr; }
       .image-panel { min-height: 280px; }
       .content-panel { padding: 48px 32px; }
-      .slide-title { font-size: 34px; }
+      .slide-title { font-size: 28px; }
     }
   </style>
 </head>
 <body>
   <div class="slide">
 
-    <!-- Left: image/graphic panel -->
     <div class="image-panel">
       <div class="image-panel-bg"></div>
       <div class="abstract-graphic">
         <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- Stylised data/chart lines -->
           <circle cx="200" cy="200" r="180" stroke="white" stroke-width="1"/>
           <circle cx="200" cy="200" r="120" stroke="white" stroke-width="1"/>
           <circle cx="200" cy="200" r="60" stroke="white" stroke-width="1"/>
@@ -200,51 +226,58 @@
           <line x1="200" y1="20" x2="200" y2="380" stroke="white" stroke-width="1"/>
           <line x1="73" y1="73" x2="327" y2="327" stroke="white" stroke-width="0.5"/>
           <line x1="327" y1="73" x2="73" y2="327" stroke="white" stroke-width="0.5"/>
-          <!-- Chart bars suggestion -->
           <rect x="100" y="240" width="20" height="80" fill="white" opacity="0.6"/>
           <rect x="130" y="200" width="20" height="120" fill="white" opacity="0.6"/>
           <rect x="160" y="160" width="20" height="160" fill="white" opacity="0.6"/>
           <rect x="190" y="180" width="20" height="140" fill="white" opacity="0.6"/>
           <rect x="220" y="130" width="20" height="190" fill="white" opacity="0.6"/>
           <rect x="250" y="150" width="20" height="170" fill="white" opacity="0.6"/>
-          <!-- Trend line -->
           <polyline points="100,260 130,220 160,180 190,190 220,140 250,160 290,110" stroke="white" stroke-width="2" fill="none" opacity="0.8"/>
         </svg>
       </div>
       <div class="image-caption">
-        <p class="image-caption-label">The challenge</p>
-        <p class="image-caption-quote">"Arriving unprepared isn't just a missed opportunity. It's a credibility problem."</p>
+        <p class="image-caption-label">The opportunity</p>
+        <p class="image-caption-quote">"Your expertise already exists. FinPrint helps the right prospect see it."</p>
       </div>
     </div>
 
-    <!-- Right: content panel -->
     <div class="content-panel">
       <div class="brand-bar">
-        <div class="brand-name">Velocity<span>IQ</span></div>
+        <div class="brand-lockup">
+          <svg class="brand-mark" viewBox="0 0 36 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="2" y="4" width="32" height="2.75" rx="1.25" fill="#FFFFFF"/>
+            <rect x="2" y="9.5" width="32" height="2.75" rx="1.25" fill="#00C8E0"/>
+            <rect x="2" y="15" width="32" height="2.75" rx="1.25" fill="#FFFFFF"/>
+            <rect x="2" y="20.5" width="32" height="2.75" rx="1.25" fill="#00C8E0"/>
+            <rect x="2" y="26" width="32" height="2.75" rx="1.25" fill="#FFFFFF"/>
+            <rect x="2" y="31.5" width="32" height="2.75" rx="1.25" fill="#00C8E0"/>
+          </svg>
+          <div class="brand-text">
+            <span class="brand-name">FinPrint</span>
+            <span class="brand-byline">by Wrigital</span>
+          </div>
+        </div>
       </div>
 
-      <p class="slide-eyebrow">Pre-Meeting Intelligence</p>
+      <p class="slide-eyebrow">FinPrint Founding Partners Programme</p>
 
-      <h1 class="slide-title">Your Prospect Has Already Used ChatGPT</h1>
+      <h1 class="slide-title">Show HNW Business Owners You Understand Their World, and Progress Them Towards Paid Advice</h1>
 
       <div class="slide-body">
         <p class="slide-para">
-          High-value prospects are hard won. Before they commit, they want evidence of expertise — and increasingly, they've already done their own AI research.
+          Your firm already has the expertise to advise complex business owners.
         </p>
         <p class="slide-para">
-          <strong>Arriving unprepared isn't just a missed opportunity. It's a credibility problem.</strong>
+          The challenge is making that understanding visible without committing heavy adviser and paraplanner time before you know whether they&apos;ll become a client.
         </p>
         <p class="slide-para">
-          FinPrint gives advisers something tangible, personalised, and demonstrably superior — before the first meeting takes place.
+          <strong>FinPrint turns complex prospect information into a clear, personal, adviser-reviewed demonstration of understanding, while the appointment decision is still live.</strong>
         </p>
       </div>
 
       <div class="cta-line">
-        <span class="cta-badge">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M5 7l1.5 1.5L9 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          FCA-Regulated Advisers
-        </span>
-        <span class="cta-label">Built for HNW business owner clients</span>
+        <span class="cta-badge">Founding Partner Pilot. £495</span>
+        <span class="cta-badge-secondary">First 10 qualifying UK IFA firms</span>
       </div>
     </div>
 

@@ -7,488 +7,599 @@ import { loadPresentationSlides } from '@/lib/uk-landing/loadSlides';
 import { contactEmail, contactMailto } from '@/lib/email/config';
 import { siteUrl } from '@/lib/site';
 import Link from 'next/link';
-import { FileText, CheckCircle, BarChart3 } from 'lucide-react';
+import {
+  FileText,
+  MessageSquare,
+  RefreshCw,
+  AlertTriangle,
+  ShieldCheck,
+} from 'lucide-react';
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <p className='text-xs font-semibold uppercase tracking-widest text-[var(--color-accent)] mb-4'>
+    <p className="mb-4 text-xs font-semibold tracking-widest text-[var(--color-accent)] uppercase">
       {children}
     </p>
   );
 }
 
+const foundingPartnersMailto = `mailto:${contactEmail}?subject=${encodeURIComponent(
+  'FinPrint Founding Partners Programme Application',
+)}`;
+
 export default function UkLandingPage() {
   const slides = loadPresentationSlides();
 
   return (
-    <div className='min-h-screen flex flex-col'>
+    <div className="flex min-h-screen flex-col">
       <Header />
 
-      <main className='flex-1'>
+      <main className="flex-1">
         {/* HERO */}
-        <section className='bg-gradient-to-br from-[#1E2A4A] via-[#2D3561] to-[#0a2463] text-white py-20 lg:py-28'>
-          <div className='max-w-5xl mx-auto px-6 text-center'>
-            <h1 className='text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-6 text-white'>
-              Your Prospect Is Already Using AI. FinPrint Sets the Standard.
-            </h1>
-            <p className='text-lg sm:text-xl text-[#CBD5E1] max-w-3xl mx-auto mb-8 leading-relaxed'>
-              Enterprise-grade governance, compliance and adviser-specific intelligence; built for
-              firms that cannot afford to compromise.
+        <section className="bg-gradient-to-br from-[#1E2A4A] via-[#2D3561] to-[#0a2463] py-20 text-white lg:py-28">
+          <div className="mx-auto max-w-5xl px-6 text-center">
+            <p className="mb-6 text-xs font-semibold tracking-widest text-[var(--color-accent)] uppercase">
+              FinPrint Founding Partners Programme
             </p>
-            <div className='text-base text-[#CBD5E1] max-w-2xl mx-auto mb-10 space-y-4 leading-relaxed text-left sm:text-center'>
-              <p>
-                Financial advisers targeting high-net-worth business owners rarely struggle to get in
-                the room. Referrals and reputation open the door.
+            <h1 className="mb-6 text-3xl leading-tight font-bold text-white sm:text-4xl lg:text-5xl">
+              Show HNW Business Owners You Understand Their World, and Progress
+              Them Towards Paid Advice
+            </h1>
+            <p className="mx-auto mb-6 max-w-3xl text-lg leading-relaxed text-[#CBD5E1] sm:text-xl">
+              FinPrint helps UK financial advice firms turn complex prospect
+              information into a clear, personal, adviser-reviewed demonstration
+              of understanding, while the appointment decision is still live.
+            </p>
+            <p className="mx-auto mb-10 max-w-3xl text-base leading-relaxed text-[#CBD5E1]">
+              Give valuable business-owner prospects tangible evidence that your
+              firm understands their business, wealth, family circumstances,
+              priorities and the decisions they&apos;re facing, without
+              committing heavy adviser and paraplanner time before you know
+              they&apos;ll become a client.
+            </p>
+            <div className="mb-10 inline-flex flex-col items-center justify-center gap-2 rounded-xl border border-[rgba(0,200,224,0.25)] bg-white/5 px-6 py-4 sm:flex-row sm:gap-6">
+              <p className="text-lg font-semibold text-white">
+                Our Founding Partner Pilot costs £495
               </p>
-              <p>Converting that introduction into a client is where momentum dies.</p>
-              <p>
-                Something has changed. Before a prospect takes your call, they&apos;ve already asked
-                ChatGPT what their business is worth on exit. They&apos;ve heard the same pitch from
-                three other advisers. Their expectations have risen, and the approach that worked
-                three years ago doesn&apos;t work the same way anymore.
-              </p>
-              <p>
-                FinPrint is the only system that delivers a complete, quantified financial picture
-                of your prospect before you&apos;ve sat down together. Adviser-reviewed,
-                formula-driven, FCA-defensible, and designed to make the first meeting close.
+              <p className="text-sm text-[#94A3B8]">
+                Open to the first 10 qualifying UK IFA firms.
               </p>
             </div>
-            <div className='flex flex-col sm:flex-row gap-4 justify-center items-center mb-4'>
-              <Button href='#calculator' className='bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-strong)] border-none'>
-                Calculate Your Client&apos;s Exit Tax Position � Free
+            <div className="mb-6 flex flex-col items-center justify-center gap-4 sm:flex-row">
+              <Button
+                href={foundingPartnersMailto}
+                className="border-none bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-strong)]"
+              >
+                Apply to Become a Founding Partner
               </Button>
             </div>
-            <p className='text-sm text-[#94A3B8] italic'>
-              No obligation. No data stored. Results in under two minutes.
-            </p>
+            <a
+              href="#how-finprint-works"
+              className="text-sm text-[#94A3B8] underline underline-offset-4 transition-colors hover:text-[var(--color-accent)]"
+            >
+              See How FinPrint Works
+            </a>
           </div>
         </section>
 
-        {/* PROBLEM */}
-        <section className='py-20 bg-white'>
-          <div className='max-w-3xl mx-auto px-6'>
-            <SectionLabel>The Problem</SectionLabel>
-            <h2 className='text-3xl sm:text-4xl font-bold text-[var(--color-primary)] mb-8'>
-              The Meeting Went Well. They Still Didn&apos;t Sign.
+        {/* THE CHALLENGE */}
+        <section className="bg-white py-20">
+          <div className="mx-auto max-w-3xl px-6">
+            <SectionLabel>The Challenge</SectionLabel>
+            <h2 className="mb-8 text-3xl font-bold text-[var(--color-primary)] sm:text-4xl">
+              How Much Work Do You Do Before They Become a Client?
             </h2>
-            <div className='space-y-6 text-[var(--color-text-secondary)] text-lg leading-relaxed'>
+            <div className="space-y-6 text-lg leading-relaxed text-[var(--color-text-secondary)]">
               <p>
-                You asked the right questions. You listened. You had the credentials, the referral
-                and the rapport. They said they&apos;d come back to you.
-              </p>
-              <p>They didn&apos;t.</p>
-              <p>
-                It&apos;s not your expertise they&apos;re questioning, but if you genuinely
-                understand their specific situation. Not business owners in general, but them.
-                Their company. Their tax exposure. Their exit timeline. Their actual numbers.
+                Established IFA firms already have the skill to advise complex
+                HNW business owners. The harder question sits earlier. Can that
+                skill and care show up clearly enough, soon enough, to shape who
+                the prospect appoints?
               </p>
               <p>
-                Most advisers arrive at the first meeting ready to listen. The prospect has already
-                decided whether this adviser feels different from the last three they met, and that
-                decision is often made before anyone sits down.
+                For a valuable business-owner prospect, doing the preparation
+                properly can mean understanding linked issues across:
+              </p>
+              <ul className="list-disc space-y-2 pl-6">
+                <li>their business</li>
+                <li>personal wealth</li>
+                <li>family circumstances</li>
+                <li>pensions and investments</li>
+                <li>property and debt</li>
+                <li>succession and exit plans</li>
+                <li>tax considerations</li>
+                <li>liquidity</li>
+                <li>competing personal objectives</li>
+              </ul>
+              <p>
+                And yet the firm does not yet know whether the prospect will
+                appoint them.
               </p>
               <p>
-                Warm leads go cold not from lost interest; they go cold because there&apos;s no
-                compelling reason to stay engaged. Life intervenes. The momentum dies. A competitor
-                makes contact at the wrong moment.
+                Too little preparation and the prospect experience can feel
+                generic. Too much preparation and costly adviser and paraplanner
+                time is committed before there is a client relationship.
               </p>
-              <p className='font-semibold text-[var(--color-text-primary)]'>
-                The gap isn&apos;t in your advice. It&apos;s in what you show them before you give
-                it.
+              <p className="font-semibold text-[var(--color-text-primary)]">
+                FinPrint is designed to make your firm&apos;s specialist
+                understanding visible without requiring the cost of winning
+                complex clients to rise at the same rate as your opportunities.
               </p>
             </div>
           </div>
         </section>
 
-        {/* AGITATION */}
-        <section className='py-20 bg-[var(--color-surface)]'>
-          <div className='max-w-3xl mx-auto px-6'>
-            <h2 className='text-3xl sm:text-4xl font-bold text-[var(--color-primary)] mb-8'>
-              What&apos;s Happening Between the Referral and the First Meeting
+        {/* THE FINPRINT DIFFERENCE */}
+        <section className="bg-[var(--color-surface)] py-20">
+          <div className="mx-auto max-w-3xl px-6">
+            <SectionLabel>The FinPrint Difference</SectionLabel>
+            <h2 className="mb-8 text-3xl font-bold text-[var(--color-primary)] sm:text-4xl">
+              Make Your Expertise Visible
             </h2>
-            <div className='space-y-6 text-[var(--color-text-secondary)] text-lg leading-relaxed'>
+            <div className="space-y-6 text-lg leading-relaxed text-[var(--color-text-secondary)]">
               <p>
-                Between the moment a business owner is referred to you and the moment they sit down
-                for your discovery call, several things are already happening.
+                Capable advisers often already know how to help. What the
+                prospect needs is tangible proof that your firm understands{' '}
+                <em>their</em> particular situation.
+              </p>
+              <p className="text-xl font-semibold text-[var(--color-text-primary)]">
+                Not just their numbers. Their situation.
               </p>
               <p>
-                They&apos;ve typed your name into Google. They&apos;ve looked at your LinkedIn.
-                They&apos;ve asked an AI tool what a business worth �8 million would be liable for
-                on exit. They&apos;ve compared how you described your service with how three other
-                advisers described theirs.
-              </p>
-              <p>And right now, your positioning looks almost identical to everyone else&apos;s.</p>
-              <p>
-                They&apos;ve heard the same words. Holistic. Independent. Client-focused.
-                They&apos;ve had the same conversation. They&apos;re waiting for something that makes
-                one adviser feel unmistakably different from the rest.
+                FinPrint connects Business + Wealth + Family + Priorities +
+                Decisions into a coherent prospect-facing Financial Pathway
+                Pack.
               </p>
               <p>
-                What&apos;s missing isn&apos;t effort or expertise; it&apos;s the ability to show a
-                prospect something tangible about their own situation before they&apos;ve had to ask
-                for it.
-              </p>
-              <p>
-                Empathy alone doesn&apos;t convert � not reliably, not consistently, not at the
-                volume a growing firm requires. The prospect feels heard in the room and forgotten
-                by the follow-up email. That gap is where deals die.
-              </p>
-              <p className='font-semibold text-[var(--color-text-primary)]'>
-                The advisers who convert at the highest rates give prospects something to hold, read
-                and think about between conversations. Something personalised. Something that
-                demonstrates understanding before asking for trust.
+                The Pack is built to show understanding. The adviser remains
+                responsible for professional judgement, review and approval.
+                FinPrint does not provide regulated financial advice.
               </p>
             </div>
           </div>
         </section>
 
-        {/* SOLUTION */}
-        <section className='py-20 bg-white'>
-          <div className='max-w-3xl mx-auto px-6'>
-            <SectionLabel>The Solution</SectionLabel>
-            <h2 className='text-3xl sm:text-4xl font-bold text-[var(--color-primary)] mb-8'>
-              Intelligence That Makes the First Meeting a Formality
+        {/* FINANCIAL PATHWAY PACK */}
+        <section className="bg-white py-20">
+          <div className="mx-auto max-w-3xl px-6">
+            <SectionLabel>The Deliverable</SectionLabel>
+            <h2 className="mb-8 text-3xl font-bold text-[var(--color-primary)] sm:text-4xl">
+              A Personal Demonstration of Understanding
             </h2>
-            <div className='space-y-6 text-[var(--color-text-secondary)] text-lg leading-relaxed'>
+            <div className="space-y-6 text-lg leading-relaxed text-[var(--color-text-secondary)]">
               <p>
-                FinPrint converts the sparse notes you already have into a complete,
-                adviser-reviewed financial intelligence report on your HNW business owner prospect;
-                it is ready before you walk into the room.
+                The Financial Pathway Pack is the core FinPrint deliverable. And
+                the Pack is not merely:
+              </p>
+              <ul className="list-disc space-y-2 pl-6">
+                <li>a generic AI report</li>
+                <li>meeting notes</li>
+                <li>a marketing brochure</li>
+                <li>a tax calculation</li>
+                <li>a template with the client&apos;s name inserted</li>
+              </ul>
+              <p>
+                Instead, fragmented information about the prospect becomes a
+                clear, evidence-grounded and adviser-reviewed picture of the
+                issues, priorities and decisions relevant to them.
               </p>
               <p>
-                Not a generic summary. Not a template dressed up with a name and a number. A
-                formula-driven document that identifies the specific financial risks, tax exposures
-                and planning opportunities relevant to this client&apos;s situation, with every
-                figure traceable and every claim defensible.
-              </p>
-              <p>The prospect receives a curated version. You keep the full audit trail.</p>
-              <p>
-                Your first meeting becomes a conversation about solutions; your prospect already
-                knows you&apos;ve done the work before they&apos;ve told you a thing.
-              </p>
-              <p className='font-semibold text-[var(--color-text-primary)]'>
-                Everyone else is using AI to cut costs. FinPrint uses it to win clients.
+                Clear, jargon-free writing sits at the centre. The aim is
+                simple. Help the prospect feel understood, in language they can
+                follow, while the adviser keeps full control of what reaches
+                them.
               </p>
             </div>
           </div>
         </section>
 
         {/* HOW IT WORKS */}
-        <section className='py-20 bg-[var(--color-surface)]'>
-          <div className='max-w-4xl mx-auto px-6'>
-            <SectionLabel>How It Works</SectionLabel>
-            <h2 className='text-3xl sm:text-4xl font-bold text-[var(--color-primary)] mb-12 text-center'>
-              Three Steps. One Report. One Conversation Starter.
+        <section
+          id="how-finprint-works"
+          className="scroll-mt-20 bg-[var(--color-surface)] py-20"
+        >
+          <div className="mx-auto max-w-4xl px-6">
+            <SectionLabel>How FinPrint Works</SectionLabel>
+            <h2 className="mb-12 text-center text-3xl font-bold text-[var(--color-primary)] sm:text-4xl">
+              Understanding That Builds Before, During and After Discovery
             </h2>
-            <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
-              <div className='bg-white rounded-xl p-8 border border-[var(--color-border-subtle)] shadow-sm'>
-                <FileText className='w-10 h-10 text-[var(--color-accent)] mb-4' aria-hidden />
-                <h3 className='text-xl font-semibold text-[var(--color-primary)] mb-3'>
-                  Step 1: Send Your Sparse Notes
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+              <div className="rounded-xl border border-[var(--color-border-subtle)] bg-white p-8 shadow-sm">
+                <FileText
+                  className="mb-4 h-10 w-10 text-[var(--color-accent)]"
+                  aria-hidden
+                />
+                <h3 className="mb-3 text-xl font-semibold text-[var(--color-primary)]">
+                  Step 1. Before Discovery
                 </h3>
-                <p className='text-[var(--color-text-secondary)] text-sm leading-relaxed'>
-                  You don&apos;t need a complete fact-find. A referral name, a rough business
-                  valuation, a sense of the client&apos;s exit timeline, and any personality details
-                  the referrer shared. That&apos;s enough.
+                <p className="mb-3 text-sm font-semibold text-[var(--color-text-primary)]">
+                  Initial Financial Pathway Pack within 24 hours
                 </p>
-                <p className='text-[var(--color-text-secondary)] text-sm leading-relaxed mt-3'>
-                  FinPrint is built to work from what you already know, not from what you wish
-                  you&apos;d asked.
+                <p className="text-sm leading-relaxed text-[var(--color-text-secondary)]">
+                  FinPrint turns the available prospect information into an
+                  initial Financial Pathway Pack. The adviser reviews the
+                  analysis, validates the content and prepares for discovery.
+                </p>
+                <p className="mt-3 text-sm leading-relaxed text-[var(--color-text-secondary)]">
+                  Adviser review stays in the path. Nothing reaches the prospect
+                  without that step.
                 </p>
               </div>
-              <div className='bg-white rounded-xl p-8 border border-[var(--color-border-subtle)] shadow-sm'>
-                <CheckCircle className='w-10 h-10 text-[var(--color-accent)] mb-4' aria-hidden />
-                <h3 className='text-xl font-semibold text-[var(--color-primary)] mb-3'>
-                  Step 2: Review and Approve Every Figure
+              <div className="rounded-xl border border-[var(--color-border-subtle)] bg-white p-8 shadow-sm">
+                <MessageSquare
+                  className="mb-4 h-10 w-10 text-[var(--color-accent)]"
+                  aria-hidden
+                />
+                <h3 className="mb-3 text-xl font-semibold text-[var(--color-primary)]">
+                  Step 2. During Discovery
                 </h3>
-                <p className='text-[var(--color-text-secondary)] text-sm leading-relaxed'>
-                  FinPrint extracts and calculates a personalised set of financial data points from
-                  your notes, which could include Business Asset Disposal Relief eligibility, retained
-                  cash risk, concentration risk and more.
+                <p className="mb-3 text-sm font-semibold text-[var(--color-text-primary)]">
+                  Add the Context Only a Conversation Can Reveal
                 </p>
-                <p className='text-[var(--color-text-secondary)] text-sm leading-relaxed mt-3'>
-                  Every figure is formula-driven. Every field is adviser-reviewed before the report
-                  generates. You approve it; you can justify every number if challenged. Mandatory
-                  fields ensure the core output always runs. Optional fields, selected based on the
-                  client&apos;s profile, unlock deeper intelligence across the full report.
+                <p className="text-sm leading-relaxed text-[var(--color-text-secondary)]">
+                  Discovery adds nuance, motives, priorities and information
+                  that were not available at the start. The adviser retains
+                  professional judgement and control throughout.
                 </p>
               </div>
-              <div className='bg-white rounded-xl p-8 border border-[var(--color-border-subtle)] shadow-sm'>
-                <BarChart3 className='w-10 h-10 text-[var(--color-accent)] mb-4' aria-hidden />
-                <h3 className='text-xl font-semibold text-[var(--color-primary)] mb-3'>
-                  Step 3: The Report Does the Work
+              <div className="rounded-xl border border-[var(--color-border-subtle)] bg-white p-8 shadow-sm">
+                <RefreshCw
+                  className="mb-4 h-10 w-10 text-[var(--color-accent)]"
+                  aria-hidden
+                />
+                <h3 className="mb-3 text-xl font-semibold text-[var(--color-primary)]">
+                  Step 3. After Discovery
                 </h3>
-                <p className='text-[var(--color-text-secondary)] text-sm leading-relaxed'>
-                  Your prospect receives a prioritised list of planning questions shaped around their
-                  actual financial position. You have quietly designed the agenda; your prospect
-                  arrives at the first meeting already engaged, already thinking, already invested in
-                  the outcome.
+                <p className="mb-3 text-sm font-semibold text-[var(--color-text-primary)]">
+                  Updated While the Appointment Decision Is Still Live
                 </p>
-                <p className='text-[var(--color-text-secondary)] text-sm leading-relaxed mt-3 font-medium text-[var(--color-text-primary)]'>
-                  Every report contains four sections as standard:
+                <p className="text-sm leading-relaxed text-[var(--color-text-secondary)]">
+                  FinPrint updates the Financial Pathway Pack following
+                  discovery. The workflow is designed so the adviser can review,
+                  refine and approve the updated Pack with a target of placing
+                  the Pack in the prospect&apos;s hands within two hours of the
+                  discovery meeting ending, assuming an efficient workflow and
+                  prompt adviser review.
                 </p>
-                <ul className='text-[var(--color-text-secondary)] text-sm leading-relaxed mt-2 list-disc pl-5 space-y-1'>
-                  <li>Executive Summary</li>
-                  <li>
-                    Your Story � a narrative that converts the numbers into plain-language insight
-                    around the client&apos;s real concerns.
-                  </li>
-                  <li>
-                    What to Discuss With Your Adviser � frames the agenda without the prospect
-                    realising you influenced it.
-                  </li>
-                  <li>Relevant pivot tables built from the formula calculations.</li>
-                </ul>
-                <p className='text-[var(--color-text-secondary)] text-sm leading-relaxed mt-3 font-medium text-[var(--color-text-primary)]'>
-                  Beyond that, FinPrint selects additional sections based on the client&apos;s
-                  specific circumstances:
+                <p className="mt-3 text-sm leading-relaxed text-[var(--color-text-secondary)]">
+                  That timing matters. The prospect may receive tangible
+                  evidence of the firm&apos;s understanding while still
+                  evaluating advisers, and potentially before meeting the next
+                  adviser on their shortlist. Appointment is never promised.
                 </p>
-                <ul className='text-[var(--color-text-secondary)] text-sm leading-relaxed mt-2 list-disc pl-5 space-y-1'>
-                  <li>Core Business and Market Benchmarks</li>
-                  <li>Risk, Governance and Resilience</li>
-                  <li>Liquidity and Concentration Risk</li>
-                  <li>Exit and Valuation Planning</li>
-                  <li>Tax and Estate Planning</li>
-                </ul>
-                <p className='text-[var(--color-text-secondary)] text-sm leading-relaxed mt-3'>
-                  No two reports are identical; the system builds around the client, not around a
-                  template.
+              </div>
+            </div>
+            <div className="mx-auto mt-12 max-w-3xl space-y-4 text-lg leading-relaxed text-[var(--color-text-secondary)]">
+              <p>
+                After discovery, the firm can run up to three analysis passes to
+                test assumptions, explore scenarios and compare readings before
+                deciding which version is right to put in front of the prospect.
+              </p>
+              <p>
+                The aim is to reduce the pressure of a single shot at the right
+                reading. Conversion is never guaranteed.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* PRESENTATION */}
+        <section className="bg-gradient-to-b from-[#1E2A4A] to-[#2D3561] py-20">
+          <div className="mx-auto max-w-5xl px-6">
+            <SectionLabel>See FinPrint in Action</SectionLabel>
+            <h2 className="mb-4 text-3xl font-bold text-white sm:text-4xl">
+              Walk Through a Sample Financial Pathway Pack
+            </h2>
+            <p className="mb-10 max-w-2xl text-[#CBD5E1]">
+              Explore a sample walkthrough built for UK financial advisers
+              working with HNW business-owner prospects. The slides show the
+              shape of the Pack, not a promise of commercial results.
+            </p>
+            <LandingSlideViewer slides={slides} />
+          </div>
+        </section>
+
+        {/* INTELLIGENT WARNINGS */}
+        <section className="bg-white py-20">
+          <div className="mx-auto max-w-4xl px-6">
+            <SectionLabel>Intelligent Warnings</SectionLabel>
+            <h2 className="mb-8 text-center text-3xl font-bold text-[var(--color-primary)] sm:text-4xl">
+              Important Issues Shouldn&apos;t Hide in the Detail
+            </h2>
+            <p className="mx-auto mb-12 max-w-3xl text-center text-lg leading-relaxed text-[var(--color-text-secondary)]">
+              Complex business-owner situations often hide material points in
+              the noise. FinPrint surfaces two Intelligent Warnings outputs to
+              support adviser judgement, not replace that judgement.
+            </p>
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+              <div className="rounded-xl border border-[var(--color-border-subtle)] bg-[var(--color-surface)] p-8">
+                <AlertTriangle
+                  className="mb-4 h-10 w-10 text-[var(--color-accent)]"
+                  aria-hidden
+                />
+                <h3 className="mb-3 text-xl font-semibold text-[var(--color-primary)]">
+                  Adviser Intelligent Warnings
+                </h3>
+                <p className="leading-relaxed text-[var(--color-text-secondary)]">
+                  Highlights important issues, risks, information gaps or
+                  considerations the adviser may need to examine before the Pack
+                  goes further.
                 </p>
-                <p className='text-[var(--color-text-secondary)] text-sm leading-relaxed mt-3'>
-                  Three separate audit reports give you a complete, FCA-defensible record: a numbers
-                  audit, a knowledge base audit drawing on gov.uk, HMRC and FCA sources, and a live
-                  external sources report with full citations at the time of generation.
+              </div>
+              <div className="rounded-xl border border-[var(--color-border-subtle)] bg-[var(--color-surface)] p-8">
+                <ShieldCheck
+                  className="mb-4 h-10 w-10 text-[var(--color-accent)]"
+                  aria-hidden
+                />
+                <h3 className="mb-3 text-xl font-semibold text-[var(--color-primary)]">
+                  Client Intelligent Warnings
+                </h3>
+                <p className="leading-relaxed text-[var(--color-text-secondary)]">
+                  Turns suitable issues into clear client-facing wording that
+                  the adviser can review, approve and send.
                 </p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* PRESENTATION */}
-        <section className='py-20 bg-gradient-to-b from-[#1E2A4A] to-[#2D3561]'>
-          <div className='max-w-5xl mx-auto px-6'>
-            <SectionLabel>See FinPrint in Action</SectionLabel>
-            <h2 className='text-3xl sm:text-4xl font-bold text-white mb-4'>
-              From Sparse Notes to FCA-Ready Intelligence
-            </h2>
-            <p className='text-[#CBD5E1] mb-10 max-w-2xl'>
-              Walk through a sample pre-meeting report � built for UK financial advisers working with
-              HNW business owner clients.
-            </p>
-            <LandingSlideViewer slides={slides} />
-          </div>
-        </section>
-
         {/* CALCULATOR */}
-        <section id='calculator' className='py-20 bg-white scroll-mt-20'>
-          <div className='max-w-4xl mx-auto px-6'>
-            <SectionLabel>Free Tool</SectionLabel>
-            <h2 className='text-3xl sm:text-4xl font-bold text-[var(--color-primary)] mb-3'>
-              See What Your Client Is Liable For on Exit � Right Now
+        <section
+          id="calculator"
+          className="scroll-mt-20 bg-[var(--color-surface)] py-20"
+        >
+          <div className="mx-auto max-w-4xl px-6">
+            <SectionLabel>A FinPrint Preview</SectionLabel>
+            <h2 className="mb-3 text-3xl font-bold text-[var(--color-primary)] sm:text-4xl">
+              See a Small Part of What FinPrint Can Surface
             </h2>
-            <p className='text-xl text-[var(--color-text-secondary)] mb-8'>
-              The FinPrint Exit Tax Optimisation Calculator
-            </p>
-            <div className='space-y-6 text-[var(--color-text-secondary)] mb-10 leading-relaxed'>
+            <div className="mb-10 space-y-6 leading-relaxed text-[var(--color-text-secondary)]">
               <p>
-                When a business owner tells you they&apos;re thinking about selling in the next twelve
-                months, there is one question above everything else they want answered.
-              </p>
-              <p className='italic text-[var(--color-text-primary)]'>
-                What will I walk away with after tax?
+                The calculator below shows a narrow part of the FinPrint
+                approach: Turning a handful of facts about a business-owner
+                prospect into useful, quantified insight.
               </p>
               <p>
-                And every adviser knows what their honest answer usually is: I&apos;ll need to get back to
-                you. My accountant normally handles the tax side.
+                Enter a sample exit scenario to see the type of calculation that
+                could sit inside a Financial Pathway Pack.
+              </p>
+              <p className="font-semibold text-[var(--color-text-primary)]">
+                The full FinPrint process goes much further.
               </p>
               <p>
-                That moment of hesitation is where your positioning is decided. Not in your credentials.
-                Not in your fee structure. In whether you had the number when they needed it.
+                FinPrint connects the prospect&apos;s business, wealth, family
+                circumstances, priorities and key decisions into a personal,
+                adviser-reviewed picture designed to show that your firm
+                understands their situation, not simply their numbers.
               </p>
-              <p>
-                Enter six figures about your client&apos;s exit position. In under two minutes you have
-                their estimated net proceeds after CGT, their BADR eligibility and their
-                concentration risk � clearly laid out and ready to show.
-              </p>
-              <p className='font-semibold text-[var(--color-text-primary)]'>
-                This calculator doesn&apos;t replace your accountant. It makes you the person who knew
-                the answer before the accountant was asked.
-              </p>
-              <p className='text-sm italic'>
-                No sign-in required. Results are yours to use immediately.
+              <p className="text-sm italic">
+                Preview a FinPrint calculation. No sign-in required. Results are
+                yours to review at once.
               </p>
             </div>
             <EmbeddedExitCalculator />
           </div>
         </section>
 
+        {/* CONTROLLED BY DESIGN */}
+        <section className="bg-white py-20">
+          <div className="mx-auto max-w-3xl px-6">
+            <SectionLabel>Controlled by Design</SectionLabel>
+            <h2 className="mb-8 text-3xl font-bold text-[var(--color-primary)] sm:text-4xl">
+              AI Does the Heavy Lifting. Your Firm Retains the Judgement.
+            </h2>
+            <div className="space-y-6 text-lg leading-relaxed text-[var(--color-text-secondary)]">
+              <p>
+                AI sits behind parts of the FinPrint process. AI is not the
+                primary offer. Adviser review and approval remain central.
+              </p>
+              <p>
+                Financially material calculations are formula-driven and
+                deterministic where that is how the system works. Narrative
+                intelligence can use AI. Outputs are built to be traceable and
+                explainable.
+              </p>
+              <p>
+                Authoritative sources are used where applicable, including
+                curated material drawn from gov.uk, HMRC and the FCA. External
+                sources can be live at the time of generation and cited in full.
+              </p>
+              <p>
+                The adviser decides what goes in front of the prospect. FinPrint
+                supports professional judgement rather than replacing that
+                judgement.
+              </p>
+              <p>
+                No client data is stored server-side between sessions. Your firm
+                holds the client data payload. The system generates the output
+                and returns control to you. Nothing persists without adviser
+                action.
+              </p>
+              <p className="font-semibold text-[var(--color-text-primary)]">
+                No silent failures. No unsupported claims. No figures you cannot
+                defend.
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* WHO IT'S FOR */}
-        <section className='py-20 bg-white'>
-          <div className='max-w-3xl mx-auto px-6'>
-            <SectionLabel>Who It&apos;s Built For</SectionLabel>
-            <h2 className='text-3xl sm:text-4xl font-bold text-[var(--color-primary)] mb-8'>
-              Built for Ambitious Advisers Who Want to Win Clients � Not Just Serve Them
+        <section className="bg-[var(--color-surface)] py-20">
+          <div className="mx-auto max-w-3xl px-6">
+            <SectionLabel>Who FinPrint Is For</SectionLabel>
+            <h2 className="mb-8 text-3xl font-bold text-[var(--color-primary)] sm:text-4xl">
+              FinPrint Isn&apos;t for Every Prospect, and FinPrint Isn&apos;t
+              for Every Firm
             </h2>
-            <div className='space-y-6 text-[var(--color-text-secondary)] text-lg leading-relaxed'>
+            <div className="space-y-6 text-lg leading-relaxed text-[var(--color-text-secondary)]">
               <p>
-                FinPrint is designed specifically for FCA-regulated financial advisers and firm
-                owners working with high-net-worth business owner clients, who are building a
-                practice where quality of conversion matters more than volume of meetings.
+                FinPrint is built for a selective use case. The fit is strongest
+                where the prospect opportunity already justifies personalised
+                pre-engagement work.
               </p>
+              <p className="font-semibold text-[var(--color-text-primary)]">
+                Strong fit:
+              </p>
+              <ul className="list-disc space-y-2 pl-6">
+                <li>
+                  Established UK IFA / financial planning / wealth management
+                  firm
+                </li>
+                <li>Typically 8-15 advisers</li>
+                <li>Around £2.5m-£6m annual firm turnover</li>
+                <li>
+                  Already working with, or actively seeking, HNW business
+                  owners, founders, directors, partners, practice owners and
+                  post-exit entrepreneurs
+                </li>
+                <li>
+                  Already receiving credible, qualified high-value opportunities
+                </li>
+                <li>
+                  Winning a further suitable relationship would be worth
+                  materially more than the cost of a FinPrint Pack
+                </li>
+                <li>
+                  Already commits adviser and paraplanner resource to prospect
+                  preparation
+                </li>
+                <li>
+                  Can review and approve the output before the Pack reaches the
+                  prospect
+                </li>
+              </ul>
+              <p className="font-semibold text-[var(--color-text-primary)]">
+                Not designed for:
+              </p>
+              <ul className="list-disc space-y-2 pl-6">
+                <li>Cold names</li>
+                <li>Purchased lists</li>
+                <li>Low-intent enquiries</li>
+                <li>Low-value prospects</li>
+                <li>Firms without enough initial prospect context</li>
+                <li>
+                  Firms without an adviser-led review and approval process
+                </li>
+                <li>Mass-market prospecting</li>
+                <li>
+                  Firms without a meaningful HNW or business-owner proposition
+                </li>
+              </ul>
               <p>
-                You already have the relationships, the referral networks and the capability. What
-                you need is a repeatable system that makes your first meetings convert and keeps your
-                existing clients feeling they are being served at a level no generalist practice can
-                match.
-              </p>
-              <p>
-                You are not looking for AI that cuts paraplanner hours; you are looking for AI that
-                wins clients. That&apos;s a different problem. It requires a different solution.
-              </p>
-              <p className='font-semibold text-[var(--color-text-primary)]'>
-                Ambitious, technology-focused owners of firms with 10 to 20 advisers are not in pain.
-                They are desperate to find a way to win clients before everyone else does. If you are
-                ambitious enough, the implications of falling behind will feel like pain.
+                That focus is deliberate. FinPrint is meant for firms already
+                investing serious time in the right conversations, and looking
+                for a more scalable way to show understanding before
+                appointment.
               </p>
             </div>
           </div>
         </section>
 
-        {/* FULL PRODUCT */}
-        <section className='py-20 bg-[var(--color-surface)]'>
-          <div className='max-w-3xl mx-auto px-6'>
-            <SectionLabel>The Full System</SectionLabel>
-            <h2 className='text-3xl sm:text-4xl font-bold text-[var(--color-primary)] mb-8'>
-              Pre-Meeting Intelligence Is Just the Beginning
+        {/* FOUNDING PARTNERS */}
+        <section id="founding-partners" className="scroll-mt-20 bg-white py-20">
+          <div className="mx-auto max-w-3xl px-6">
+            <SectionLabel>Founding Partners Programme</SectionLabel>
+            <h2 className="mb-8 text-3xl font-bold text-[var(--color-primary)] sm:text-4xl">
+              Help Shape FinPrint Before Wider Release
             </h2>
-            <div className='space-y-6 text-[var(--color-text-secondary)] text-lg leading-relaxed'>
+            <div className="space-y-6 text-lg leading-relaxed text-[var(--color-text-secondary)]">
               <p>
-                The FinPrint pre-meeting report is the system&apos;s opening move. The full capability
-                runs across the entire client acquisition journey.
+                Wrigital is inviting the first 10 qualifying UK IFA firms to
+                take part in the FinPrint Founding Partners Programme. This is
+                early access during commercial validation and refinement, not a
+                generic software sale.
+              </p>
+              <div className="my-8 rounded-xl border border-[var(--color-border-subtle)] bg-[var(--color-surface)] p-8 text-center">
+                <p className="mb-3 text-sm font-semibold tracking-widest text-[var(--color-accent)] uppercase">
+                  Founding Partner Price
+                </p>
+                <p className="mb-3 text-4xl font-bold text-[var(--color-primary)] sm:text-5xl">
+                  £495
+                </p>
+                <p className="text-[var(--color-text-secondary)]">
+                  Planned standard Financial Pathway Pack price is £1,200
+                </p>
+              </div>
+              <p>
+                Founding Partners receive early access at £495 because FinPrint
+                is still in commercial validation and refinement. In return,
+                participating firms will be asked for structured feedback on the
+                FinPrint experience, workflow and usefulness in suitable
+                prospect situations.
               </p>
               <p>
-                <strong className='text-[var(--color-text-primary)]'>Before the meeting:</strong> A
-                personalised financial intelligence report positions you as someone who already
-                understands the client; not someone about to ask them to explain their situation from
-                scratch. Your prospect arrives already trusting you.
+                The programme is selective. Places are for firms that fit the
+                intended FinPrint use case described above.
               </p>
               <p>
-                <strong className='text-[var(--color-text-primary)]'>During the meeting:</strong> You
-                already know the numbers. The conversation is about planning, not discovery. The
-                emotional motivator � fear of falling behind, ambition to protect what they&apos;ve
-                built � stays at the centre of the conversation rather than being buried under
-                credentials and features.
-              </p>
-              <p>
-                <strong className='text-[var(--color-text-primary)]'>After the meeting:</strong> A
-                post-meeting report, generated from the full fact-find and meeting notes, gives the
-                client a tangible record of what was discussed and gives you a follow-up tool with
-                genuine content to return to. Warm leads don&apos;t stay warm by accident.
-              </p>
-              <p>
-                <strong className='text-[var(--color-text-primary)]'>When engagement drops:</strong> A
-                re-engagement report, run with a different analytical angle and fresh market data,
-                gives you a credible reason to make contact. Not a newsletter. Not a check-in. A
-                personalised, numbered, professionally constructed reason to talk.
-              </p>
-              <p>
-                Every report generates a numbers audit, a regulatory knowledge base audit and a live
-                external sources report with full citations. Every claim is traceable. Every figure is
-                defensible.
-              </p>
-              <p className='font-semibold text-[var(--color-text-primary)]'>
-                The trust that was built in the meeting is reinforced every time you make contact �
-                because every contact is built on intelligence, not guesswork.
+                FinPrint does not guarantee that a prospect will appoint the
+                firm. The Pack is designed to help make understanding visible
+                while that decision is still open.
               </p>
             </div>
-          </div>
-        </section>
-
-        {/* COMPLIANCE */}
-        <section className='py-20 bg-white'>
-          <div className='max-w-3xl mx-auto px-6'>
-            <SectionLabel>FCA-Ready</SectionLabel>
-            <h2 className='text-3xl sm:text-4xl font-bold text-[var(--color-primary)] mb-8'>
-              Built to Operate Inside a Regulated Environment
-            </h2>
-            <div className='space-y-6 text-[var(--color-text-secondary)] text-lg leading-relaxed'>
-              <p>
-                FinPrint is not a general-purpose AI tool applied to financial services. It is
-                built from the ground up for FCA-regulated advice practices.
-              </p>
-              <p>
-                No data is stored server-side between sessions. You hold the client data payload. The
-                system generates the report and returns control to you. Nothing persists without
-                adviser action.
-              </p>
-              <p>
-                Every financially material figure is formula-driven, not generated by AI inference.
-                AI is used for narrative intelligence and pattern recognition; the numbers come from
-                a deterministic, auditable calculation layer, reviewed and approved by the adviser
-                before any output is produced.
-              </p>
-              <p>
-                The knowledge base draws exclusively from authoritative, curated sources: gov.uk,
-                HMRC and the FCA. External sources are live at the time of blueprint generation and
-                cited in full.
-              </p>
-              <p className='font-semibold text-[var(--color-text-primary)]'>
-                No silent failures. No unsupported claims. No figures you cannot defend.
-              </p>
+            <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+              <Button
+                href={foundingPartnersMailto}
+                className="border-none bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-strong)]"
+              >
+                Apply to Become a Founding Partner
+              </Button>
             </div>
           </div>
         </section>
 
         {/* FINAL CTA */}
-        <section className='py-20 bg-gradient-to-br from-[#1E2A4A] via-[#2D3561] to-[#0a2463] text-white'>
-          <div className='max-w-3xl mx-auto px-6 text-center'>
-            <SectionLabel>Get Started</SectionLabel>
-            <h2 className='text-3xl sm:text-4xl font-bold mb-8 text-white'>
-              The Window Is Open Now. It Will Not Stay Open.
+        <section className="bg-gradient-to-br from-[#1E2A4A] via-[#2D3561] to-[#0a2463] py-20 text-white">
+          <div className="mx-auto max-w-3xl px-6 text-center">
+            <SectionLabel>Founding Partners</SectionLabel>
+            <h2 className="mb-8 text-3xl font-bold text-white sm:text-4xl">
+              We&apos;re Looking for 10 Firms FinPrint Was Built For
             </h2>
-            <p className='text-[#CBD5E1] text-lg mb-6 leading-relaxed'>
-              Right now, most adviser firms are using AI around the edges � meeting notes, compliance
-              summaries, drafted emails. That&apos;s useful. It is not a competitive differentiator.
+            <p className="mb-6 text-lg leading-relaxed text-[#CBD5E1]">
+              If your firm already works with valuable business-owner prospects,
+              already invests professional time preparing for discovery, and
+              wants a more scalable way to show understanding before
+              appointment, your firm may be a strong fit for the Founding
+              Partners Programme.
             </p>
-            <p className='text-[#CBD5E1] text-lg mb-6 leading-relaxed'>
-              A minority of firms have AI built into their core client-growth strategy. Those that
-              reach AI-driven client conversion first will hold a structural advantage that slower
-              competitors will find very difficult to close. In two to three years, when every firm
-              has &quot;AI somewhere,&quot; the companies that embedded it into first meetings,
-              follow-ups and re-engagements will have better processes, deeper client data and
-              stronger relationships than the firms that waited.
-            </p>
-            <p className='text-[#CBD5E1] text-lg mb-6 leading-relaxed'>
-              FinPrint is not a tool you add to your stack; it is the system you build your
-              client-acquisition workflow around.
-            </p>
-            <p className='text-[#CBD5E1] text-lg mb-12 leading-relaxed'>
-              The consequence of delaying is simple: By the time you decide to take this seriously,
-              the adviser in your patch who moved first will already have a structural advantage you
-              cannot easily close.
-            </p>
-            <div className='max-w-xl mx-auto text-left mb-12'>
-              <div className='bg-[#1E2A4A]/60 rounded-xl p-8 border border-[rgba(0,200,224,0.2)]'>
-                <h3 className='text-xl font-semibold text-white mb-3'>Try the Calculator</h3>
-                <p className='text-[#94A3B8] text-sm mb-6'>
-                  Run the numbers for a current prospect in under two minutes. No account. No
-                  obligation. Receive your extended exit tax report and a sample intelligence report,
-                  then book a discovery call to find out more.
-                </p>
-                <Button href='#calculator' className='bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-strong)] border-none w-full sm:w-auto'>
-                  Calculate Your Client&apos;s Exit Tax Position � Free ?
-                </Button>
-              </div>
+            <div className="mb-10 inline-flex flex-col items-center justify-center gap-2 rounded-xl border border-[rgba(0,200,224,0.25)] bg-white/5 px-6 py-4 sm:flex-row sm:gap-6">
+              <p className="text-lg font-semibold text-white">
+                Become a Founding Partner for £495
+              </p>
+              <p className="text-sm text-[#94A3B8]">
+                First 10 qualifying UK IFA firms
+              </p>
+            </div>
+            <div className="mb-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
+              <Button
+                href={foundingPartnersMailto}
+                className="border-none bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-strong)]"
+              >
+                Apply to Become a Founding Partner
+              </Button>
+              <Button
+                href="#calculator"
+                variant="secondary"
+                className="border-white text-white hover:bg-white hover:text-[var(--color-primary)]"
+              >
+                Preview a FinPrint Calculation
+              </Button>
             </div>
 
-            <div className='text-[#CBD5E1] space-y-1'>
+            <div className="space-y-1 text-[#CBD5E1]">
               <p>
-                <a href={contactMailto} className='text-[var(--color-accent)] hover:underline'>
+                <a
+                  href={contactMailto}
+                  className="text-[var(--color-accent)] hover:underline"
+                >
                   {contactEmail}
                 </a>
               </p>
               <p>
-                <a href={siteUrl} className='text-[var(--color-accent)] hover:underline'>
+                <a
+                  href={siteUrl}
+                  className="text-[var(--color-accent)] hover:underline"
+                >
                   {siteUrl.replace(/^https?:\/\//, '')}
                 </a>
               </p>
@@ -497,24 +608,34 @@ export default function UkLandingPage() {
         </section>
 
         {/* UK FOOTER NOTE */}
-        <section className='py-8 bg-[var(--color-surface)] border-t border-[var(--color-border-subtle)]'>
-          <div className='max-w-4xl mx-auto px-6 text-center text-sm text-[var(--color-text-secondary)] space-y-3'>
-            <p>Wrigital Ltd | FinPrint - AI-Powered Pre-Meeting Intelligence for Financial Advisers</p>
+        <section className="border-t border-[var(--color-border-subtle)] bg-[var(--color-surface)] py-8">
+          <div className="mx-auto max-w-4xl space-y-3 px-6 text-center text-sm text-[var(--color-text-secondary)]">
             <p>
-              FinPrint is a technology product from Wrigital. It does not provide financial advice. All outputs
-              are designed for use by FCA-regulated financial advisers and are subject to adviser
-              review and approval before use.
+              Wrigital Ltd | FinPrint | Adviser-Reviewed Financial Pathway Packs
+              for UK Financial Advice Firms
             </p>
             <p>
-              Robert Hartley and Hartley Precision Components Ltd, where referenced in demonstration
-              materials, are AI-generated fictional characters created for demonstration purposes
-              only.
+              FinPrint is a technology product from Wrigital. FinPrint does not
+              provide financial advice. All outputs are designed for use by
+              FCA-regulated financial advisers and are subject to adviser review
+              and approval before use.
             </p>
-            <p className='flex flex-wrap justify-center gap-4'>
-              <Link href='/privacy' className='text-[var(--color-primary)] hover:underline'>
+            <p>
+              Robert Hartley and Hartley Precision Components Ltd, where
+              referenced in demonstration materials, are AI-generated fictional
+              characters created for demonstration purposes only.
+            </p>
+            <p className="flex flex-wrap justify-center gap-4">
+              <Link
+                href="/privacy"
+                className="text-[var(--color-primary)] hover:underline"
+              >
                 Privacy Policy
               </Link>
-              <Link href='/terms' className='text-[var(--color-primary)] hover:underline'>
+              <Link
+                href="/terms"
+                className="text-[var(--color-primary)] hover:underline"
+              >
                 Terms of Use
               </Link>
             </p>

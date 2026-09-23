@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FinPrint. Before, During and After Discovery</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --navy:       #2D3561;
+      --navy-dark:  #1E2A4A;
+      --cyan:       #00C8E0;
+      --blue:       #3B82F6;
+      --white:      #FFFFFF;
+      --text-body:  #CBD5E1;
+      --text-muted: #94A3B8;
+      --card-bg:    #1E2A4A;
+      --divider:    rgba(0, 200, 224, 0.2);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--navy);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      align-items: center;
+    }
+
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 64px 48px;
+      width: 100%;
+    }
+
+    .slide-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 16px;
+    }
+
+    .slide-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 40px;
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--white);
+      margin-bottom: 48px;
+      letter-spacing: -0.01em;
+      max-width: 720px;
+    }
+
+    .flow-grid {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      gap: 16px;
+      align-items: stretch;
+      margin-bottom: 48px;
+    }
+
+    .flow-card {
+      background: var(--card-bg);
+      border: 1px solid var(--divider);
+      border-radius: 12px;
+      padding: 28px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .flow-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--cyan), var(--blue));
+    }
+
+    .flow-stage {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 10px;
+    }
+
+    .flow-timing {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 14px;
+    }
+
+    .flow-body {
+      font-size: 14px;
+      color: var(--text-body);
+      line-height: 1.65;
+      margin-bottom: 16px;
+    }
+
+    .flow-steps {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .flow-steps li {
+      font-size: 13px;
+      color: var(--text-body);
+      padding-left: 14px;
+      position: relative;
+      line-height: 1.5;
+    }
+
+    .flow-steps li::before {
+      content: '↓';
+      position: absolute;
+      left: 0;
+      color: var(--cyan);
+      font-size: 11px;
+    }
+
+    .flow-steps li:first-child::before {
+      content: '';
+    }
+
+    .flow-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--cyan);
+      font-size: 28px;
+      font-weight: 300;
+      padding-top: 40px;
+    }
+
+    .closing-bar {
+      border-top: 1px solid var(--divider);
+      padding-top: 28px;
+      text-align: center;
+    }
+
+    .closing-text {
+      font-family: 'DM Serif Display', serif;
+      font-size: 22px;
+      color: var(--white);
+      line-height: 1.4;
+    }
+
+    @media (max-width: 900px) {
+      .flow-grid {
+        grid-template-columns: 1fr;
+      }
+      .flow-arrow {
+        padding: 0;
+        transform: rotate(90deg);
+      }
+      .slide-title { font-size: 30px; }
+      .page { padding: 40px 24px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <p class="slide-eyebrow">The FinPrint Workflow</p>
+    <h1 class="slide-title">Understanding That Builds Before, During and After Discovery</h1>
+
+    <div class="flow-grid">
+
+      <div class="flow-card">
+        <p class="flow-stage">Before Discovery</p>
+        <p class="flow-timing">Within 24 hours</p>
+        <p class="flow-body">Initial Financial Pathway Pack</p>
+        <ul class="flow-steps">
+          <li>Initial Financial Pathway Pack</li>
+          <li>Adviser reviews and prepares</li>
+        </ul>
+      </div>
+
+      <div class="flow-arrow" aria-hidden="true">→</div>
+
+      <div class="flow-card">
+        <p class="flow-stage">Discovery</p>
+        <p class="flow-timing">In the room</p>
+        <p class="flow-body">Context + motivation + priorities + professional judgement</p>
+        <ul class="flow-steps">
+          <li>Conversation reveals what notes cannot</li>
+          <li>Adviser retains full control</li>
+        </ul>
+      </div>
+
+      <div class="flow-arrow" aria-hidden="true">→</div>
+
+      <div class="flow-card">
+        <p class="flow-stage">After Discovery</p>
+        <p class="flow-timing">Target: within 2 hours</p>
+        <p class="flow-body">Updated Financial Pathway Pack</p>
+        <ul class="flow-steps">
+          <li>Updated Financial Pathway Pack</li>
+          <li>Adviser reviews and approves</li>
+          <li>Prospect receives</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="closing-bar">
+      <p class="closing-text">Demonstrate understanding while the appointment decision is still live.</p>
+    </div>
+
+  </div>
+</body>
+</html>

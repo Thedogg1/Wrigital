@@ -51,6 +51,13 @@ export default function Button({
         </a>
       );
     }
+    if (href.startsWith('mailto:')) {
+      return (
+        <a href={href} className={combinedClassName}>
+          {children}
+        </a>
+      );
+    }
     if (href.startsWith('http://') || href.startsWith('https://')) {
       return (
         <a

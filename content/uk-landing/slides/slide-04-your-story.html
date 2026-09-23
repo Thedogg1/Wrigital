@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>FinPrint — Numbers Tell You What. Your Story Tells You Why.</title>
+  <title>FinPrint. Numbers Show What's There. Context Shows What Matters.</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet"/>
   <style>
     :root {
@@ -151,14 +151,37 @@
       border-bottom: 1px solid var(--divider);
     }
 
-    .report-brand-name {
+    .brand-lockup {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-mark {
+      width: 24px;
+      height: 27px;
+      flex-shrink: 0;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.15;
+    }
+
+    .brand-name {
+      font-family: 'DM Serif Display', serif;
       font-size: 15px;
-      font-weight: 700;
+      font-weight: 400;
       letter-spacing: -0.02em;
       color: var(--white);
     }
 
-    .report-brand-name span { color: var(--cyan); }
+    .brand-byline {
+      font-size: 10px;
+      font-weight: 400;
+      color: var(--text-muted);
+    }
 
     .report-label-tag {
       margin-left: auto;
@@ -217,6 +240,68 @@
       line-height: 1.55;
     }
 
+    .calc-callout {
+      background: rgba(0,200,224,0.08);
+      border: 1px solid var(--divider);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+    }
+
+    .calc-callout-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 6px;
+    }
+
+    .calc-callout-value {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+
+    .calc-callout-note {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .pathway-chain {
+      background: var(--card-bg);
+      border: 1px solid var(--divider);
+      border-radius: 8px;
+      padding: 20px 22px;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .pathway-chain-top {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+
+    .pathway-chain-arrow {
+      color: var(--text-muted);
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .pathway-chain-bottom {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.04em;
+    }
+
     @media (max-width: 900px) {
       .slide { grid-template-columns: 1fr; }
       .context-panel, .report-panel { padding: 40px 24px; }
@@ -232,12 +317,31 @@
     <div class="report-panel">
 
       <div class="report-brand">
-        <div class="report-brand-name">Velocity<span>IQ</span></div>
-        <div class="report-label-tag">Pre-Meeting Intelligence Report</div>
+        <div class="brand-lockup">
+          <svg class="brand-mark" viewBox="0 0 36 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="2" y="4" width="32" height="2.75" rx="1.25" fill="#FFFFFF"/>
+            <rect x="2" y="9.5" width="32" height="2.75" rx="1.25" fill="#00C8E0"/>
+            <rect x="2" y="15" width="32" height="2.75" rx="1.25" fill="#FFFFFF"/>
+            <rect x="2" y="20.5" width="32" height="2.75" rx="1.25" fill="#00C8E0"/>
+            <rect x="2" y="26" width="32" height="2.75" rx="1.25" fill="#FFFFFF"/>
+            <rect x="2" y="31.5" width="32" height="2.75" rx="1.25" fill="#00C8E0"/>
+          </svg>
+          <div class="brand-text">
+            <span class="brand-name">FinPrint</span>
+            <span class="brand-byline">by Wrigital</span>
+          </div>
+        </div>
+        <div class="report-label-tag">Financial Pathway Pack</div>
       </div>
 
-      <p class="report-eyebrow">Report Section</p>
+      <p class="report-eyebrow">Pack Section</p>
       <h2 class="report-title">Your Story</h2>
+
+      <div class="calc-callout">
+        <p class="calc-callout-label">Illustrative figure</p>
+        <p class="calc-callout-value">Business value £8.28m. Cost basis £95k</p>
+        <p class="calc-callout-note">One calculation within a much broader picture</p>
+      </div>
 
       <div class="story-card">
         <h3 class="story-card-heading">Your business relies heavily on you, limiting its appeal to buyers.</h3>
@@ -275,27 +379,33 @@
 
     <!-- Right: context -->
     <div class="context-panel">
-      <p class="slide-eyebrow">Report Section</p>
-      <h1 class="slide-title">Numbers Tell You What. Your Story Tells You Why It Matters.</h1>
+      <p class="slide-eyebrow">Financial Pathway Pack</p>
+      <h1 class="slide-title">Numbers Show What&apos;s There. Context Shows What Matters.</h1>
+
+      <div class="pathway-chain">
+        <p class="pathway-chain-top">Business + Wealth + Family + Priorities + Decisions</p>
+        <p class="pathway-chain-arrow">↓</p>
+        <p class="pathway-chain-bottom">Financial Pathway Pack</p>
+      </div>
 
       <div class="pull-quote">
-        <p>His adviser understood not just his finances — but what he's worried about.</p>
+        <p>The prospect can see that the firm has considered more than the numbers.</p>
       </div>
 
       <div class="feature-cards">
         <div class="feature-card">
-          <h3 class="feature-card-title">Narrative Translation</h3>
-          <p class="feature-card-body">Your Story converts the numbers into a narrative written around the client's actual concerns, using language they can read without a financial dictionary.</p>
+          <h3 class="feature-card-title">A Coherent Picture</h3>
+          <p class="feature-card-body">The Financial Pathway Pack connects the prospect&apos;s business, wealth, family circumstances, priorities and decisions into a picture they can understand.</p>
         </div>
         <div class="feature-card">
-          <h3 class="feature-card-title">Your Story Report Section</h3>
-          <p class="feature-card-body"><em>See the report → reconstructed from the client's data, personalised to their situation.</em></p>
+          <h3 class="feature-card-title">Your Story</h3>
+          <p class="feature-card-body"><em>See the Pack section. Personal narrative built from the prospect&apos;s situation, not a template with a name inserted.</em></p>
         </div>
       </div>
 
       <div class="adviser-note">
-        <h3 class="adviser-note-title">Adviser's Discretion</h3>
-        <p class="adviser-note-body">The adviser decides whether to share it. But it's ready when they need it.</p>
+        <h3 class="adviser-note-title">Adviser Discretion</h3>
+        <p class="adviser-note-body">The adviser decides whether to share the Pack. And only after review and approval.</p>
       </div>
     </div>
 

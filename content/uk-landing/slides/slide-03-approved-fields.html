@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>FinPrint — AI Generates. You Approve.</title>
+  <title>FinPrint. Your Firm Retains Control</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet"/>
   <style>
     :root {
@@ -55,14 +55,37 @@
       border-bottom: 1px solid var(--divider);
     }
 
-    .report-brand-name {
+    .brand-lockup {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-mark {
+      width: 24px;
+      height: 27px;
+      flex-shrink: 0;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.15;
+    }
+
+    .brand-name {
+      font-family: 'DM Serif Display', serif;
       font-size: 15px;
-      font-weight: 700;
+      font-weight: 400;
       letter-spacing: -0.02em;
       color: var(--white);
     }
 
-    .report-brand-name span { color: var(--cyan); }
+    .brand-byline {
+      font-size: 10px;
+      font-weight: 400;
+      color: var(--text-muted);
+    }
 
     .report-label-tag {
       margin-left: auto;
@@ -277,20 +300,33 @@
     <!-- Left: Approved Fields form -->
     <div class="form-panel">
       <div class="report-brand">
-        <div class="report-brand-name">Velocity<span>IQ</span></div>
-        <div class="report-label-tag">Pre-Meeting Intelligence Report</div>
+        <div class="brand-lockup">
+          <svg class="brand-mark" viewBox="0 0 36 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="2" y="4" width="32" height="2.75" rx="1.25" fill="#FFFFFF"/>
+            <rect x="2" y="9.5" width="32" height="2.75" rx="1.25" fill="#00C8E0"/>
+            <rect x="2" y="15" width="32" height="2.75" rx="1.25" fill="#FFFFFF"/>
+            <rect x="2" y="20.5" width="32" height="2.75" rx="1.25" fill="#00C8E0"/>
+            <rect x="2" y="26" width="32" height="2.75" rx="1.25" fill="#FFFFFF"/>
+            <rect x="2" y="31.5" width="32" height="2.75" rx="1.25" fill="#00C8E0"/>
+          </svg>
+          <div class="brand-text">
+            <span class="brand-name">FinPrint</span>
+            <span class="brand-byline">by Wrigital</span>
+          </div>
+        </div>
+        <div class="report-label-tag">Financial Pathway Pack</div>
       </div>
 
       <div class="legend">
         <div class="legend-item">
           <span class="legend-dot mandatory"></span>
-          <span>Mandatory — always runs → asterisked fields ensure core output never fails</span>
+          <span>Mandatory. Asterisked fields ensure the core Pack always runs</span>
         </div>
       </div>
       <div class="legend" style="margin-top: -12px;">
         <div class="legend-item">
           <span class="legend-dot optional"></span>
-          <span>Optional — unlocks richer output → selected based on client profile</span>
+          <span>Optional. Selected based on the prospect profile to deepen the Pack</span>
         </div>
       </div>
 
@@ -383,24 +419,24 @@
 
     <!-- Right: explanation cards -->
     <div class="explain-panel">
-      <p class="slide-eyebrow">Review &amp; Approve</p>
-      <h1 class="slide-title">AI Generates. You Approve.</h1>
+      <p class="slide-eyebrow">Adviser Control</p>
+      <h1 class="slide-title">Your Firm Retains Control</h1>
 
       <div class="explain-cards">
 
         <div class="explain-card">
-          <h3 class="explain-card-title">Formula-Driven</h3>
-          <p class="explain-card-body">FinPrint extracts and calculates a personalised set of financial figures from your notes — ready for your review.</p>
+          <h3 class="explain-card-title">Structured Analysis</h3>
+          <p class="explain-card-body">FinPrint turns available information into a structured set of relevant facts, calculations and considerations. Financially material figures are formula-driven.</p>
         </div>
 
         <div class="explain-card">
-          <h3 class="explain-card-title">Mandatory &amp; Optional Fields</h3>
-          <p class="explain-card-body"><strong>Mandatory fields</strong> ensure the core output always runs. <strong>Optional fields</strong>, selected based on the client profile, unlock richer, more detailed intelligence across the entire report.</p>
+          <h3 class="explain-card-title">Adviser Review</h3>
+          <p class="explain-card-body">The adviser validates the information, corrects assumptions and decides what is appropriate.</p>
         </div>
 
         <div class="explain-card">
-          <h3 class="explain-card-title">Adviser-Approved</h3>
-          <p class="explain-card-body">Every figure is formula-driven and adviser-approved — so the adviser can justify every number if challenged.</p>
+          <h3 class="explain-card-title">Professional Judgement</h3>
+          <p class="explain-card-body">Nothing reaches the prospect until the adviser is satisfied the Pack represents the firm&apos;s professional standard.</p>
         </div>
 
       </div>

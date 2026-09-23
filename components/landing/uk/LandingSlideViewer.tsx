@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { WrigitalLogo } from '@/components/brand/WrigitalLogo';
 import type { UkPresentationSlide } from '@/lib/uk-landing/loadSlides';
 
 interface LandingSlideViewerProps {
@@ -35,11 +36,19 @@ export default function LandingSlideViewer({ slides }: LandingSlideViewerProps) 
   return (
     <div className='rounded-xl overflow-hidden border border-[rgba(0,200,224,0.25)] bg-[#1E2A4A] shadow-lg'>
       <div className='flex items-center justify-between gap-4 px-4 sm:px-6 py-3 border-b border-[rgba(0,200,224,0.2)] bg-[#2D3561]'>
-        <div className='min-w-0'>
-          <p className='text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-[#00C8E0] mb-0.5'>
-            FinPrint Presentation
+        <div className='min-w-0 flex items-center gap-3'>
+          <WrigitalLogo variant='finprint' onDark className='shrink-0' />
+          <div className='min-w-0 hidden sm:block border-l border-[rgba(0,200,224,0.25)] pl-3'>
+            <p className='text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-[#00C8E0] mb-0.5'>
+              Sample Walkthrough
+            </p>
+            <p className='text-sm sm:text-base font-medium text-white truncate'>
+              {current.label}
+            </p>
+          </div>
+          <p className='text-sm font-medium text-white truncate sm:hidden'>
+            {current.label}
           </p>
-          <p className='text-sm sm:text-base font-medium text-white truncate'>{current.label}</p>
         </div>
         <p className='text-xs sm:text-sm text-[#94A3B8] whitespace-nowrap shrink-0'>
           {index + 1} / {total}

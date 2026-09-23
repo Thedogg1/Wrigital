@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FinPrint. Founding Partners Programme</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --navy:       #2D3561;
+      --navy-dark:  #1E2A4A;
+      --cyan:       #00C8E0;
+      --blue:       #3B82F6;
+      --white:      #FFFFFF;
+      --text-body:  #CBD5E1;
+      --text-muted: #94A3B8;
+      --card-bg:    #1E2A4A;
+      --divider:    rgba(0, 200, 224, 0.2);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: linear-gradient(160deg, var(--navy-dark) 0%, var(--navy) 100%);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      max-width: 760px;
+      padding: 64px 48px;
+      text-align: center;
+    }
+
+    .brand-lockup {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+
+    .brand-mark {
+      width: 32px;
+      height: 36px;
+      flex-shrink: 0;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      line-height: 1.15;
+      text-align: left;
+    }
+
+    .brand-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 22px;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      color: var(--white);
+    }
+
+    .brand-byline {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--text-muted);
+    }
+
+    .slide-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 16px;
+    }
+
+    .slide-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 40px;
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--white);
+      margin-bottom: 20px;
+      letter-spacing: -0.01em;
+    }
+
+    .slide-subtitle {
+      font-size: 16px;
+      color: var(--text-body);
+      margin-bottom: 36px;
+      line-height: 1.65;
+    }
+
+    .offer-card {
+      background: rgba(0,200,224,0.08);
+      border: 1px solid var(--divider);
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin-bottom: 28px;
+    }
+
+    .offer-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 10px;
+    }
+
+    .offer-price {
+      font-family: 'DM Serif Display', serif;
+      font-size: 52px;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+
+    .offer-meta {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-body);
+      margin-bottom: 16px;
+    }
+
+    .offer-standard {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .offer-explain {
+      font-size: 14px;
+      color: var(--text-body);
+      line-height: 1.65;
+      margin-bottom: 36px;
+      text-align: left;
+    }
+
+    .contact-email {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--cyan);
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      color: var(--navy-dark);
+      font-size: 15px;
+      font-weight: 700;
+      padding: 16px 36px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      margin-bottom: 36px;
+    }
+
+    .closing-loop {
+      border-top: 1px solid var(--divider);
+      padding-top: 28px;
+      font-family: 'DM Serif Display', serif;
+      font-size: 18px;
+      color: var(--white);
+      line-height: 1.4;
+    }
+
+    @media (max-width: 600px) {
+      .page { padding: 48px 24px; }
+      .slide-title { font-size: 30px; }
+      .offer-price { font-size: 42px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <div class="brand-lockup">
+      <svg class="brand-mark" viewBox="0 0 36 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="2" y="4" width="32" height="2.75" rx="1.25" fill="#FFFFFF"/>
+        <rect x="2" y="9.5" width="32" height="2.75" rx="1.25" fill="#00C8E0"/>
+        <rect x="2" y="15" width="32" height="2.75" rx="1.25" fill="#FFFFFF"/>
+        <rect x="2" y="20.5" width="32" height="2.75" rx="1.25" fill="#00C8E0"/>
+        <rect x="2" y="26" width="32" height="2.75" rx="1.25" fill="#FFFFFF"/>
+        <rect x="2" y="31.5" width="32" height="2.75" rx="1.25" fill="#00C8E0"/>
+      </svg>
+      <div class="brand-text">
+        <span class="brand-name">FinPrint</span>
+        <span class="brand-byline">by Wrigital</span>
+      </div>
+    </div>
+
+    <p class="slide-eyebrow">FinPrint Founding Partners Programme</p>
+    <h1 class="slide-title">We&apos;re Looking for 10 Firms FinPrint Was Built For</h1>
+    <p class="slide-subtitle">If your firm already works with valuable business-owner prospects, invests professional time preparing for discovery, and wants a more scalable way to demonstrate its understanding before appointment, the Founding Partners Programme may be a strong fit.</p>
+
+    <div class="offer-card">
+      <p class="offer-label">Founding Partner Pilot</p>
+      <p class="offer-price">£495</p>
+      <p class="offer-meta">First 10 qualifying UK IFA firms</p>
+      <p class="offer-standard">Planned standard Financial Pathway Pack price: £1,200</p>
+    </div>
+
+    <p class="offer-explain">FinPrint is currently in its commercial validation and refinement stage. Founding Partners receive early access pricing and will be asked for structured feedback on the experience, workflow and usefulness of FinPrint in appropriate prospect situations.</p>
+
+    <span class="contact-email">hello@wrigital.com</span>
+
+    <a href="mailto:hello@wrigital.com?subject=FinPrint%20Founding%20Partners%20Programme%20Application" class="cta-button">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 4l6 5 6-5M2 4h12v9H2V4z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Apply to Become a Founding Partner
+    </a>
+
+    <p class="closing-loop">Your Firm Already Has the Expertise. FinPrint Helps the Right Prospect See It.</p>
+
+  </div>
+</body>
+</html>
