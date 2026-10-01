@@ -2,13 +2,13 @@ import type { Metadata } from 'next';
 import { siteUrl } from '@/lib/site';
 
 export const metadata: Metadata = {
-  title: 'FinPrint Exit Tax Calculator for UK Financial Advisers | Wrigital',
+  title: 'FinPrint Founding Partners for UK Advice Firms | Wrigital',
   description:
-    'FCA-regulated advisers: estimate your client\'s net proceeds after CGT, BADR eligibility, and concentration risk. Free UK exit tax calculator.',
+    'Request a free FinPrint Blueprint on a fictional business owner, then use the Founding Partner pilot for two Financial Pathway Packs on a genuine prospect.',
   openGraph: {
-    title: 'FinPrint Exit Tax Calculator for UK Financial Advisers | Wrigital',
+    title: 'FinPrint Founding Partners for UK Advice Firms | Wrigital',
     description:
-      'Estimate net proceeds after CGT, BADR eligibility, and concentration risk for HNW business owner clients.',
+      'Request a free FinPrint Blueprint on a fictional business owner, then use the Founding Partner pilot for two Financial Pathway Packs on a genuine prospect.',
     url: `${siteUrl}/uk`,
     type: 'website',
     locale: 'en_GB',

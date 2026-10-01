@@ -1,0 +1,260 @@
+{
+  "niche": "BusinessUK",
+  "description": "Additional business valuation and financial data required for UK high net worth business owners beyond standard questionnaire fields",
+  "niche_specific_fields": {
+    "required": [
+      {
+        "path": "client_profile.primary_business.total_assets",
+        "label": "Total Assets",
+        "description": "Sum of all current and non-current assets on the balance sheet, required for asset-based and net asset value calculations.",
+        "data_type": "currency_gbp",
+        "example_value": 12500000,
+        "used_by_formulas": [
+          "1",
+          "6",
+          "7"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.total_liabilities",
+        "label": "Total Liabilities",
+        "description": "Sum of all current and long-term liabilities including debt obligations, required for net asset value and working capital calculations.",
+        "data_type": "currency_gbp",
+        "example_value": 4500000,
+        "used_by_formulas": [
+          "1",
+          "6",
+          "11"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.industry_multiplier",
+        "label": "Industry Earnings Multiplier",
+        "description": "Industry-specific multiple (typically 2-7x) applied to earnings or EBITDA for valuation, varies by sector competitiveness.",
+        "data_type": "number",
+        "example_value": 4.5,
+        "used_by_formulas": [
+          "2",
+          "12"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.revenue_multiplier",
+        "label": "Revenue Multiplier",
+        "description": "Industry-specific multiple applied to annual revenue for valuing high-growth or pre-profit businesses.",
+        "data_type": "number",
+        "example_value": 2.3,
+        "used_by_formulas": [
+          "3"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.pe_ratio",
+        "label": "P/E Ratio",
+        "description": "Price-to-earnings ratio based on comparable companies (typically 2-25x) used for profit-based business valuation.",
+        "data_type": "number",
+        "example_value": 12.5,
+        "used_by_formulas": [
+          "4"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.annual_cash_flow",
+        "label": "Annual Cash Flow",
+        "description": "Projected annual cash flow from operations used in capitalization of earnings valuation method.",
+        "data_type": "currency_gbp",
+        "example_value": 850000,
+        "used_by_formulas": [
+          "5"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.capitalization_rate",
+        "label": "Capitalization Rate",
+        "description": "Industry-specific rate (e.g. 10%) used to convert annual cash flows or excess earnings to present value.",
+        "data_type": "percentage",
+        "example_value": 0.1,
+        "used_by_formulas": [
+          "5",
+          "7",
+          "9"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.market_value_of_assets",
+        "label": "Market Value of Assets",
+        "description": "Current fair market value of tangible business assets, added to goodwill value in excess earnings method.",
+        "data_type": "currency_gbp",
+        "example_value": 3200000,
+        "used_by_formulas": [
+          "7"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.excess_earnings",
+        "label": "Excess Earnings",
+        "description": "Earnings above normal return on assets attributable to goodwill, used in excess earnings valuation.",
+        "data_type": "currency_gbp",
+        "example_value": 275000,
+        "used_by_formulas": [
+          "7"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.discount_rate",
+        "label": "Discount Rate",
+        "description": "Rate used to discount future cash flows to present value in DCF and present value calculations.",
+        "data_type": "percentage",
+        "example_value": 0.08,
+        "used_by_formulas": [
+          "8",
+          "9"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.free_cash_flows",
+        "label": "Projected Free Cash Flows",
+        "description": "Array of projected free cash flows for each future year used in discounted cash flow valuation.",
+        "data_type": "currency_gbp",
+        "example_value": 750000,
+        "used_by_formulas": [
+          "8"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.residual_value",
+        "label": "Residual Terminal Value",
+        "description": "Terminal value of business at end of projection period, added to DCF valuation.",
+        "data_type": "currency_gbp",
+        "example_value": 12500000,
+        "used_by_formulas": [
+          "8"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.current_assets",
+        "label": "Current Assets",
+        "description": "Total assets convertible to cash within one year, used for working capital calculation.",
+        "data_type": "currency_gbp",
+        "example_value": 2800000,
+        "used_by_formulas": [
+          "11"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.current_liabilities",
+        "label": "Current Liabilities",
+        "description": "Total short-term obligations due within one year, used for working capital calculation.",
+        "data_type": "currency_gbp",
+        "example_value": 1200000,
+        "used_by_formulas": [
+          "11"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.net_annual_profits",
+        "label": "Net Annual Profits",
+        "description": "Bottom-line net profit after all expenses, used for P/E ratio and SDE calculations.",
+        "data_type": "currency_gbp",
+        "example_value": 625000,
+        "used_by_formulas": [
+          "4",
+          "13"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.pre_tax_income",
+        "label": "Pre-Tax Income (EBT)",
+        "description": "Earnings before tax used as base for Seller's Discretionary Earnings adjustment.",
+        "data_type": "currency_gbp",
+        "example_value": 725000,
+        "used_by_formulas": [
+          "13"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.depreciation_amortization",
+        "label": "Depreciation & Amortization",
+        "description": "Annual non-cash expenses added back to calculate true earning potential in SDE.",
+        "data_type": "currency_gbp",
+        "example_value": 125000,
+        "used_by_formulas": [
+          "13"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.discretionary_expenses",
+        "label": "Owner Discretionary Expenses",
+        "description": "Owner-specific non-essential expenses added back to reflect earnings available to new owner.",
+        "data_type": "currency_gbp",
+        "example_value": 95000,
+        "used_by_formulas": [
+          "13"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.non_recurring_items",
+        "label": "Non-Recurring Items",
+        "description": "One-time gains/losses adjusted out of earnings for normalized SDE calculation.",
+        "data_type": "currency_gbp",
+        "example_value": 25000,
+        "used_by_formulas": [
+          "13"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.annual_income",
+        "label": "Annual Income",
+        "description": "Consistent annual business income stream used for present value calculation.",
+        "data_type": "currency_gbp",
+        "example_value": 425000,
+        "used_by_formulas": [
+          "9"
+        ]
+      }
+    ],
+    "optional": [
+      {
+        "path": "client_profile.primary_business.rnrb_applicable",
+        "label": "RNRB Applicable",
+        "description": "Indicates if Residence Nil Rate Band (£175,000) applies to property inheritance for enhanced IHT exemption.",
+        "data_type": "string",
+        "example_value": "yes",
+        "used_by_formulas": [
+          "14"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.total_gains",
+        "label": "Total Capital Gains",
+        "description": "Gross capital gains realized in tax year before applying annual CGT allowance.",
+        "data_type": "currency_gbp",
+        "example_value": 125000,
+        "used_by_formulas": [
+          "15"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.annual_exemption_used",
+        "label": "Annual CGT Exemption Used",
+        "description": "Portion of annual CGT allowance already utilized, affects remaining taxable gains calculation.",
+        "data_type": "currency_gbp",
+        "example_value": 25000,
+        "used_by_formulas": [
+          "15"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.gifts_from_surplus_income",
+        "label": "Regular Gifts from Surplus Income",
+        "description": "Annual gifts from surplus income exempt from IHT, in addition to £3,000 annual exemption.",
+        "data_type": "currency_gbp",
+        "example_value": 18000,
+        "used_by_formulas": [
+          "16"
+        ]
+      }
+    ]
+  },
+  "generated_at": "2026-04-19T17:39:37.902Z"
+}

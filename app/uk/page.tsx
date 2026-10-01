@@ -2,7 +2,7 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import Button from '@/components/Button';
 import LandingSlideViewer from '@/components/landing/uk/LandingSlideViewer';
-import EmbeddedExitCalculator from '@/components/landing/uk/EmbeddedExitCalculator';
+import FreeBlueprintForm from '@/components/landing/uk/FreeBlueprintForm';
 import { loadPresentationSlides } from '@/lib/uk-landing/loadSlides';
 import { contactEmail, contactMailto } from '@/lib/email/config';
 import { siteUrl } from '@/lib/site';
@@ -59,10 +59,11 @@ export default function UkLandingPage() {
             </p>
             <div className="mb-10 inline-flex flex-col items-center justify-center gap-2 rounded-xl border border-[rgba(0,200,224,0.25)] bg-white/5 px-6 py-4 sm:flex-row sm:gap-6">
               <p className="text-lg font-semibold text-white">
-                Our Founding Partner Pilot costs £495
+                £495 for two Financial Pathway Packs
               </p>
               <p className="text-sm text-[#94A3B8]">
-                Open to the first 10 qualifying UK IFA firms.
+                Around one genuine HNW prospect. First 10 qualifying UK IFA
+                firms.
               </p>
             </div>
             <div className="mb-6 flex flex-col items-center justify-center gap-4 sm:flex-row">
@@ -71,6 +72,13 @@ export default function UkLandingPage() {
                 className="border-none bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-strong)]"
               >
                 Apply to Become a Founding Partner
+              </Button>
+              <Button
+                href="#free-finprint"
+                variant="secondary"
+                className="border-white text-white hover:bg-white hover:text-[var(--color-primary)]"
+              >
+                Create My Free Blueprint
               </Button>
             </div>
             <a
@@ -343,41 +351,91 @@ export default function UkLandingPage() {
           </div>
         </section>
 
-        {/* CALCULATOR */}
+        {/* FREE SAMPLE */}
         <section
-          id="calculator"
+          id="free-finprint"
           className="scroll-mt-20 bg-[var(--color-surface)] py-20"
         >
           <div className="mx-auto max-w-4xl px-6">
-            <SectionLabel>A FinPrint Preview</SectionLabel>
-            <h2 className="mb-3 text-3xl font-bold text-[var(--color-primary)] sm:text-4xl">
-              See a Small Part of What FinPrint Can Surface
+            <SectionLabel>Free Blueprint</SectionLabel>
+            <h2 className="mb-8 text-3xl font-bold text-[var(--color-primary)] sm:text-4xl">
+              See the Depth FinPrint Can Bring to a Case Your Firm Would
+              Recognise
             </h2>
-            <div className="mb-10 space-y-6 leading-relaxed text-[var(--color-text-secondary)]">
+            <div className="mb-10 space-y-6 text-lg leading-relaxed text-[var(--color-text-secondary)]">
               <p>
-                The calculator below shows a narrow part of the FinPrint
-                approach: Turning a handful of facts about a business-owner
-                prospect into useful, quantified insight.
-              </p>
-              <p>
-                Enter a sample exit scenario to see the type of calculation that
-                could sit inside a Financial Pathway Pack.
-              </p>
-              <p className="font-semibold text-[var(--color-text-primary)]">
-                The full FinPrint process goes much further.
+                The free Blueprint is substantive research and analysis on a
+                business-owner situation relevant to your firm. Use it to judge
+                the quality of the work before you apply the complete process
+                to a genuine prospect.
               </p>
               <p>
-                FinPrint connects the prospect&apos;s business, wealth, family
-                circumstances, priorities and key decisions into a personal,
-                adviser-reviewed picture designed to show that your firm
-                understands their situation, not simply their numbers.
+                A representative scenario is enough. You can also base it on a
+                genuine situation, provided nothing you supply identifies the
+                individual or the business.
               </p>
-              <p className="text-sm italic">
-                Preview a FinPrint calculation. No sign-in required. Results are
-                yours to review at once.
+              <p>The research is real research for the scenario you provide. The Blueprint shows:</p>
+              <ul className="list-disc space-y-2 pl-6">
+                <li>the information available, and the important gaps</li>
+                <li>the assumptions being made</li>
+                <li>relevant supporting research</li>
+                <li>the proposed analytical approach</li>
+                <li>material calculations, where they matter</li>
+                <li>
+                  the interpretation, and where your professional judgement is
+                  required
+                </li>
+              </ul>
+              <p>
+                That is the foundation behind the analysis. It is not the
+                finished communication a prospect would read. Prospect-facing
+                output turns the relevant complexity into clear, personalised
+                language.
+              </p>
+              <p>
+                FinPrint supports your professional judgement. It does not
+                replace it, and it does not provide regulated advice. A
+                calculated figure can be inspected. It still depends on the
+                inputs, assumptions and approach behind it.
               </p>
             </div>
-            <EmbeddedExitCalculator />
+            <div className="mb-10 grid grid-cols-1 gap-8 md:grid-cols-2">
+              <div className="rounded-xl border border-[var(--color-border-subtle)] bg-white p-8">
+                <h3 className="mb-3 text-xl font-semibold text-[var(--color-primary)]">
+                  Free Blueprint
+                </h3>
+                <p className="leading-relaxed text-[var(--color-text-secondary)]">
+                  Judge the depth on a business-owner situation relevant to
+                  your firm, using real research for the scenario you describe.
+                </p>
+              </div>
+              <div className="rounded-xl border border-[var(--color-border-subtle)] bg-white p-8">
+                <h3 className="mb-3 text-xl font-semibold text-[var(--color-primary)]">
+                  Founding Partner pilot
+                </h3>
+                <p className="leading-relaxed text-[var(--color-text-secondary)]">
+                  Apply the complete adviser-controlled workflow to one genuine
+                  qualified HNW business-owner prospect your firm wants to win.
+                  £495 covers two Financial Pathway Packs around that prospect:
+                  one before discovery, and one that incorporates what the
+                  meeting reveals. With an efficient workflow and prompt adviser
+                  review, the reviewed and approved client-facing report is
+                  targeted to be in the prospect&apos;s hands within two hours
+                  of the meeting ending. FinPrint does not guarantee the
+                  prospect will appoint the firm.
+                </p>
+              </div>
+            </div>
+            <div className="rounded-xl border border-[var(--color-border-subtle)] bg-white p-6 shadow-sm sm:p-8">
+              <p className="mb-8 text-lg leading-relaxed text-[var(--color-text-secondary)]">
+                Describe a business-owner situation your firm would recognise.
+                Use a representative scenario, or a genuine one with nothing
+                that identifies the person or the business. We will use real
+                research to build the Blueprint, so you can judge the depth for
+                yourself.
+              </p>
+              <FreeBlueprintForm />
+            </div>
           </div>
         </section>
 
@@ -516,10 +574,45 @@ export default function UkLandingPage() {
                 <p className="mb-3 text-4xl font-bold text-[var(--color-primary)] sm:text-5xl">
                   £495
                 </p>
+                <p className="mb-3 text-[var(--color-text-primary)]">
+                  Two complete Financial Pathway Packs around one genuine HNW
+                  business-owner prospect
+                </p>
                 <p className="text-[var(--color-text-secondary)]">
-                  Planned standard Financial Pathway Pack price is £1,200
+                  Planned standard price is £1,200 per Financial Pathway Pack
                 </p>
               </div>
+              <p>
+                Each deliverable is a Financial Pathway Pack. The £495 pilot
+                includes two of them, both built around the same genuine
+                qualified prospect.
+              </p>
+              <p>
+                <span className="font-semibold text-[var(--color-text-primary)]">
+                  Financial Pathway Pack 1
+                </span>{' '}
+                is prepared before discovery. The adviser provides what they
+                already know. FinPrint prepares the pack for adviser review and
+                approval, so the adviser can enter the meeting with a clearer
+                view of what may matter, where expertise should be focused, and
+                the questions they want to be paid to answer.
+              </p>
+              <p>
+                <span className="font-semibold text-[var(--color-text-primary)]">
+                  Financial Pathway Pack 2
+                </span>{' '}
+                is prepared after discovery. It incorporates what was learned in
+                the meeting. With an efficient workflow and prompt adviser
+                review, the reviewed and approved client-facing report is
+                targeted to be in the prospect&apos;s hands within two hours of
+                the meeting ending.
+              </p>
+              <p>
+                That is the commercial difference from the free sample. The
+                pilot uses a real prospect and their real circumstances, with
+                controlled adviser review and approval, professional judgement,
+                and the discovery workflow.
+              </p>
               <p>
                 Founding Partners receive early access at £495 because FinPrint
                 is still in commercial validation and refinement. In return,
@@ -562,12 +655,21 @@ export default function UkLandingPage() {
               appointment, your firm may be a strong fit for the Founding
               Partners Programme.
             </p>
+            <p className="mb-6 text-lg leading-relaxed text-[#CBD5E1]">
+              The free Blueprint is a demonstration on a fictional representative
+              owner, prepared to the same research standard as the pilot, and
+              you can use it for research. It does not include live adviser
+              approval. A sample Financial Pathway Pack shows the prospect-facing
+              output. The pilot is two Financial Pathway Packs on an actual
+              qualified prospect, with real circumstances, adviser review,
+              professional judgement and the discovery workflow.
+            </p>
             <div className="mb-10 inline-flex flex-col items-center justify-center gap-2 rounded-xl border border-[rgba(0,200,224,0.25)] bg-white/5 px-6 py-4 sm:flex-row sm:gap-6">
               <p className="text-lg font-semibold text-white">
-                Become a Founding Partner for £495
+                £495 for two Financial Pathway Packs
               </p>
               <p className="text-sm text-[#94A3B8]">
-                First 10 qualifying UK IFA firms
+                One genuine prospect. First 10 qualifying UK IFA firms.
               </p>
             </div>
             <div className="mb-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
@@ -578,11 +680,11 @@ export default function UkLandingPage() {
                 Apply to Become a Founding Partner
               </Button>
               <Button
-                href="#calculator"
+                href="#free-finprint"
                 variant="secondary"
                 className="border-white text-white hover:bg-white hover:text-[var(--color-primary)]"
               >
-                Preview a FinPrint Calculation
+                Create My Free Blueprint
               </Button>
             </div>
 
