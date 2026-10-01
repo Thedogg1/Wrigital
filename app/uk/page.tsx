@@ -66,7 +66,7 @@ export default function UkLandingPage() {
                 firms.
               </p>
             </div>
-            <div className="mb-6 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <div className="mb-6 flex flex-col items-center justify-center gap-4 sm:flex-row sm:flex-wrap">
               <Button
                 href={foundingPartnersMailto}
                 className="border-none bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-strong)]"
@@ -78,7 +78,7 @@ export default function UkLandingPage() {
                 variant="secondary"
                 className="border-white text-white hover:bg-white hover:text-[var(--color-primary)]"
               >
-                Create My Free Blueprint
+                Request My Complimentary Business Owner Analysis
               </Button>
             </div>
             <a
@@ -155,11 +155,14 @@ export default function UkLandingPage() {
               </p>
               <p>
                 FinPrint connects Business + Wealth + Family + Priorities +
-                Decisions into a coherent prospect-facing Financial Pathway
-                Pack.
+                Decisions in Financial Insights: a clear, personalised document
+                for the business-owner prospect, once the adviser has reviewed
+                and approved it.
               </p>
               <p>
-                The Pack is built to show understanding. The adviser remains
+                The adviser receives the wider Financial Pathway Pack, six
+                documents that support that work. Financial Insights is the
+                document intended for the prospect. The adviser remains
                 responsible for professional judgement, review and approval.
                 FinPrint does not provide regulated financial advice.
               </p>
@@ -176,9 +179,56 @@ export default function UkLandingPage() {
             </h2>
             <div className="space-y-6 text-lg leading-relaxed text-[var(--color-text-secondary)]">
               <p>
-                The Financial Pathway Pack is the core FinPrint deliverable. And
-                the Pack is not merely:
+                The Financial Pathway Pack is the complete deliverable the
+                adviser receives. Each Pack contains six documents:
               </p>
+              <ol className="list-decimal space-y-2 pl-6">
+                <li>
+                  <span className="font-semibold text-[var(--color-text-primary)]">
+                    Blueprint.
+                  </span>{' '}
+                  The underlying analytical foundation.
+                </li>
+                <li>
+                  <span className="font-semibold text-[var(--color-text-primary)]">
+                    Financial Insights.
+                  </span>{' '}
+                  The clear, personalised document that, following adviser
+                  review and approval, is intended for the business-owner
+                  prospect.
+                </li>
+                <li>
+                  <span className="font-semibold text-[var(--color-text-primary)]">
+                    Warnings File.
+                  </span>{' '}
+                  Supporting warnings for adviser consideration.
+                </li>
+                <li>
+                  <span className="font-semibold text-[var(--color-text-primary)]">
+                    Numbers Audit.
+                  </span>{' '}
+                  Supporting audit of the numbers and calculations.
+                </li>
+                <li>
+                  <span className="font-semibold text-[var(--color-text-primary)]">
+                    Information Audit.
+                  </span>{' '}
+                  Supporting audit of the information used, gaps and related
+                  information considerations.
+                </li>
+                <li>
+                  <span className="font-semibold text-[var(--color-text-primary)]">
+                    External Sources Audit.
+                  </span>{' '}
+                  Supporting audit of the external research and sources used.
+                </li>
+              </ol>
+              <p>
+                The adviser receives all six. The prospect receives the
+                adviser-reviewed and approved Financial Insights document. The
+                other five support the adviser.
+              </p>
+              <p>Financial Insights is not:</p>
               <ul className="list-disc space-y-2 pl-6">
                 <li>a generic AI report</li>
                 <li>meeting notes</li>
@@ -187,15 +237,12 @@ export default function UkLandingPage() {
                 <li>a template with the client&apos;s name inserted</li>
               </ul>
               <p>
-                Instead, fragmented information about the prospect becomes a
-                clear, evidence-grounded and adviser-reviewed picture of the
-                issues, priorities and decisions relevant to them.
-              </p>
-              <p>
-                Clear, jargon-free writing sits at the centre. The aim is
-                simple. Help the prospect feel understood, in language they can
-                follow, while the adviser keeps full control of what reaches
-                them.
+                Fragmented information about the prospect becomes a clear,
+                evidence-grounded and adviser-reviewed picture of the issues,
+                priorities and decisions relevant to them. That picture connects
+                Business + Wealth + Family + Priorities + Decisions, in language
+                the prospect can follow. The adviser keeps full control of what
+                reaches them.
               </p>
             </div>
           </div>
@@ -225,12 +272,12 @@ export default function UkLandingPage() {
                 </p>
                 <p className="text-sm leading-relaxed text-[var(--color-text-secondary)]">
                   FinPrint turns the available prospect information into an
-                  initial Financial Pathway Pack. The adviser reviews the
-                  analysis, validates the content and prepares for discovery.
+                  initial Financial Pathway Pack. The adviser reviews the six
+                  documents, validates the content and prepares for discovery.
                 </p>
                 <p className="mt-3 text-sm leading-relaxed text-[var(--color-text-secondary)]">
-                  Adviser review stays in the path. Nothing reaches the prospect
-                  without that step.
+                  Adviser review stays in the path. Financial Insights does not
+                  reach the prospect without that step.
                 </p>
               </div>
               <div className="rounded-xl border border-[var(--color-border-subtle)] bg-white p-8 shadow-sm">
@@ -263,11 +310,11 @@ export default function UkLandingPage() {
                 </p>
                 <p className="text-sm leading-relaxed text-[var(--color-text-secondary)]">
                   FinPrint updates the Financial Pathway Pack following
-                  discovery. The workflow is designed so the adviser can review,
-                  refine and approve the updated Pack with a target of placing
-                  the Pack in the prospect&apos;s hands within two hours of the
-                  discovery meeting ending, assuming an efficient workflow and
-                  prompt adviser review.
+                  discovery. The adviser reviews, refines and approves the
+                  updated Pack. With an efficient workflow and prompt adviser
+                  review, the reviewed and approved Financial Insights document
+                  is targeted to be in the prospect&apos;s hands within two
+                  hours of the discovery meeting ending.
                 </p>
                 <p className="mt-3 text-sm leading-relaxed text-[var(--color-text-secondary)]">
                   That timing matters. The prospect may receive tangible
@@ -281,7 +328,8 @@ export default function UkLandingPage() {
               <p>
                 After discovery, the firm can run up to three analysis passes to
                 test assumptions, explore scenarios and compare readings before
-                deciding which version is right to put in front of the prospect.
+                deciding which version of Financial Insights is right to put in
+                front of the prospect.
               </p>
               <p>
                 The aim is to reduce the pressure of a single shot at the right
@@ -316,8 +364,9 @@ export default function UkLandingPage() {
             </h2>
             <p className="mx-auto mb-12 max-w-3xl text-center text-lg leading-relaxed text-[var(--color-text-secondary)]">
               Complex business-owner situations often hide material points in
-              the noise. FinPrint surfaces two Intelligent Warnings outputs to
-              support adviser judgement, not replace that judgement.
+              the noise. Each Financial Pathway Pack includes a Warnings File.
+              FinPrint surfaces two Intelligent Warnings outputs to support
+              adviser judgement, not replace that judgement.
             </p>
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
               <div className="rounded-xl border border-[var(--color-border-subtle)] bg-[var(--color-surface)] p-8">
@@ -330,8 +379,8 @@ export default function UkLandingPage() {
                 </h3>
                 <p className="leading-relaxed text-[var(--color-text-secondary)]">
                   Highlights important issues, risks, information gaps or
-                  considerations the adviser may need to examine before the Pack
-                  goes further.
+                  considerations the adviser may need to examine before deciding
+                  what, if anything, belongs in Financial Insights.
                 </p>
               </div>
               <div className="rounded-xl border border-[var(--color-border-subtle)] bg-[var(--color-surface)] p-8">
@@ -343,8 +392,8 @@ export default function UkLandingPage() {
                   Client Intelligent Warnings
                 </h3>
                 <p className="leading-relaxed text-[var(--color-text-secondary)]">
-                  Turns suitable issues into clear client-facing wording that
-                  the adviser can review, approve and send.
+                  Turns suitable issues into clear wording the adviser can
+                  review and approve for use in Financial Insights.
                 </p>
               </div>
             </div>
@@ -357,24 +406,28 @@ export default function UkLandingPage() {
           className="scroll-mt-20 bg-[var(--color-surface)] py-20"
         >
           <div className="mx-auto max-w-4xl px-6">
-            <SectionLabel>Free Blueprint</SectionLabel>
+            <SectionLabel>Complimentary Business Owner Analysis</SectionLabel>
             <h2 className="mb-8 text-3xl font-bold text-[var(--color-primary)] sm:text-4xl">
               See the Depth FinPrint Can Bring to a Case Your Firm Would
               Recognise
             </h2>
             <div className="mb-10 space-y-6 text-lg leading-relaxed text-[var(--color-text-secondary)]">
               <p>
-                The free Blueprint is substantive research and analysis on a
-                business-owner situation relevant to your firm. Use it to judge
-                the quality of the work before you apply the complete process
-                to a genuine prospect.
+                Request a Complimentary Business Owner Analysis: substantive
+                research and analysis on a business-owner situation relevant to
+                your firm. It produces a Blueprint you can use to judge the
+                depth of FinPrint&apos;s work before you apply the complete
+                process to a genuine prospect.
               </p>
               <p>
                 A representative scenario is enough. You can also base it on a
                 genuine situation, provided nothing you supply identifies the
                 individual or the business.
               </p>
-              <p>The research is real research for the scenario you provide. The Blueprint shows:</p>
+              <p>
+                The research is real research for the scenario you provide. The
+                Blueprint shows:
+              </p>
               <ul className="list-disc space-y-2 pl-6">
                 <li>the information available, and the important gaps</li>
                 <li>the assumptions being made</li>
@@ -387,10 +440,16 @@ export default function UkLandingPage() {
                 </li>
               </ul>
               <p>
-                That is the foundation behind the analysis. It is not the
-                finished communication a prospect would read. Prospect-facing
-                output turns the relevant complexity into clear, personalised
-                language.
+                The Blueprint is the analytical foundation behind Financial
+                Insights, and one of the six documents in a Financial Pathway
+                Pack. This complimentary analysis produces the Blueprint. It
+                does not include the other five documents.
+              </p>
+              <p>
+                If you later decide to use FinPrint, that Blueprint can provide
+                the analytical foundation for the wider Pack. You can inspect
+                the thinking, research, assumptions, calculations and approach,
+                and amend or use that foundation when the work is taken further.
               </p>
               <p>
                 FinPrint supports your professional judgement. It does not
@@ -402,11 +461,13 @@ export default function UkLandingPage() {
             <div className="mb-10 grid grid-cols-1 gap-8 md:grid-cols-2">
               <div className="rounded-xl border border-[var(--color-border-subtle)] bg-white p-8">
                 <h3 className="mb-3 text-xl font-semibold text-[var(--color-primary)]">
-                  Free Blueprint
+                  Complimentary Business Owner Analysis
                 </h3>
                 <p className="leading-relaxed text-[var(--color-text-secondary)]">
-                  Judge the depth on a business-owner situation relevant to
-                  your firm, using real research for the scenario you describe.
+                  Real research on a situation your firm would recognise,
+                  producing a Blueprint you can use to judge the depth of the
+                  work. If you later use FinPrint, that Blueprint can underpin
+                  the wider Financial Pathway Pack.
                 </p>
               </div>
               <div className="rounded-xl border border-[var(--color-border-subtle)] bg-white p-8">
@@ -418,11 +479,12 @@ export default function UkLandingPage() {
                   qualified HNW business-owner prospect your firm wants to win.
                   £495 covers two Financial Pathway Packs around that prospect:
                   one before discovery, and one that incorporates what the
-                  meeting reveals. With an efficient workflow and prompt adviser
-                  review, the reviewed and approved client-facing report is
-                  targeted to be in the prospect&apos;s hands within two hours
-                  of the meeting ending. FinPrint does not guarantee the
-                  prospect will appoint the firm.
+                  meeting reveals. Each Pack contains six documents, and you
+                  receive both Packs. With an efficient workflow and prompt
+                  adviser review, the reviewed and approved Financial Insights
+                  document is targeted to be in the prospect&apos;s hands within
+                  two hours of the meeting ending. FinPrint does not guarantee
+                  the prospect will appoint the firm.
                 </p>
               </div>
             </div>
@@ -430,9 +492,9 @@ export default function UkLandingPage() {
               <p className="mb-8 text-lg leading-relaxed text-[var(--color-text-secondary)]">
                 Describe a business-owner situation your firm would recognise.
                 Use a representative scenario, or a genuine one with nothing
-                that identifies the person or the business. We will use real
-                research to build the Blueprint, so you can judge the depth for
-                yourself.
+                that identifies the person or the business. We will carry out
+                the Complimentary Business Owner Analysis and create the
+                Blueprint, so you can judge the depth for yourself.
               </p>
               <FreeBlueprintForm />
             </div>
@@ -585,7 +647,11 @@ export default function UkLandingPage() {
               <p>
                 Each deliverable is a Financial Pathway Pack. The £495 pilot
                 includes two of them, both built around the same genuine
-                qualified prospect.
+                qualified prospect. Each Pack contains six documents: Blueprint,
+                Financial Insights, Warnings File, Numbers Audit, Information
+                Audit and External Sources Audit. The adviser receives the
+                complete Pack. The prospect receives the adviser-reviewed and
+                approved Financial Insights document.
               </p>
               <p>
                 <span className="font-semibold text-[var(--color-text-primary)]">
@@ -603,15 +669,16 @@ export default function UkLandingPage() {
                 </span>{' '}
                 is prepared after discovery. It incorporates what was learned in
                 the meeting. With an efficient workflow and prompt adviser
-                review, the reviewed and approved client-facing report is
+                review, the reviewed and approved Financial Insights document is
                 targeted to be in the prospect&apos;s hands within two hours of
                 the meeting ending.
               </p>
               <p>
-                That is the commercial difference from the free sample. The
-                pilot uses a real prospect and their real circumstances, with
-                controlled adviser review and approval, professional judgement,
-                and the discovery workflow.
+                The Complimentary Business Owner Analysis produces a Blueprint
+                you can inspect before you decide. The pilot is the live
+                application: a genuine prospect and their real circumstances,
+                with controlled adviser review and approval, professional
+                judgement, and the discovery workflow.
               </p>
               <p>
                 Founding Partners receive early access at £495 because FinPrint
@@ -626,8 +693,8 @@ export default function UkLandingPage() {
               </p>
               <p>
                 FinPrint does not guarantee that a prospect will appoint the
-                firm. The Pack is designed to help make understanding visible
-                while that decision is still open.
+                firm. Financial Insights is intended to make that understanding
+                visible to the prospect while the decision is still open.
               </p>
             </div>
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
@@ -656,13 +723,15 @@ export default function UkLandingPage() {
               Partners Programme.
             </p>
             <p className="mb-6 text-lg leading-relaxed text-[#CBD5E1]">
-              The free Blueprint is a demonstration on a fictional representative
-              owner, prepared to the same research standard as the pilot, and
-              you can use it for research. It does not include live adviser
-              approval. A sample Financial Pathway Pack shows the prospect-facing
-              output. The pilot is two Financial Pathway Packs on an actual
-              qualified prospect, with real circumstances, adviser review,
-              professional judgement and the discovery workflow.
+              The Complimentary Business Owner Analysis uses a representative
+              scenario, or a genuine situation that does not identify the person
+              or the business. It produces a Blueprint from real research, so
+              you can judge the depth of the work. It is not a complete
+              Financial Pathway Pack. The pilot is two Financial Pathway Packs
+              on one genuine qualified prospect, with adviser review,
+              professional judgement and the discovery workflow. You receive
+              both Packs. The reviewed and approved Financial Insights document
+              is what is intended to reach the prospect.
             </p>
             <div className="mb-10 inline-flex flex-col items-center justify-center gap-2 rounded-xl border border-[rgba(0,200,224,0.25)] bg-white/5 px-6 py-4 sm:flex-row sm:gap-6">
               <p className="text-lg font-semibold text-white">
@@ -672,7 +741,7 @@ export default function UkLandingPage() {
                 One genuine prospect. First 10 qualifying UK IFA firms.
               </p>
             </div>
-            <div className="mb-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <div className="mb-12 flex flex-col items-center justify-center gap-4 sm:flex-row sm:flex-wrap">
               <Button
                 href={foundingPartnersMailto}
                 className="border-none bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-strong)]"
@@ -684,7 +753,7 @@ export default function UkLandingPage() {
                 variant="secondary"
                 className="border-white text-white hover:bg-white hover:text-[var(--color-primary)]"
               >
-                Create My Free Blueprint
+                Request My Complimentary Business Owner Analysis
               </Button>
             </div>
 

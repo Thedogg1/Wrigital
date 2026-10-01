@@ -119,7 +119,7 @@ function FieldControl({
       </p>
       {provenance === 'DEFAULT - DEMONSTRATION' && (
         <p className="text-xs font-semibold tracking-wide text-[var(--color-accent)] uppercase">
-          Default: demonstration
+          Representative default
         </p>
       )}
       {provenance === 'ADVISER PROVIDED' && (
@@ -129,7 +129,7 @@ function FieldControl({
       )}
       {field.blocking && provenance === 'DEFAULT - DEMONSTRATION' && (
         <p className="text-xs text-[var(--color-text-secondary)]">
-          Default demonstration value. Change this if you want.
+          Representative default. Change this if you want.
         </p>
       )}
       {showReset && onReset && (
@@ -296,12 +296,13 @@ export default function FreeBlueprintForm() {
           Tell us about the HNW business owners you want to explore
         </h3>
         <label htmlFor={descriptionId} className="block text-sm font-semibold text-[var(--color-text-primary)]">
-          Describe the initial conversation you imagine with that representative owner.
+          Describe the business-owner situation you want analysed.
         </label>
         <p className="text-sm leading-relaxed text-[var(--color-text-secondary)]">
-          This does not need to be detailed. A few sentences is enough. FinPrint
-          will use it to expand the demonstration into a representative fictional
-          case. Please do not enter information about a real client or prospect.
+          A few sentences is enough. FinPrint will use this to carry out the
+          Complimentary Business Owner Analysis and create the Blueprint. Use a
+          representative scenario, or a genuine situation with nothing that
+          identifies the individual or the business.
         </p>
         <textarea
           id={descriptionId}
@@ -327,9 +328,10 @@ export default function FreeBlueprintForm() {
             Starting financial picture
           </h3>
           <p className="leading-relaxed text-[var(--color-text-secondary)]">
-            We have added representative demonstration values so you can explore
-            FinPrint without building a complete fictional case from scratch.
-            Change anything you want.
+            Representative values are already filled in, so you can request the
+            analysis without assembling a full picture from scratch. Change
+            anything that should reflect your scenario. Do not enter information
+            that identifies a real client or prospect.
           </p>
         </div>
         {uniqueGroups(MANDATORY_FIELDS).map((group) => (
@@ -373,10 +375,10 @@ export default function FreeBlueprintForm() {
           Deepen the Blueprint
         </h3>
         <p className="leading-relaxed text-[var(--color-text-secondary)]">
-          FinPrint&apos;s Business Owner Blueprint is designed for higher-value
-          owner-managed businesses where the company forms a material part of
-          the owner&apos;s wealth and issues such as valuation, exit, succession,
-          liquidity and personal financial planning may intersect.
+          The Blueprint is designed for higher-value owner-managed businesses
+          where the company forms a material part of the owner&apos;s wealth and
+          issues such as valuation, exit, succession, liquidity and personal
+          financial planning may intersect.
         </p>
         <p className="leading-relaxed text-[var(--color-text-secondary)]">
           FinPrint can use additional information to make the analysis more
@@ -419,7 +421,7 @@ export default function FreeBlueprintForm() {
         </h3>
         <p className="leading-relaxed text-[var(--color-text-secondary)]">
           Optional information that may enable or refine further analysis. Leave
-          blank anything you do not want in the demonstration.
+          blank anything you do not want included.
         </p>
         {uniqueGroups(OPTIONAL_HOST_FIELDS).map((group) => (
           <details
@@ -554,13 +556,14 @@ export default function FreeBlueprintForm() {
           disabled={sending}
           className="inline-flex items-center justify-center rounded-lg border-none bg-[var(--color-accent)] px-8 py-4 text-base font-semibold text-white transition-colors hover:bg-[var(--color-accent-strong)] disabled:cursor-not-allowed disabled:opacity-50"
         >
-          {sending ? 'Sending' : 'Create My Free Blueprint'}
+          {sending ? 'Sending' : 'Request My Complimentary Business Owner Analysis'}
         </button>
         <p className="text-sm leading-relaxed text-[var(--color-text-secondary)]">
-          No real client data required. Your Blueprint uses a representative
-          fictional case. It will distinguish between information you supplied,
-          demonstration defaults, and calculated values. Inferred assumptions
-          and external research, if used later, will be labelled separately.
+          Do not include information that identifies a real client or prospect.
+          The analysis produces a Blueprint. It will distinguish between
+          information you supplied, representative defaults, and calculated
+          values. Inferred assumptions and external research, if used later,
+          will be labelled separately.
         </p>
         <p className="text-sm leading-relaxed text-[var(--color-text-secondary)]">
           We use your name, firm and email to prepare and send the Blueprint.{' '}

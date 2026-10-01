@@ -4,11 +4,11 @@ import { siteUrl } from '@/lib/site';
 export const metadata: Metadata = {
   title: 'FinPrint Founding Partners for UK Advice Firms | Wrigital',
   description:
-    'Request a free FinPrint Blueprint on a fictional business owner, then use the Founding Partner pilot for two Financial Pathway Packs on a genuine prospect.',
+    'Request a Complimentary Business Owner Analysis. FinPrint carries out real research and produces a Blueprint. The Founding Partner pilot is two Financial Pathway Packs around one genuine prospect.',
   openGraph: {
     title: 'FinPrint Founding Partners for UK Advice Firms | Wrigital',
     description:
-      'Request a free FinPrint Blueprint on a fictional business owner, then use the Founding Partner pilot for two Financial Pathway Packs on a genuine prospect.',
+      'Request a Complimentary Business Owner Analysis. FinPrint carries out real research and produces a Blueprint. The Founding Partner pilot is two Financial Pathway Packs around one genuine prospect.',
     url: `${siteUrl}/uk`,
     type: 'website',
     locale: 'en_GB',
