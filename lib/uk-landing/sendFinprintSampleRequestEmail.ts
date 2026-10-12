@@ -1,6 +1,7 @@
 import { getResendClient } from '@/lib/email/resendClient';
 import { contactEmail, resendFromAddress } from '@/lib/email/config';
 import { formatLondonTimestamp } from '@/lib/brochure/dates';
+import { payloadGeneratorLines } from '@/lib/landing/payloadGeneratorPaste';
 import {
   formatGbp,
   formatPercentFromDecimal,
@@ -64,12 +65,17 @@ function buildText(input: PreparedBlueprintRequest, timestamp: string): string {
     ? `Owner stake: ${formatGbp(input.calculated.ownerStakeGbp)}\nBusiness concentration: ${formatPercentFromDecimal(input.calculated.businessConcentration)}\nFormula: business value x ownership / 100, then owner stake / net worth\nProvenance: CALCULATED\n`
     : 'Not calculated. The starting picture did not parse.\n';
 
+  const paste = payloadGeneratorLines(input.fields);
+
   return `New Free FinPrint Blueprint request from /uk.
 
 This email is the request as submitted. No Blueprint has been generated yet. No AI inference has been applied. Missing niche and optional fields were left blank on purpose.
 
+COPY INTO THE PAYLOAD GENERATOR
+${paste}
+
 LEAD DETAILS
-Name: ${input.adviserName}
+Adviser name: ${input.adviserName}
 Firm: ${input.firmName}
 Work email: ${input.email}
 Niche: ${input.niche}
@@ -99,6 +105,7 @@ function buildHtml(input: PreparedBlueprintRequest, timestamp: string): string {
   const starting = input.fields.filter((field) => field.section === 'starting');
   const niche = input.fields.filter((field) => field.section === 'niche');
   const optional = input.fields.filter((field) => field.section === 'optional');
+  const paste = payloadGeneratorLines(input.fields);
   const calculated = input.calculated
     ? `<p style="margin:0 0 8px;"><strong>Owner stake:</strong> ${escapeHtml(formatGbp(input.calculated.ownerStakeGbp))}</p>
        <p style="margin:0 0 8px;"><strong>Business concentration:</strong> ${escapeHtml(formatPercentFromDecimal(input.calculated.businessConcentration))}</p>
@@ -112,8 +119,10 @@ function buildHtml(input: PreparedBlueprintRequest, timestamp: string): string {
     <p style="margin:0 0 8px;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#0e7490;">Free FinPrint Blueprint</p>
     <h1 style="margin:0 0 12px;font-size:22px;">Request from /uk</h1>
     <p style="margin:0 0 24px;color:#475569;">Submission only. The Blueprint has not been generated, and no inferred values are included.</p>
+    <h2 style="font-size:16px;">Copy into the payload generator</h2>
+    <pre style="margin:0 0 24px;padding:16px;background:#ffffff;border:1px solid #e2e8f0;border-radius:8px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;line-height:1.6;white-space:pre-wrap;">${escapeHtml(paste)}</pre>
     <h2 style="font-size:16px;">Lead details</h2>
-    <p style="margin:0 0 8px;"><strong>Name:</strong> ${escapeHtml(input.adviserName)}</p>
+    <p style="margin:0 0 8px;"><strong>Adviser name:</strong> ${escapeHtml(input.adviserName)}</p>
     <p style="margin:0 0 8px;"><strong>Firm:</strong> ${escapeHtml(input.firmName)}</p>
     <p style="margin:0 0 8px;"><strong>Work email:</strong> <a href="mailto:${escapeHtml(input.email)}">${escapeHtml(input.email)}</a></p>
     <p style="margin:0 0 8px;"><strong>Niche:</strong> ${escapeHtml(input.niche)}</p>

@@ -1,6 +1,7 @@
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import Button from '@/components/Button';
+import FoundingPartnerApplyButton from '@/components/landing/FoundingPartnerApplyButton';
 import LandingSlideViewer from '@/components/landing/uk/LandingSlideViewer';
 import FreeBlueprintForm from '@/components/landing/uk/FreeBlueprintForm';
 import { loadPresentationSlides } from '@/lib/uk-landing/loadSlides';
@@ -22,10 +23,6 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
     </p>
   );
 }
-
-const foundingPartnersMailto = `mailto:${contactEmail}?subject=${encodeURIComponent(
-  'FinPrint Founding Partners Programme Application',
-)}`;
 
 export default function UkLandingPage() {
   const slides = loadPresentationSlides();
@@ -67,12 +64,7 @@ export default function UkLandingPage() {
               </p>
             </div>
             <div className="mb-6 flex flex-col items-center justify-center gap-4 sm:flex-row sm:flex-wrap">
-              <Button
-                href={foundingPartnersMailto}
-                className="border-none bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-strong)]"
-              >
-                Apply to Become a Founding Partner
-              </Button>
+              <FoundingPartnerApplyButton />
               <Button
                 href="#free-finprint"
                 variant="secondary"
@@ -698,12 +690,7 @@ export default function UkLandingPage() {
               </p>
             </div>
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Button
-                href={foundingPartnersMailto}
-                className="border-none bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-strong)]"
-              >
-                Apply to Become a Founding Partner
-              </Button>
+              <FoundingPartnerApplyButton />
             </div>
           </div>
         </section>
@@ -742,12 +729,7 @@ export default function UkLandingPage() {
               </p>
             </div>
             <div className="mb-12 flex flex-col items-center justify-center gap-4 sm:flex-row sm:flex-wrap">
-              <Button
-                href={foundingPartnersMailto}
-                className="border-none bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-strong)]"
-              >
-                Apply to Become a Founding Partner
-              </Button>
+              <FoundingPartnerApplyButton />
               <Button
                 href="#free-finprint"
                 variant="secondary"

@@ -56,13 +56,21 @@
     }
 
     .report-brand-name {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.15;
       font-size: 15px;
       font-weight: 700;
       letter-spacing: -0.02em;
       color: var(--white);
     }
 
-    .report-brand-name span { color: var(--cyan); }
+    .report-brand-name span {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0;
+      color: var(--text-muted);
+    }
 
     .report-label-tag {
       margin-left: auto;
@@ -267,7 +275,7 @@
 
     <div class="form-panel">
       <div class="report-brand">
-        <div class="report-brand-name">Velocity<span>IQ</span></div>
+        <div class="report-brand-name">FinPrint<span>by Wrigital</span></div>
         <div class="report-label-tag">Pre-Meeting Intelligence Report</div>
       </div>
 

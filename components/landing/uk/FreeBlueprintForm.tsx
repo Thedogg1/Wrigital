@@ -34,6 +34,11 @@ function domId(path: string): string {
   return `bp-${path.replace(/\./g, '-')}`;
 }
 
+function formatGbpDisplay(raw: string): string {
+  const amount = parseLooseNumber(raw);
+  return amount === null ? raw : formatGbp(amount);
+}
+
 function FieldControl({
   field,
   value,
@@ -52,6 +57,10 @@ function FieldControl({
   const helpId = `${domId(field.path)}-help`;
   const errorId = `${domId(field.path)}-error`;
   const describedBy = error ? `${helpId} ${errorId}` : helpId;
+  const [moneyFocused, setMoneyFocused] = useState(false);
+  const isMoney = field.kind === 'gbp';
+  const shownValue =
+    isMoney && !moneyFocused ? formatGbpDisplay(value) : value;
   const provenance = field.blocking ? provenanceFor(field, value || field.defaultValue || '') : null;
   const showReset = field.blocking && value !== undefined && !isDefaultValue(field, value);
 
@@ -106,10 +115,19 @@ function FieldControl({
               ? 'decimal'
               : undefined
           }
-          value={value}
+          value={shownValue}
           disabled={disabled}
           aria-invalid={Boolean(error) || undefined}
           aria-describedby={describedBy}
+          onFocus={() => {
+            if (isMoney) setMoneyFocused(true);
+          }}
+          onBlur={() => {
+            if (!isMoney) return;
+            setMoneyFocused(false);
+            const formatted = formatGbpDisplay(value);
+            if (formatted !== value) onChange(formatted);
+          }}
           onChange={(event) => onChange(event.target.value)}
           className={inputClass}
         />

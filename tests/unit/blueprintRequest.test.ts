@@ -5,11 +5,14 @@ import {
   NICHE_FIELDS,
   defaultFieldValues,
 } from '@/lib/uk-landing/blueprintFields';
+import { payloadGeneratorLines } from '@/lib/landing/payloadGeneratorPaste';
 import {
   businessConcentration,
   calculatedPicture,
+  formatGbp,
   isDefaultValue,
   ownerStakeGbp,
+  parseLooseNumber,
   prepareBlueprintRequest,
   provenanceFor,
 } from '@/lib/uk-landing/blueprintRequest';
@@ -55,6 +58,16 @@ describe('blueprint lead request', () => {
       prepared.request?.machineReadable &&
         (prepared.request.machineReadable as { client_profile: { financial_situation: { concentration_risk?: number } } }).client_profile.financial_situation.concentration_risk,
     ).toBeUndefined();
+
+    const paste = payloadGeneratorLines(prepared.request?.fields ?? []);
+    expect(paste.split('\n').every((line) => /^[^:\n]+: .+$/.test(line))).toBe(true);
+    expect(paste).toContain('Name: Representative Business Owner');
+    expect(paste).toContain(`Net Worth: ${formatGbp(12_000_000)}`);
+    expect(paste).toContain(`Business Value: ${formatGbp(8_100_000)}`);
+    const netWorth = paste
+      .split('\n')
+      .find((line) => line.startsWith('Net Worth:'));
+    expect(parseLooseNumber(netWorth?.split(': ')[1] ?? '')).toBe(12_000_000);
   });
 
   it('changes provenance when a default is edited, including formatted GBP', () => {

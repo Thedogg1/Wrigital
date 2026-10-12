@@ -1,0 +1,454 @@
+{
+  "niche": "BusinessUSA",
+  "description": "Additional data points needed to analyze, value, and plan for U.S. business-owning high-net-worth clients using corporate finance, tax, and portfolio analytics.",
+  "niche_specific_fields": {
+    "required": [
+      {
+        "path": "client_profile.primary_business.future_value_target",
+        "label": "Future Value Target",
+        "description": "The specific future dollar amount (such as expected sale proceeds or account value) to be discounted or projected in time value of money analyses.",
+        "data_type": "currency",
+        "example_value": 10000000,
+        "used_by_formulas": [
+          "1",
+          "2"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.present_value_amount",
+        "label": "Present Value Amount",
+        "description": "The current dollar amount available or invested that will be grown to a future value under an assumed rate of return.",
+        "data_type": "currency",
+        "example_value": 5000000,
+        "used_by_formulas": [
+          "2"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.discount_rate",
+        "label": "Discount / Return Rate",
+        "description": "The annual rate used to discount future cash flows or grow present values when evaluating projects and planning scenarios.",
+        "data_type": "percentage",
+        "example_value": 0.08,
+        "used_by_formulas": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.time_horizon_years",
+        "label": "Time Horizon (Years)",
+        "description": "The number of years over which the cash flows or investments are projected or discounted.",
+        "data_type": "integer",
+        "example_value": 10,
+        "used_by_formulas": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "18"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.cash_flow_schedule",
+        "label": "Projected Cash Flow Schedule",
+        "description": "A period-by-period schedule of expected business or project cash flows used for NPV and IRR analyses.",
+        "data_type": "string",
+        "example_value": "[{\"year\":1,\"cash_flow\":250000},{\"year\":2,\"cash_flow\":300000}]",
+        "used_by_formulas": [
+          "3",
+          "4"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.initial_investment",
+        "label": "Initial Investment Amount",
+        "description": "The upfront capital outlay or purchase price used as the initial cash flow in NPV and IRR calculations.",
+        "data_type": "currency",
+        "example_value": 1000000,
+        "used_by_formulas": [
+          "3",
+          "4"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.market_value_of_equity",
+        "label": "Market Value of Equity",
+        "description": "The total market value of the owners' equity used in capital structure and WACC calculations.",
+        "data_type": "currency",
+        "example_value": 8000000,
+        "used_by_formulas": [
+          "5"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.market_value_of_debt",
+        "label": "Market Value of Debt",
+        "description": "The total market value of interest-bearing debt obligations used in capital structure and WACC calculations.",
+        "data_type": "currency",
+        "example_value": 2000000,
+        "used_by_formulas": [
+          "5"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.cost_of_equity",
+        "label": "Cost of Equity",
+        "description": "The required rate of return on the business's equity used in WACC and valuation work.",
+        "data_type": "percentage",
+        "example_value": 0.12,
+        "used_by_formulas": [
+          "5",
+          "6"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.cost_of_debt",
+        "label": "Pre-Tax Cost of Debt",
+        "description": "The average interest rate the business pays on its debt, used to determine the debt component of WACC.",
+        "data_type": "percentage",
+        "example_value": 0.06,
+        "used_by_formulas": [
+          "5"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.marginal_tax_rate",
+        "label": "Marginal Tax Rate",
+        "description": "The client's marginal income tax rate used to convert pre-tax cost of debt to an after-tax rate in WACC.",
+        "data_type": "percentage",
+        "example_value": 0.37,
+        "used_by_formulas": [
+          "5",
+          "11",
+          "13",
+          "14",
+          "15"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.risk_free_rate",
+        "label": "Risk-Free Rate",
+        "description": "The yield on a risk-free benchmark (such as U.S. Treasuries) used in CAPM and Sharpe ratio calculations.",
+        "data_type": "percentage",
+        "example_value": 0.04,
+        "used_by_formulas": [
+          "6",
+          "17"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.market_expected_return",
+        "label": "Expected Market Return",
+        "description": "The expected return on the overall market portfolio used in CAPM to estimate required return on equity.",
+        "data_type": "percentage",
+        "example_value": 0.09,
+        "used_by_formulas": [
+          "6"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.equity_beta",
+        "label": "Equity Beta",
+        "description": "The measure of the business or portfolio's sensitivity to market movements used in the CAPM formula.",
+        "data_type": "number",
+        "example_value": 1.2,
+        "used_by_formulas": [
+          "6"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.current_assets",
+        "label": "Current Assets",
+        "description": "The total value of assets expected to be converted to cash within one year used to assess liquidity.",
+        "data_type": "currency",
+        "example_value": 1500000,
+        "used_by_formulas": [
+          "7"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.current_liabilities",
+        "label": "Current Liabilities",
+        "description": "The total obligations due within one year used in computing the current ratio.",
+        "data_type": "currency",
+        "example_value": 750000,
+        "used_by_formulas": [
+          "7"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.total_liabilities",
+        "label": "Total Liabilities",
+        "description": "The total book value of all short- and long-term obligations used to assess leverage.",
+        "data_type": "currency",
+        "example_value": 4000000,
+        "used_by_formulas": [
+          "8"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.total_equity",
+        "label": "Total Equity",
+        "description": "The total book value of shareholders' equity used in leverage and profitability ratios.",
+        "data_type": "currency",
+        "example_value": 6000000,
+        "used_by_formulas": [
+          "8",
+          "9"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.net_income",
+        "label": "Net Income",
+        "description": "The business's net earnings after all expenses and taxes, used in ROE and margin analysis.",
+        "data_type": "currency",
+        "example_value": 1200000,
+        "used_by_formulas": [
+          "9",
+          "10"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.beginning_equity",
+        "label": "Beginning Shareholders' Equity",
+        "description": "The shareholders' equity balance at the start of the period used to compute average equity for ROE.",
+        "data_type": "currency",
+        "example_value": 5500000,
+        "used_by_formulas": [
+          "9"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.ending_equity",
+        "label": "Ending Shareholders' Equity",
+        "description": "The shareholders' equity balance at the end of the period used to compute average equity for ROE.",
+        "data_type": "currency",
+        "example_value": 6500000,
+        "used_by_formulas": [
+          "9"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.net_sales",
+        "label": "Net Sales",
+        "description": "Total sales revenue after returns and allowances used to calculate net profit margin.",
+        "data_type": "currency",
+        "example_value": 8000000,
+        "used_by_formulas": [
+          "10"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.above_the_line_deductions",
+        "label": "Above-the-Line Deductions",
+        "description": "Total deductions that reduce gross income to arrive at adjusted gross income in the client's tax calculation.",
+        "data_type": "currency",
+        "example_value": 30000,
+        "used_by_formulas": [
+          "11"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.standard_or_itemized_deductions",
+        "label": "Standard or Itemized Deductions",
+        "description": "The total amount of standard or itemized deductions claimed when computing taxable income.",
+        "data_type": "currency",
+        "example_value": 50000,
+        "used_by_formulas": [
+          "11"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.qualified_business_income",
+        "label": "Qualified Business Income (QBI)",
+        "description": "The amount of qualified business income from pass-through entities used to compute the QBI deduction.",
+        "data_type": "currency",
+        "example_value": 600000,
+        "used_by_formulas": [
+          "11",
+          "12"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.net_earnings_from_self_employment",
+        "label": "Net Earnings from Self-Employment",
+        "description": "The client's net earnings subject to self-employment tax for sole proprietorships and partnerships.",
+        "data_type": "currency",
+        "example_value": 250000,
+        "used_by_formulas": [
+          "13"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.social_security_wage_base",
+        "label": "Social Security Wage Base",
+        "description": "The annual Social Security wage base limit used to cap the portion of earnings subject to the full self-employment tax rate.",
+        "data_type": "currency",
+        "example_value": 168600,
+        "used_by_formulas": [
+          "13"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.net_investment_income",
+        "label": "Net Investment Income",
+        "description": "The client's total net investment income potentially subject to the Net Investment Income Tax.",
+        "data_type": "currency",
+        "example_value": 200000,
+        "used_by_formulas": [
+          "14"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.modified_adjusted_gross_income",
+        "label": "Modified Adjusted Gross Income (MAGI)",
+        "description": "The client's MAGI used to determine exposure to the Net Investment Income Tax.",
+        "data_type": "currency",
+        "example_value": 800000,
+        "used_by_formulas": [
+          "14"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.niit_threshold_amount",
+        "label": "NIIT Threshold Amount",
+        "description": "The applicable MAGI threshold for Net Investment Income Tax based on filing status.",
+        "data_type": "currency",
+        "example_value": 250000,
+        "used_by_formulas": [
+          "14"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.taxable_estate_value",
+        "label": "Taxable Estate Value",
+        "description": "The value of the taxable estate used to determine tentative federal estate tax.",
+        "data_type": "currency",
+        "example_value": 30000000,
+        "used_by_formulas": [
+          "15"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.applicable_estate_tax_credit",
+        "label": "Applicable Estate Tax Credit Amount",
+        "description": "The unified credit amount available to offset the tentative federal estate tax.",
+        "data_type": "currency",
+        "example_value": 5000000,
+        "used_by_formulas": [
+          "15"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.prior_year_retirement_account_balance",
+        "label": "Prior Year Retirement Account Balance",
+        "description": "The total balance of relevant tax-deferred retirement accounts at the end of the prior year used for RMD calculations.",
+        "data_type": "currency",
+        "example_value": 2000000,
+        "used_by_formulas": [
+          "16"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.irs_distribution_period_factor",
+        "label": "IRS Distribution Period Factor",
+        "description": "The life expectancy factor from the IRS RMD table corresponding to the client's age and situation.",
+        "data_type": "number",
+        "example_value": 27.4,
+        "used_by_formulas": [
+          "16"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.portfolio_expected_return",
+        "label": "Portfolio Expected Return",
+        "description": "The average or expected annual return of the client's investment portfolio used in risk-adjusted performance metrics.",
+        "data_type": "percentage",
+        "example_value": 0.1,
+        "used_by_formulas": [
+          "17",
+          "18"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.portfolio_return_series",
+        "label": "Portfolio Return Series",
+        "description": "A time series of periodic portfolio returns used to calculate volatility and risk-adjusted metrics.",
+        "data_type": "string",
+        "example_value": "[0.05,0.08,-0.02,0.12]",
+        "used_by_formulas": [
+          "17",
+          "18"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.net_operating_income",
+        "label": "Net Operating Income",
+        "description": "The income generated from operations before interest and taxes used to assess debt service coverage.",
+        "data_type": "currency",
+        "example_value": 1500000,
+        "used_by_formulas": [
+          "19"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.total_debt_service",
+        "label": "Total Debt Service",
+        "description": "The total required principal and interest payments on debt over a year used in DSCR analysis.",
+        "data_type": "currency",
+        "example_value": 900000,
+        "used_by_formulas": [
+          "19"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.total_sales",
+        "label": "Total Sales",
+        "description": "Total revenue from sales before deducting variable costs used in contribution margin analysis.",
+        "data_type": "currency",
+        "example_value": 5000000,
+        "used_by_formulas": [
+          "20"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.total_variable_costs",
+        "label": "Total Variable Costs",
+        "description": "Total costs that vary directly with sales volume used to determine contribution margin ratio.",
+        "data_type": "currency",
+        "example_value": 3000000,
+        "used_by_formulas": [
+          "20"
+        ]
+      }
+    ],
+    "optional": [
+      {
+        "path": "client_profile.primary_business.estate_tax_rate_schedule_reference",
+        "label": "Estate Tax Rate Schedule Reference",
+        "description": "A reference to the specific federal estate tax rate schedule used for precise estate tax calculations.",
+        "data_type": "string",
+        "example_value": "Current Federal Estate Tax Rate Table",
+        "used_by_formulas": [
+          "15"
+        ]
+      },
+      {
+        "path": "client_profile.primary_business.client_filing_status",
+        "label": "Client Tax Filing Status",
+        "description": "The client's income tax filing status which may affect thresholds and deduction limits in tax-related formulas.",
+        "data_type": "string",
+        "example_value": "Married Filing Jointly",
+        "used_by_formulas": [
+          "11",
+          "14",
+          "15"
+        ]
+      }
+    ]
+  },
+  "generated_at": "2026-06-07T15:43:22.770Z"
+}

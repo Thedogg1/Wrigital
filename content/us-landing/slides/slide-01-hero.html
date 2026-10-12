@@ -105,13 +105,21 @@
     }
 
     .brand-name {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.15;
       font-size: 18px;
       font-weight: 700;
       letter-spacing: -0.02em;
       color: var(--white);
     }
 
-    .brand-name span { color: var(--cyan); }
+    .brand-name span {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0;
+      color: var(--text-muted);
+    }
 
     .slide-eyebrow {
       font-size: 11px;
@@ -220,7 +228,7 @@
     <!-- Right: content panel -->
     <div class="content-panel">
       <div class="brand-bar">
-        <div class="brand-name">Velocity<span>IQ</span></div>
+        <div class="brand-name">FinPrint<span>by Wrigital</span></div>
       </div>
 
       <p class="slide-eyebrow">Pre-Meeting Intelligence</p>

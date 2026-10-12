@@ -2,13 +2,15 @@ import type { Metadata } from 'next';
 import { siteUrl } from '@/lib/site';
 
 export const metadata: Metadata = {
-  title: 'FinPrint Exit Tax Calculator for US Financial Advisors | Wrigital',
+  title: {
+    absolute: 'FinPrint Founding Partners for US Advisory Firms | Wrigital',
+  },
   description:
-    'SEC- and FINRA-regulated advisors: estimate net proceeds after federal and state tax, QSBS eligibility, and concentration risk.',
+    'Request a Complimentary Business Owner Analysis. FinPrint carries out real research and produces a Blueprint. The Founding Partner pilot is two Financial Pathway Packs around one genuine prospect.',
   openGraph: {
-    title: 'FinPrint Exit Tax Calculator for US Financial Advisors | Wrigital',
+    title: 'FinPrint Founding Partners for US Advisory Firms | Wrigital',
     description:
-      'Estimate net proceeds after tax, QSBS eligibility, and concentration risk for HNW business owner clients.',
+      'Request a Complimentary Business Owner Analysis. FinPrint carries out real research and produces a Blueprint. The Founding Partner pilot is two Financial Pathway Packs around one genuine prospect.',
     url: `${siteUrl}/us`,
     type: 'website',
     locale: 'en_US',

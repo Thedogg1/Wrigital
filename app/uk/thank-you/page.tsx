@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import Button from '@/components/Button';
-import { contactEmail } from '@/lib/email/config';
+import FoundingPartnerApplyButton from '@/components/landing/FoundingPartnerApplyButton';
 
 export const metadata: Metadata = {
   title: 'Thank you | Complimentary Business Owner Analysis',
@@ -10,10 +10,6 @@ export const metadata: Metadata = {
     'Your Complimentary Business Owner Analysis request has been received.',
   robots: { index: false, follow: false },
 };
-
-const foundingPartnersMailto = `mailto:${contactEmail}?subject=${encodeURIComponent(
-  'FinPrint Founding Partners Programme Application',
-)}`;
 
 const samplePathwayPackUrl =
   'https://drive.google.com/drive/folders/1jvDnjF_Olw4YM6DFKjB0-n5am61rFg_t?usp=sharing';
@@ -71,13 +67,10 @@ export default async function UkBlueprintThankYouPage({
               >
                 Back to FinPrint
               </Button>
-              <Button
-                href={foundingPartnersMailto}
+              <FoundingPartnerApplyButton
                 variant="secondary"
                 className="border-white text-white hover:bg-white hover:text-[var(--color-primary)]"
-              >
-                Apply to Become a Founding Partner
-              </Button>
+              />
             </div>
           </div>
         </section>

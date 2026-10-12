@@ -56,13 +56,21 @@
     }
 
     .report-brand-name {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.15;
       font-size: 15px;
       font-weight: 700;
       letter-spacing: -0.02em;
       color: var(--white);
     }
 
-    .report-brand-name span { color: var(--cyan); }
+    .report-brand-name span {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0;
+      color: var(--text-muted);
+    }
 
     .report-label-tag {
       margin-left: auto;
@@ -267,23 +275,23 @@
 
     <div class="form-panel">
       <div class="report-brand">
-        <div class="report-brand-name">Velocity<span>IQ</span></div>
+        <div class="report-brand-name">FinPrint<span>by Wrigital</span></div>
         <div class="report-label-tag">Pre-Meeting Intelligence Report</div>
       </div>
 
       <div class="notes-card">
         <div class="notes-card-header">
           <h2 class="notes-card-title">Pre-meeting advisor notes</h2>
-          <p class="notes-card-subtitle">Paste sparse notes about the client, their business, and exit intent. The system will generate a full questionnaire and advisor�client transcript for your review.</p>
+          <p class="notes-card-subtitle">Paste sparse notes about the client, their business, and exit intent. The system will generate a full questionnaire and advisor-client transcript for your review.</p>
         </div>
         <div class="notes-textarea-wrap">
-          <textarea class="notes-textarea" readonly>Referral from existing client (CPA at a Nashville firm). Name: Marcus T. Ellison. Owns Ellison Dynamics � a C-Corp in industrial robotics and automation. Referrer said he's "done very well" over nine years, net worth "well into nine figures" but most of it is in the company. Targeting a full exit in 12�18 months � nothing signed, no mandate yet. Personality: pragmatic, hands-on, still running the business day to day.
+          <textarea class="notes-textarea" readonly>Referral from existing client (CPA at a Nashville firm). Name: Marcus T. Ellison. Owns Ellison Dynamics - a C-Corp in industrial robotics and automation. Referrer said he's "done very well" over nine years, net worth "well into nine figures" but most of it is in the company. Targeting a full exit in 12-18 months - nothing signed, no mandate yet. Personality: pragmatic, hands-on, still running the business day to day.
 
-Public filings / LinkedIn � Ellison Dynamics. Revenue circa $32M, EBITDA around $11.2M. Founded 2016, incorporated early 2017. Marcus owns 62% outright (verify cap table at meeting). QSBS likely eligible � shares issued March 2017, active business, manufacturing sector. Three unsolicited strategic approaches in the last year (per referrer).
+Public filings / LinkedIn - Ellison Dynamics. Revenue circa $32M, EBITDA around $11.2M. Founded 2016, incorporated early 2017. Marcus owns 62% outright (verify cap table at meeting). QSBS likely eligible - shares issued March 2017, active business, manufacturing sector. Three unsolicited strategic approaches in the last year (per referrer).
 
 Website / LinkedIn: robotic assembly systems for automotive, food processing, and pharmaceutical manufacturing. Nashville HQ. ~120 staff per LinkedIn estimate. Marcus, mid-50s, engineering background. No formal sale process running yet.
 
-Referrer mentioned: wife aligned on philanthropy (DAF interest); two adult children (law school / pre-med, not in the business). Marcus sounded focused on tax-efficient exit, QSBS preservation, and estate planning � but hasn't engaged an advisor on the transaction yet.</textarea>
+Referrer mentioned: wife aligned on philanthropy (DAF interest); two adult children (law school / pre-med, not in the business). Marcus sounded focused on tax-efficient exit, QSBS preservation, and estate planning - but hasn't engaged an advisor on the transaction yet.</textarea>
         </div>
         <div class="notes-card-footer">
           <span class="notes-char-count">1,024 characters</span>
@@ -311,7 +319,7 @@ Referrer mentioned: wife aligned on philanthropy (DAF interest); two adult child
           <rect x="3" y="3" width="22" height="22" rx="4" stroke="currentColor" stroke-width="2"/>
           <path d="M9 14l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        <span class="cta-block-text">This is all it takes. ?</span>
+        <span class="cta-block-text">This is all it takes.</span>
       </div>
 
       <ul class="bullet-list">

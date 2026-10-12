@@ -39,15 +39,23 @@
     }
 
     .brand-name {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      line-height: 1.15;
       font-size: 22px;
       font-weight: 700;
       letter-spacing: -0.02em;
       color: var(--white);
       margin-bottom: 56px;
-      display: inline-block;
     }
 
-    .brand-name span { color: var(--cyan); }
+    .brand-name span {
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0;
+      color: var(--text-muted);
+    }
 
     .slide-eyebrow {
       font-size: 11px;
@@ -134,7 +142,7 @@
 <body>
   <div class="page">
 
-    <div class="brand-name">Velocity<span>IQ</span></div>
+    <div class="brand-name">FinPrint<span>by Wrigital</span></div>
 
     <p class="slide-eyebrow">Get Started</p>
     <h1 class="slide-title">AI-Powered Pre-Meeting Intelligence for financial advisors</h1>
