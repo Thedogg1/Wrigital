@@ -2,5 +2,5 @@
 module.exports = {
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://wrigital.com',
   generateRobotsTxt: true,
-  exclude: ['/uk', '/us', '/studio'],
+  exclude: ['/uk', '/uk/walkthrough', '/us', '/us/walkthrough', '/studio'],
 };
